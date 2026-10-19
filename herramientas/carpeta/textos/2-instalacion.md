@@ -85,8 +85,12 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 ## Paso 3. La copia de la aplicación
 
 1. Con la sesión de GitHub de la institución abierta, entrar a la **plantilla**: **github.com/inscripciones-iglesia/app-inscripciones-plantilla**.
-2. Tocar **Use this template** → **Create a new repository**.
-3. Owner: la cuenta de la institución. Nombre: **app-inscripciones**. Elegir **Private**. Tocar **Create repository**.
+2. Tocar el botón verde **Use this template** (usar esta plantilla) → **Create a new repository** (crear un repositorio nuevo; «repositorio» es la carpeta donde GitHub guarda la aplicación).
+3. Completar:
+   - **Owner** (dueño): la cuenta de la institución (ya aparece elegida).
+   - **Repository name** (nombre): **app-inscripciones**.
+   - Elegir **Private** (privado: solo lo ve la institución). **No** elegir Public.
+   - Tocar **Create repository** (crear repositorio) y esperar unos segundos.
 
 > 📝 **Anotá en la hoja:** C5 (la dirección del repositorio, por ejemplo github.com/inscripciones-laspalmas/app-inscripciones).
 
@@ -96,66 +100,66 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No hace falta crearlas a mano**: lo hace el instalador.
 
-1. Entrar a **supabase.com** → **Start your project** → **Continue with GitHub** → **Authorize**. Queda creada una organización con plan **Free**. Si en algún momento pide tarjeta, **no cargarla**.
-2. Crear la **llave** para el instalador. Camino corto: abrir **supabase.com/dashboard/account/tokens**. (Camino largo: arriba a la derecha, el ícono de la cuenta → **Account preferences** → **Access Tokens**.) Tocar **Generate new token** (la parte verde del botón, no la flechita) y completar:
-   - **Name:** «Instalador». **Expires in:** **Never**.
-   - **Resource access:** **Organization** → elegir la organización.
-   - **Permissions:** tocar «Preset · No access» → **Full access** (aparece un aviso amarillo: es normal).
-   - **Review access** → confirmar.
+1. Entrar a **supabase.com** → **Start your project** (empezá tu proyecto) → **Continue with GitHub** (entrar con la cuenta de GitHub que creaste en el paso 2) → **Authorize** (autorizar). Queda creada una «organización» (el espacio de la institución en Supabase) con plan **Free** (gratis). Si pregunta un nombre para la organización, poner el de la institución. Si en algún momento pide tarjeta, **no cargarla**, y nunca tocar **Upgrade** (pasar a pago).
+2. Crear la **llave** para el instalador. Camino corto: abrir **supabase.com/dashboard/account/tokens**. (Camino largo: arriba a la derecha, el ícono de la cuenta → **Account preferences** (preferencias de la cuenta) → **Access Tokens** (llaves de acceso).) Tocar **Generate new token** (crear una llave nueva; la parte verde del botón, no la flechita) y completar:
+   - **Name** (nombre): «Instalador». **Expires in** (vence en): **Never** (nunca).
+   - **Resource access** (a qué tiene acceso): **Organization** (organización) → elegir la organización.
+   - **Permissions** (permisos): tocar «Preset · No access» → **Full access** (acceso completo). Aparece un aviso amarillo: es normal.
+   - **Review access** (revisar) → confirmar.
 3. Copiar la llave (empieza con `sbp_`). **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. **No se anota en ningún lado.**
 
 > 📝 **Anotá en la hoja:** D1 (nombre de la organización de Supabase) y tildá D2 cuando la llave esté cargada en GitHub (paso 6).
 
-> ✅ **Cómo sé que salió bien:** en supabase.com, arriba a la izquierda, se ve la organización con la etiqueta **FREE**, y en **Access Tokens** aparece «Instalador».
+> ✅ **Cómo sé que salió bien:** en supabase.com, arriba a la izquierda, se ve la organización con la etiqueta **FREE** (gratis), y en **Access Tokens** aparece «Instalador».
 
 ## Paso 5. La cuenta de Cloudflare y su llave
 
 Cloudflare publica la aplicación en internet (una dirección como `inscripciones-laspalmas.pages.dev`).
 
-1. **dash.cloudflare.com/sign-up** → registrarse con el Gmail de la institución y una **contraseña nueva**.
-2. Abrir el correo de Cloudflare y tocar el enlace para **verificar la cuenta**.
-3. Si ofrece agregar un dominio o un plan pago: **saltear**.
-4. **Verificación en dos pasos:** perfil (arriba a la derecha) → **My Profile** → **Authentication** → **Two-Factor Authentication** → escanear con Google Authenticator → guardar los **backup codes**.
-5. Crear la **llave**. Camino corto: abrir **dash.cloudflare.com/profile/api-tokens**. (Camino largo: **My Profile** → **API Tokens**.) Tocar **Create Token** → **Create Custom Token** → **Get started**.
-   - Nombre: «Instalador».
-   - Permisos: **Account** → **Cloudflare Pages** → **Edit**. Tocar **+ Add more** y agregar **Account** → **Account Settings** → **Read**.
-   - Account Resources: **Include** → la cuenta de la institución.
-   - Si pide fecha de vencimiento (TTL), dejarla vacía o elegir la más lejana.
-   - **Continue to summary** → **Create Token**.
+1. Entrar a **dash.cloudflare.com/sign-up** (crear cuenta) → **Email** (correo): el Gmail de la institución; **Password** (contraseña): una **contraseña nueva** → **Sign up** (registrarse). Puede aparecer el control «¿sos un robot?» (ver el paso 2).
+2. Abrir el Gmail: llega un correo de Cloudflare. Tocar el enlace **Verify email** (verificar el correo).
+3. Si Cloudflare ofrece agregar un dominio (**Add a domain**), elegir un plan o hacer preguntas: **saltear** (**Skip**) o cerrar. No hace falta nada de eso, y nunca cargar tarjeta.
+4. **Verificación en dos pasos:** ícono de la persona (arriba a la derecha) → **My Profile** (mi perfil) → **Authentication** (autenticación) → **Two-Factor Authentication** (verificación en dos pasos) → escanear el código con **Google Authenticator** (como en GitHub) → escribir el número de 6 dígitos → guardar los **backup codes** (códigos de respaldo; imprimirlos o copiarlos a mano).
+5. Crear la **llave**. Camino corto: abrir **dash.cloudflare.com/profile/api-tokens**. (Camino largo: **My Profile** → **API Tokens** (llaves).) Tocar **Create Token** (crear llave) → bajar hasta **Create Custom Token** (llave a medida) → **Get started** (empezar).
+   - **Token name** (nombre): «Instalador».
+   - **Permissions** (permisos), en la primera fila elegir: **Account** → **Cloudflare Pages** → **Edit** (editar). Tocar **+ Add more** (agregar otro) y en la segunda fila: **Account** → **Account Settings** → **Read** (leer).
+   - **Account Resources** (cuentas): **Include** (incluir) → la cuenta de la institución.
+   - Si aparece **TTL** (fecha de vencimiento), dejarla vacía.
+   - Abajo: **Continue to summary** (ver resumen) → **Create Token** (crear llave).
 6. Copiar la llave. **Se muestra una sola vez.** Pegarla en el paso 6.
 
 > 📝 **Anotá en la hoja:** E1 (contraseña), E2 (dónde guardaste los backup codes) y E3 (fecha de vencimiento de la llave, si tiene).
 
-> ✅ **Cómo sé que salió bien:** en **My Profile → API Tokens** aparece «Instalador» con estado **Active**.
+> ✅ **Cómo sé que salió bien:** en **My Profile → API Tokens** aparece «Instalador» con estado **Active** (activa).
 
 ## Paso 6. Cargar las cuatro claves en GitHub
 
-1. En GitHub, abrir el repositorio **app-inscripciones** de la institución → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**. Camino corto: escribir en el navegador la dirección del repositorio (casilla C5) y agregarle al final **/settings/secrets/actions**.
-2. Crear estos cuatro, uno por uno. El nombre tiene que estar **exactamente** así, con mayúsculas:
+1. En GitHub, abrir el repositorio **app-inscripciones** de la institución → pestaña **Settings** (configuración; arriba, a la derecha de la fila de pestañas) → en el menú de la izquierda, **Secrets and variables** (secretos y variables) → **Actions**. Camino corto: escribir en el navegador la dirección del repositorio (casilla C5) y agregarle al final **/settings/secrets/actions**.
+2. Para cada una de las cuatro claves de la tabla: tocar el botón verde **New repository secret** (nuevo secreto) → en **Name** (nombre) escribir el nombre **exactamente** así, con mayúsculas y guiones bajos → en **Secret** (secreto) pegar el valor → **Add secret** (agregar).
 
 | Nombre | Qué se pega |
 |---|---|
 | `SUPABASE_ACCESS_TOKEN` | La llave de Supabase (paso 4) |
 | `CLOUDFLARE_API_TOKEN` | La llave de Cloudflare (paso 5) |
 | `CLAVE_RESPALDO` | Una clave **inventada** y larga (mínimo 16 caracteres; por ejemplo, cuatro palabras con números). **Sin ella no se pueden abrir los respaldos** |
-| `GMAIL_CLAVE_APLICACION` | La contraseña de aplicación de 16 letras (paso 1, casilla B6) |
+| `GMAIL_CLAVE_APLICACION` | La contraseña de aplicación de 16 letras (paso 1, casilla B6). Da lo mismo con o sin los espacios del medio |
 
 > GitHub guarda los secrets cifrados y no los vuelve a mostrar. Si uno se carga mal, se vuelve a crear con el mismo nombre (reemplaza al anterior).
 
 > 📝 **Anotá en la hoja:** F1 (la CLAVE_RESPALDO, letra por letra: es la más importante). **Anotala antes de pegarla en GitHub**: después GitHub no la deja ver nunca más, así que la hoja es la única copia. No es una cuenta: no tiene dirección web ni usuario. Tildá también D2 y E4.
 
-> ✅ **Cómo sé que salió bien:** en **Secrets and variables → Actions** se ven los **cuatro nombres** de la tabla, escritos igual.
+> ✅ **Cómo sé que salió bien:** en **Secrets and variables → Actions**, debajo de **Repository secrets**, se ven los **cuatro nombres** de la tabla, escritos igual. (El valor no se ve nunca: es normal.)
 
 ## Paso 7. El botón «Instalar»
 
-1. En el repositorio → pestaña **Actions** (o la dirección del repositorio, casilla C5, con **/actions** al final). Si pregunta, tocar **I understand my workflows, go ahead and enable them**.
-2. A la izquierda, **Instalar** → a la derecha, **Run workflow**.
+1. En el repositorio → pestaña **Actions** (acciones: las tareas automáticas), o la dirección del repositorio (casilla C5) con **/actions** al final. Si aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo.
+2. En la lista de la izquierda, tocar **Instalar** → a la derecha aparece una franja con el botón **Run workflow** (ejecutar): tocarlo y se abre un cuadrito.
 3. Completar:
    - **Nombre de la institución:** como se va a ver en la aplicación (ej.: «Club Atlético Las Palmas»).
    - **Gmail de la institución:** el del paso 1.
    - **Correo del primer Responsable general:** con el que va a entrar al panel esa persona (puede ser el personal).
    - **Nombre y apellido del Responsable general.**
-4. Tocar **Run workflow** (el botón verde). Aparece una ejecución en amarillo 🟡. Tarda entre **5 y 15 minutos**.
+4. Tocar el botón verde **Run workflow** del cuadrito. A los pocos segundos aparece una fila nueva con un círculo amarillo 🟡 (está trabajando; si no aparece, recargar la página con F5). Tarda entre **5 y 15 minutos**: no hace falta quedarse mirando.
 5. Cuando termina en verde ✅, tocar la ejecución: arriba aparece el **resumen** con la dirección de la aplicación y la del panel.
 
 **Qué hace solo el instalador:** crea las dos bases de datos (real y de pruebas), carga todas las tablas y reglas de seguridad, da de alta al Responsable general, configura los correos con el código de ingreso y publica la aplicación. Desde ese momento, todos los días se hace un **respaldo cifrado** y el sistema **se revisa solo** y avisa por correo si algo necesita atención.
