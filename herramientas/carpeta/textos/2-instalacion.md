@@ -156,7 +156,10 @@ Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No
 
 Cloudflare publica la aplicación en internet (una dirección como `inscripciones-laspalmas.pages.dev`).
 
-1. Entrar a **dash.cloudflare.com/sign-up** (crear cuenta) → **Email** (correo): el Gmail de la institución; **Password** (contraseña): una **contraseña nueva** → **Sign up** (registrarse). Puede aparecer el control «¿sos un robot?» (ver el paso 2).
+1. Entrar a **dash.cloudflare.com/sign-up** (crear cuenta) → **Email** (correo): el Gmail de la institución; **Password** (contraseña): una **contraseña nueva** → **Sign up** (registrarse). **No** usar «Continue with Google / Apple / GitHub»: completar los casilleros. Abajo, en **Let us know you are human** (demostrá que sos una persona), el cuadro se verifica solo («Verificando…»); si aparece una casilla, tildarla.
+
+![Registro en Cloudflare: (1) Email, (2) Password, (3) el control de persona, que se verifica solo](img/cloudflare-registro.png)
+
 2. Abrir el Gmail: llega un correo de Cloudflare. Tocar el enlace **Verify email** (verificar el correo).
 3. Si Cloudflare ofrece agregar un dominio (**Add a domain**), elegir un plan o hacer preguntas: **saltear** (**Skip**) o cerrar. No hace falta nada de eso, y nunca cargar tarjeta.
 4. **Verificación en dos pasos:** ícono de la persona (arriba a la derecha) → **My Profile** (mi perfil) → **Authentication** (autenticación) → **Two-Factor Authentication** (verificación en dos pasos) → escanear el código con **Google Authenticator** (como en GitHub) → escribir el número de 6 dígitos → guardar los **backup codes** (códigos de respaldo; imprimirlos o copiarlos a mano).
