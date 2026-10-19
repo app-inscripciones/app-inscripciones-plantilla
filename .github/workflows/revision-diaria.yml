@@ -35,7 +35,7 @@ jobs:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
         run: node herramientas/instalador/despertar.mjs
 
-            - name: Preparar psql (cliente de la base)
+      - name: Preparar psql (cliente de la base)
         run: command -v psql || (sudo apt-get update -q && sudo apt-get install -y -q postgresql-client)
 
       - name: Armar la conexión a la base
