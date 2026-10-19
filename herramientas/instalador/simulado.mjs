@@ -1,7 +1,7 @@
 // Servidor simulado de Supabase y Cloudflare para probar el instalador sin cuentas reales.
 // Devuelve una función con la misma forma que fetch. `ejecutarSql(ref, sql)` es opcional:
 // si se pasa, las consultas se ejecutan de verdad (por ejemplo, en un PostgreSQL local).
-export function apiSimulada({ ejecutarSql = null, estadoInicial = 'COMING_UP', subdominio = null } = {}) {
+export function apiSimulada({ ejecutarSql = null, estadoInicial = 'COMING_UP', subdominio = null, limiteProyectos = 99 } = {}) {
   const estado = {
     proyectos: [], consultas: [], auth: {}, claves: {}, pages: [], llamadas: [], esperas: 0,
   };
@@ -35,6 +35,7 @@ export function apiSimulada({ ejecutarSql = null, estadoInicial = 'COMING_UP', s
     if (method === 'GET' && ruta === '/v1/projects') return json(200, estado.proyectos.map(({ ref, name, status }) => ({ ref, name, status })));
     if (method === 'POST' && ruta === '/v1/projects') {
       if (!datos.db_pass || !datos.organization_slug || !datos.name) return json(400, { message: 'faltan datos' });
+      if (estado.proyectos.length >= limiteProyectos) return json(402, { message: 'The following organization members have reached their maximum limits for the number of active free projects' });
       n += 1;
       const ref = `proyectodeprueba${String.fromCharCode(96 + n).repeat(4)}`; // 20 letras, como las de Supabase
       const p = { ref, name: datos.name, region: datos.region, status: estadoInicial, db_pass: datos.db_pass };

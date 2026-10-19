@@ -144,7 +144,16 @@ export async function instalar(env, { fetchFn = fetch, log = console.log, pausa 
     let p = existentes.find((x) => x.name === nombre);
     if (!p) {
       log(`    Creando ${nombre}…`);
-      p = await sb('POST', '/v1/projects', { name: nombre, organization_slug: org, db_pass: clave, region });
+      try {
+        p = await sb('POST', '/v1/projects', { name: nombre, organization_slug: org, db_pass: clave, region });
+      } catch (e) {
+        if (/limit|maximum|max(imum)? number|free project|402/i.test(e.message)) {
+          throw new Error('Supabase no deja crear más bases gratis en esta organización (el plan gratuito permite 2 activas). '
+            + 'Si creaste un proyecto a mano, borralo: supabase.com → abrí ese proyecto → Project Settings → General → abajo de todo, Delete project. '
+            + 'Después volvé a tocar «Instalar». (Nunca elijas un plan pago.)');
+        }
+        throw e;
+      }
     } else {
       log(`    ${nombre} ya existía: se reutiliza.`);
     }

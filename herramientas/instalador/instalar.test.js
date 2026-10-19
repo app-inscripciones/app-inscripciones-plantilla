@@ -73,6 +73,12 @@ describe('instalador (D34)', () => {
     expect(estado.proyectos.find((p) => p.ref === 'pausadaaaaaaaaaaaaaa').status).toBe('ACTIVE_HEALTHY');
   });
 
+  it('si el plan gratuito no deja crear más bases, explica qué borrar', async () => {
+    const { fetchFn, estado } = apiSimulada({ estadoInicial: 'ACTIVE_HEALTHY', limiteProyectos: 1 });
+    estado.proyectos.push({ ref: 'amanoaaaaaaaaaaaaaaa', name: 'mi-proyecto', status: 'ACTIVE_HEALTHY' });
+    await expect(instalar(ENV_PRUEBA, opciones(fetchFn))).rejects.toThrow(/Delete project/);
+  });
+
   it('se puede volver a correr: reutiliza lo que ya existe', async () => {
     const { fetchFn, estado } = apiSimulada();
     await instalar(ENV_PRUEBA, opciones(fetchFn));
