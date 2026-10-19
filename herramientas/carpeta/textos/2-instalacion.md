@@ -100,6 +100,9 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 1. Con la sesión de GitHub de la institución abierta, entrar a la **plantilla**: **github.com/inscripciones-iglesia/app-inscripciones-plantilla**. (Es el molde que copian **todas** las instituciones, sean o no iglesias: no tiene datos de nadie, y la copia que hacés queda en tu cuenta, privada.)
 2. Tocar el botón verde **Use this template** (usar esta plantilla) → **Create a new repository** (crear un repositorio nuevo; «repositorio» es la carpeta donde GitHub guarda la aplicación).
+
+![La plantilla: (1) botón verde «Use this template»](img/github-plantilla.png)
+
 3. Completar:
    - **Owner** (dueño): la cuenta de la institución (ya aparece elegida).
    - **Repository name** (nombre): **app-inscripciones**.
