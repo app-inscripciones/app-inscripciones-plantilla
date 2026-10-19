@@ -34,9 +34,13 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 **Verificación en dos pasos (obligatoria):**
 
-1. **myaccount.google.com/security** → **Verificación en dos pasos** → **Comenzar**.
-2. Cargar el celular y escribir el código que llega por SMS.
-3. Generar los **códigos de seguridad**.
+1. Entrar a **myaccount.google.com/security** y tocar **Verificación en dos pasos**.
+2. **Mirá qué aparece:**
+   - Si hay un botón **«Comenzar»** o **«Activar»**: tocarlo, cargar el celular y escribir el código que llega por SMS.
+   - Si aparece una lista (Llaves de acceso, Notificación de Google, Authenticator, **Número de teléfono** con un ✅ verde, **Códigos de verificación alternativos**) y abajo el botón **«Desactivar la verificación en dos pasos»**: **ya está activada**. No hace falta ningún SMS; seguí con el punto 3. (Pasa cuando el celular ya estaba cargado en la cuenta.)
+3. Tocar **«Códigos de verificación alternativos»** (la última fila) → **Obtener códigos**. Aparecen **10 códigos de 8 números**: copiarlos a mano en la hoja.
+
+> **Si el SMS no llega:** revisá el número: en Argentina va **+54 9** y la característica sin 0 y sin 15 (por ejemplo, +54 9 362 4555666). Elegí **«Llamada de voz»** para que Google te dicte el código. Esperá 2 o 3 minutos antes de pedir otro. Si sigue sin llegar, usá otro número o probá unas horas más tarde (Google limita los códigos a un número que ya está en varias cuentas).
 
 > Si Google pide «escaneá este QR con tu celular»: usar los **datos móviles** del celular (no el Wi-Fi) y no reintentar muchas veces seguidas; después de varios intentos, Google bloquea el acceso por unas horas.
 
