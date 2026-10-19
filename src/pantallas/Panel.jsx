@@ -89,7 +89,7 @@ const AYUDA_ROLES = {
   consulta: 'Solo mira el panel y descarga el Excel.',
 };
 
-function Personas({ yo }) {
+function Personas({ yo, alCambiarmeRoles }) {
   const [lista, setLista] = useState(null);
   const [error, setError] = useState('');
   const [form, setForm] = useState(null);
@@ -107,8 +107,11 @@ function Personas({ yo }) {
     const r = await rpc('panel_guardar_usuario', { p_email: form.email, p_nombre: form.nombre, p_roles: form.roles, p_activo: form.activo });
     setOcupado(false);
     if (!r || !r.ok) { setError(mensajeError(r)); return; }
+    const fuiYo = form.email === yo.email;
     setForm(null);
     cargar();
+    // Si me cambié mis propios roles, las pestañas se actualizan solas (sin recargar la página).
+    if (fuiYo && alCambiarmeRoles) alCambiarmeRoles();
   };
 
   if (form) {
@@ -534,7 +537,7 @@ export default function Panel() {
           </section>
         )}
         {seccion === 'qr' && tiene('organizador') && <AccesosQR key={`qr-${eventoId}-${qrPedido.n}`} api={apiQR} mostrarVolver={false} eventoInicial={eventoId} formInicial={qrPedido.tarea} nombreInicial={qrPedido.tarea ? yo.nombre : ''} />}
-        {seccion === 'personas' && tiene('responsable') && <Personas yo={yo} />}
+        {seccion === 'personas' && tiene('responsable') && <Personas yo={yo} alCambiarmeRoles={cargarPerfil} />}
         {seccion === 'estado' && tiene('responsable') && <EstadoSistema estado={est} />}
         {seccion === 'institucion' && tiene('responsable') && <Institucion />}
       </main>
