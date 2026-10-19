@@ -65,6 +65,14 @@ describe('instalador (D34)', () => {
     await expect(instalar({ ...ENV_PRUEBA, CLOUDFLARE_API_TOKEN: '' }, opciones(fetchFn))).rejects.toThrow(/CLOUDFLARE_API_TOKEN/);
   });
 
+  it('reactiva sola una base pausada (plan gratuito)', async () => {
+    const { fetchFn, estado } = apiSimulada({ estadoInicial: 'ACTIVE_HEALTHY' });
+    estado.proyectos.push({ ref: 'pausadaaaaaaaaaaaaaa', name: 'club-atletico-las-palmas-real', status: 'INACTIVE' });
+    await instalar(ENV_PRUEBA, opciones(fetchFn));
+    expect(estado.reactivadas).toBe(1);
+    expect(estado.proyectos.find((p) => p.ref === 'pausadaaaaaaaaaaaaaa').status).toBe('ACTIVE_HEALTHY');
+  });
+
   it('se puede volver a correr: reutiliza lo que ya existe', async () => {
     const { fetchFn, estado } = apiSimulada();
     await instalar(ENV_PRUEBA, opciones(fetchFn));

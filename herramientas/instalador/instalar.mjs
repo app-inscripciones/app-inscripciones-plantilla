@@ -156,8 +156,19 @@ export async function instalar(env, { fetchFn = fetch, log = console.log, pausa 
       const p = await sb('GET', `/v1/projects/${b.ref}`);
       if (p.status === 'ACTIVE_HEALTHY') break;
       if (['INIT_FAILED', 'REMOVED', 'RESTORE_FAILED'].includes(p.status)) throw new Error(`Supabase: la base ${b.nombre} quedó en estado ${p.status}.`);
-      if (p.status === 'INACTIVE') throw new Error(`Supabase: la base ${b.nombre} está pausada. Reanudala desde supabase.com (Resume project) y volvé a instalar.`);
-      if (i > 60) throw new Error(`Supabase: la base ${b.nombre} tardó demasiado en estar lista. Volvé a tocar «Instalar» en unos minutos.`);
+      if (p.status === 'INACTIVE') {
+        // El plan gratuito pausa una base sin uso: se reactiva sola (lo mismo que el botón «Resume project»).
+        if (b.reactivada === undefined) {
+          log(`    ${b.nombre} estaba pausada: reactivándola (tarda unos minutos)…`);
+          await sb('POST', `/v1/projects/${b.ref}/restore`, {});
+          b.reactivada = 0;
+        } else if (++b.reactivada > 12) {
+          throw new Error(`Supabase: la base ${b.nombre} sigue pausada. Reanudala desde supabase.com (Resume project) y volvé a instalar.`);
+        }
+        await esperar(pausa);
+        continue;
+      }
+      if (i > 90) throw new Error(`Supabase: la base ${b.nombre} tardó demasiado en estar lista. Volvé a tocar «Instalar» en unos minutos.`);
       if (i === 0) log(`    Esperando que ${b.nombre} esté lista (puede tardar unos minutos)…`);
       await esperar(pausa);
     }

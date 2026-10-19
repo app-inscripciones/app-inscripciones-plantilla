@@ -50,6 +50,7 @@ export function apiSimulada({ ejecutarSql = null, estadoInicial = 'COMING_UP', s
         if (p.status === 'COMING_UP') { estado.esperas += 1; p.status = 'ACTIVE_HEALTHY'; return json(200, { ref: p.ref, name: p.name, status: 'COMING_UP' }); }
         return json(200, { ref: p.ref, name: p.name, status: p.status });
       }
+      if (method === 'POST' && resto === '/restore') { if (p.status !== 'INACTIVE') return json(400, { message: 'no está pausado' }); p.status = 'COMING_UP'; estado.reactivadas = (estado.reactivadas || 0) + 1; return json(200, {}); }
       if (method === 'PATCH' && resto === '/database/password') { p.db_pass = datos.password; return json(200, { message: 'ok' }); }
       if (method === 'POST' && resto === '/database/query') {
         estado.consultas.push({ ref: p.ref, query: datos.query });
