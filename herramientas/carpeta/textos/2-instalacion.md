@@ -118,6 +118,9 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 > ✅ **Cómo sé que salió bien:** arriba a la izquierda dice **inscripciones-laspalmas / app-inscripciones** con la etiqueta **Private**.
 
+![Copia lista: el nombre app-inscripciones con la etiqueta «Private»](img/github-copia-lista.png)
+
+
 ## Paso 4. La cuenta de Supabase y su llave
 
 Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No hace falta crearlas a mano**: lo hace el instalador.
