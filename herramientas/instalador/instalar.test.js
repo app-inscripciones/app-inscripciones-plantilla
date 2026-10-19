@@ -95,7 +95,7 @@ describe('instalador (D34)', () => {
 
   it('errores claros: faltan secrets, llave mal copiada, clave corta', async () => {
     const { fetchFn } = apiSimulada();
-    await expect(instalar({ ...ENV_PRUEBA, GMAIL_CLAVE_APLICACION: '' }, opciones(fetchFn))).rejects.toThrow(/Faltan datos: GMAIL_CLAVE_APLICACION/);
+    await expect(instalar({ ...ENV_PRUEBA, GMAIL_CLAVE_APLICACION: '' }, opciones(fetchFn))).rejects.toThrow(/Faltan datos: claves en GitHub.*GMAIL_CLAVE_APLICACION/);
     await expect(instalar({ ...ENV_PRUEBA, CLOUDFLARE_API_TOKEN: 'mal' }, opciones(fetchFn))).rejects.toThrow(/Cloudflare respondió 403.*llave/);
     await expect(instalar({ ...ENV_PRUEBA, SUPABASE_ACCESS_TOKEN: 'mal' }, opciones(fetchFn))).rejects.toThrow(/Supabase respondió 401/);
     await expect(instalar({ ...ENV_PRUEBA, CLAVE_RESPALDO: 'corta' }, opciones(fetchFn))).rejects.toThrow(/16 caracteres/);

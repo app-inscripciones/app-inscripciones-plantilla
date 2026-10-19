@@ -248,7 +248,7 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 | Qué pasa | Qué hacer |
 |---|---|
-| El instalador dice «Faltan datos: …» | Falta uno de los cuatro secrets o un dato del formulario. Revisar el paso 6 |
+| El instalador dice «Faltan datos: …» | El mensaje dice cuál falta: una clave en GitHub (revisar el paso 6: el nombre tiene que estar escrito exactamente igual) o un casillero del panel de «Instalar» |
 | «Cloudflare respondió 403» o «Supabase respondió 401» | La llave está mal copiada o no tiene los permisos de los pasos 4 o 5. Crear una nueva y cargarla otra vez |
 | «La base … tardó demasiado en estar lista» | Supabase está lento. Esperar unos minutos y volver a tocar **Run workflow** |
 | «Supabase no deja crear más bases gratis…» | Se creó un proyecto a mano en Supabase. Borrarlo (supabase.com → el proyecto → **Project Settings** → **General** → abajo, **Delete project**) y volver a tocar **Run workflow** |

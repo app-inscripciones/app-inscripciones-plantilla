@@ -89,7 +89,13 @@ export async function instalar(env, { fetchFn = fetch, log = console.log, pausa 
   const fija = String(env.URL_APP_FIJA || '').trim().replace(/\/+$/, '');
   const falta = ['SUPABASE_ACCESS_TOKEN', ...(fija ? [] : ['CLOUDFLARE_API_TOKEN']), 'CLAVE_RESPALDO', 'GMAIL_CLAVE_APLICACION',
     'NOMBRE_INSTITUCION', 'CORREO_PROYECTO', 'CORREO_RESPONSABLE', 'NOMBRE_RESPONSABLE'].filter((k) => !String(env[k] || '').trim());
-  if (falta.length) throw new Error(`Faltan datos: ${falta.join(', ')}. Revisá los secrets del repositorio y el formulario «Instalar».`);
+  if (falta.length) {
+    const FORM = { NOMBRE_INSTITUCION: 'nombre de la institución', CORREO_PROYECTO: 'Gmail de la institución', CORREO_RESPONSABLE: 'correo del Responsable general', NOMBRE_RESPONSABLE: 'nombre y apellido del Responsable general' };
+    const claves = falta.filter((k) => !FORM[k]);
+    const datos = falta.filter((k) => FORM[k]).map((k) => FORM[k]);
+    throw new Error(['Faltan datos:', claves.length ? ` claves en GitHub (manual de instalación, paso 6; el nombre tiene que estar escrito exactamente igual): ${claves.join(', ')}.` : '',
+      datos.length ? ` Casilleros del panel de «Instalar» sin completar: ${datos.join(', ')}.` : ''].join(''));
+  }
   if (env.CLAVE_RESPALDO.length < 16) throw new Error('La CLAVE_RESPALDO tiene que tener al menos 16 caracteres.');
   const correo = (c) => String(c).trim().toLowerCase();
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo(env.CORREO_RESPONSABLE))) throw new Error('El correo del Responsable general no es válido.');
@@ -288,6 +294,15 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     console.log(`\nListo. La app: ${r.urlApp}`);
   } catch (e) {
     console.error(`::error::${e.message}`);
+    if (env.GITHUB_STEP_SUMMARY) {
+      appendFileSync(env.GITHUB_STEP_SUMMARY, [
+        '## ❌ La instalación no terminó', '',
+        `**Qué pasó:** ${e.message}`, '',
+        '**Qué hacer:** corregí lo que dice el mensaje y volvé a tocar **Run workflow** (el botón verde de arriba a la derecha y, en el panel, el de abajo de todo). '
+          + 'Lo que ya se hizo no se repite ni se pierde. **No** uses «Re-run jobs».', '',
+        'Si el mensaje no se entiende, buscalo en el manual de instalación, sección «Si algo sale mal durante la instalación».', '',
+      ].join('\n'));
+    }
     process.exit(1);
   }
 }
