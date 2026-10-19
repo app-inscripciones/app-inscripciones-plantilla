@@ -1,0 +1,45 @@
+"""Arma las imágenes del manual de instalación a partir de capturas reales: recuadros rojos numerados en lo que
+hay que tocar y desenfoque de correos, números, claves y direcciones. Uso: python3 marcar_capturas.py <carpeta-capturas>
+Las capturas originales no se guardan en el repositorio; solo las ya marcadas (textos/img)."""
+import os, sys
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+ORIG = sys.argv[1] if len(sys.argv) > 1 else '.'
+DEST = os.path.join(os.path.dirname(__file__), 'textos', 'img')
+ROJO = (220, 30, 30)
+try: FUENTE = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 30)
+except OSError: FUENTE = ImageFont.load_default()
+
+# nombre: (archivo, recorte o None, [(x1,y1,x2,y2,'número')], [zonas a desenfocar])
+CAPTURAS = {
+    'google-2pasos-activa': ('f4230aaf-image.png', None, [(190, 625, 1190, 687, '1'), (162, 736, 552, 794, '')], [(740, 536, 885, 570)]),
+    'google-contrasena-app': ('a36d2550-image.jpg', (0, 250, 1080, 2300), [(108, 1776, 972, 1936, '1'), (684, 2106, 927, 2222, '2')], [(132, 116, 816, 226), (110, 1430, 900, 1580)]),
+    'github-robot': ('c339a851-image.png', None, [(700, 567, 1068, 629, '')], [(520, 770, 1240, 917)]),
+    'github-2pasos': ('9e603659-image.png', None, [(88, 447, 436, 495, '1'), (486, 740, 842, 792, '2')], [(170, 8, 455, 74)]),
+    'supabase-llaves': ('a86f7f0d-image.png', None, [(1316, 470, 1530, 512, '1')], [(684, 616, 946, 646)]),
+    'supabase-llave-1': ('51db0d4f-image.png', None, [(584, 102, 970, 217, '1'), (586, 493, 968, 600, '2'), (801, 815, 970, 857, '4')], []),
+    'supabase-llave-2': ('f7564733-image.png', None, [(604, 116, 981, 166, '3'), (821, 652, 981, 692, '4')], [(612, 0, 858, 28)]),
+    'github-instalacion-terminada': ('8040061f-image.png', (340, 180, 1880, 490), [(366, 252, 655, 292, '')], [(455, 303, 1300, 394)]),
+}
+
+def marcar(nombre, archivo, recorte, marcas, borrosos):
+    im = Image.open(os.path.join(ORIG, archivo)).convert('RGB')
+    for (x1, y1, x2, y2) in borrosos:
+        zona = im.crop((x1, y1, x2, y2)).filter(ImageFilter.GaussianBlur(14))
+        im.paste(zona, (x1, y1))
+    d = ImageDraw.Draw(im)
+    for (x1, y1, x2, y2, num) in marcas:
+        d.rounded_rectangle((x1, y1, x2, y2), radius=8, outline=ROJO, width=5)
+        if num:
+            r = 22; cx, cy = x1 - 4, y1 - 4
+            d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=ROJO)
+            d.text((cx, cy), num, fill='white', font=FUENTE, anchor='mm')
+    if recorte: im = im.crop(recorte)
+    if im.width > 1400: im = im.resize((1400, round(im.height * 1400 / im.width)))
+    im.save(os.path.join(DEST, nombre + '.png'), optimize=True)
+
+if __name__ == '__main__':
+    os.makedirs(DEST, exist_ok=True)
+    for n, (a, rc, m, b) in CAPTURAS.items():
+        if os.path.exists(os.path.join(ORIG, a)): marcar(n, a, rc, m, b); print('ok', n)
+        else: print('falta', a)

@@ -10,6 +10,7 @@ Genérica: no nombra a ninguna institución.
 """
 import asyncio, os, shutil, subprocess, sys, zipfile, html
 import markdown
+import re
 from playwright.async_api import async_playwright
 
 DIR = os.path.dirname(os.path.abspath(__file__))
@@ -33,10 +34,19 @@ code{background:#f1f3f5;padding:0 1mm;border-radius:1mm;font-size:10pt}
 li{margin:.8mm 0}
 hr{border:0;border-top:.4mm solid #d0d4da;margin:6mm 0}
 .pie{color:#6b7280;font-size:9pt;margin-top:8mm}
+figure{margin:2mm 0 4mm;page-break-inside:avoid} figure img{max-width:100%;max-height:120mm;border:.3mm solid #c9cfd6;border-radius:1.5mm;display:block}
 """
 
 def md_a_html(md_texto, titulo):
     cuerpo = markdown.markdown(md_texto, extensions=['tables'])
+    # Capturas marcadas (textos/img): van dentro del PDF, como imagen embebida.
+    def _img(m):
+        ruta = os.path.join(os.path.dirname(__file__), 'textos', m.group(1))
+        if not os.path.exists(ruta): return ''
+        import base64
+        return 'src="data:image/png;base64,' + base64.b64encode(open(ruta, 'rb').read()).decode() + '"'
+    cuerpo = re.sub(r'src="(img/[^"]+)"', _img, cuerpo)
+    cuerpo = re.sub(r'<p>(<img [^>]+>)</p>', r'<figure>\1</figure>', cuerpo)
     # Recuadros especiales: «📝 Anotá en la hoja» y «✅ Cómo sé que salió bien»
     cuerpo = cuerpo.replace('<blockquote>\n<p>📝', '<blockquote style="background:#fff7e0;border-color:#e6a700">\n<p>📝')
     cuerpo = cuerpo.replace('<blockquote>\n<p>✅', '<blockquote style="background:#e8f5e9;border-color:#2e7d32">\n<p>✅')

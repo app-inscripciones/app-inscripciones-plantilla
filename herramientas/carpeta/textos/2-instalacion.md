@@ -42,6 +42,9 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 > **Si el SMS no llega:** revisá el número: en Argentina va **+54 9** y la característica sin 0 y sin 15 (por ejemplo, +54 9 362 4555666). Elegí **«Llamada de voz»** para que Google te dicte el código. Esperá 2 o 3 minutos antes de pedir otro. Si sigue sin llegar, usá otro número o probá unas horas más tarde (Google limita los códigos a un número que ya está en varias cuentas).
 
+![Verificación en dos pasos ya activada: (1) Códigos de verificación alternativos; abajo, «Desactivar…» indica que ya está activa](img/google-2pasos-activa.png)
+
+
 > Si Google pide «escaneá este QR con tu celular»: usar los **datos móviles** del celular (no el Wi-Fi) y no reintentar muchas veces seguidas; después de varios intentos, Google bloquea el acceso por unas horas.
 
 **Contraseña de aplicación** (para que el sistema pueda mandar los códigos de ingreso por correo):
@@ -49,6 +52,9 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 1. Con la sesión del Gmail de la institución abierta, entrar a **myaccount.google.com/apppasswords**.
 2. Nombre: «Supabase» → **Crear**.
 3. Aparece una clave de **16 letras**. Se usa en el paso 6.
+
+![Contraseñas de aplicación: (1) escribir «Supabase», (2) Crear](img/google-contrasena-app.png)
+
 
 > Si la página dice que no está disponible, la verificación en dos pasos todavía no quedó activa: esperar unos minutos y volver a probar.
 
@@ -66,6 +72,9 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 > 🤖 **«¿Sos un robot?»** Al registrarte o entrar, GitHub (y también Google o Cloudflare) a veces muestra un control para comprobar que sos una persona: **deslizar una flecha hacia la derecha**, elegir imágenes o resolver un pequeño juego. Es normal y no tiene nada que ver con la aplicación: hacé lo que pide, despacio. Si sale mal, aparece otro; probá de nuevo. Con el botón del parlante 🔊 se puede hacer escuchando.
 
+![Control «¿sos un robot?»: deslizar la flecha hacia la derecha](img/github-robot.png)
+
+
 1. Entrar a **github.com/signup** (página para crear una cuenta).
 2. Completar, uno por uno, lo que pide la pantalla:
    - **Email** (correo): el Gmail de la institución.
@@ -76,7 +85,10 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 3. Aparece el control **«¿sos un robot?»** (ver arriba). Resolverlo.
 4. GitHub manda un **código de 8 números al Gmail**: abrir el Gmail, copiarlo y escribirlo en GitHub.
 5. Si pregunta por un plan, elegir **Free** (gratis). Si hace preguntas sobre para qué lo vas a usar, se pueden saltear con **Skip** (saltear) o **Continue** (continuar).
-6. **Verificación en dos pasos** (obligatoria): tocar la **foto de perfil** (el círculo de arriba a la derecha) → **Settings** (configuración) → en el menú de la izquierda, **Password and authentication** (contraseña y autenticación) → **bajar con la ruedita del mouse** hasta el título **Two-factor authentication** (verificación en dos pasos) → botón verde **Enable two-factor authentication** (activar). A veces GitHub ya la pide sola al registrarte: es lo mismo.
+6. **Verificación en dos pasos** (obligatoria): tocar la **foto de perfil** (el círculo de arriba a la derecha) → **Settings** (configuración) → en el menú de la izquierda, **Password and authentication** (contraseña y autenticación) → **bajar con la ruedita del mouse** hasta el título **Two-factor authentication** (verificación en dos pasos) → botón verde **Enable two-factor authentication** (activar).
+
+![(1) Password and authentication, (2) bajar hasta Two-factor authentication](img/github-2pasos.png)
+ A veces GitHub ya la pide sola al registrarte: es lo mismo.
 7. Elegir **Authenticator app** (aplicación de autenticación). En el celular, instalar **Google Authenticator** (desde Play Store o App Store), abrirla, tocar **+** → **Escanear un código QR** y apuntar a la pantalla de la computadora. En el celular aparece un número de **6 dígitos** que cambia cada 30 segundos: escribirlo en GitHub y tocar **Continue**.
 8. GitHub muestra los **recovery codes** (códigos de recuperación, sirven si perdés el celular). Tocar **Download** (descargar) e imprimirlos, o copiarlos a mano. Después tocar **I have saved my recovery codes** (ya guardé mis códigos) y **Done** (listo).
 
@@ -106,10 +118,19 @@ Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No
 
 1. Entrar a **supabase.com** → **Start your project** (empezá tu proyecto) → **Continue with GitHub** (entrar con la cuenta de GitHub que creaste en el paso 2) → **Authorize** (autorizar). Queda creada una «organización» (el espacio de la institución en Supabase) con plan **Free** (gratis). Si pregunta un nombre para la organización, poner el de la institución. Si en algún momento pide tarjeta, **no cargarla**, y nunca tocar **Upgrade** (pasar a pago).
 2. Crear la **llave** para el instalador. Camino corto: abrir **supabase.com/dashboard/account/tokens**. (Camino largo: arriba a la derecha, el ícono de la cuenta → **Account preferences** (preferencias de la cuenta) → **Access Tokens** (llaves de acceso).) Tocar **Generate new token** (crear una llave nueva; la parte verde del botón, no la flechita) y completar:
+
+![(1) Generate new token](img/supabase-llaves.png)
+
    - **Name** (nombre): «Instalador». **Expires in** (vence en): **Never** (nunca).
    - **Resource access** (a qué tiene acceso): **Organization** (organización) → elegir la organización.
    - **Permissions** (permisos): tocar «Preset · No access» → **Full access** (acceso completo). Aparece un aviso amarillo: es normal.
    - **Review access** (revisar) → confirmar.
+
+![(1) Instalador y Never, (2) Organization, (4) Review access](img/supabase-llave-1.png)
+
+![(3) Preset · Full access, (4) Review access](img/supabase-llave-2.png)
+
+
 3. Copiar la llave (empieza con `sbp_`). **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. **No se anota en ningún lado.**
 
 > 📝 **Anotá en la hoja:** D1 (nombre de la organización de Supabase) y tildá D2 cuando la llave esté cargada en GitHub (paso 6).
@@ -165,6 +186,9 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
    - **Nombre y apellido del Responsable general.**
 4. Tocar el botón verde **Run workflow** del cuadrito. A los pocos segundos aparece una fila nueva con un círculo amarillo 🟡 (está trabajando; si no aparece, recargar la página con F5). Tarda entre **5 y 15 minutos**: no hace falta quedarse mirando.
 5. Cuando termina en verde ✅, tocar la ejecución: arriba aparece el **resumen** con la dirección de la aplicación y la del panel.
+
+![Resumen «Instalación terminada» con la dirección de la aplicación y del panel](img/github-instalacion-terminada.png)
+
 
 **Qué hace solo el instalador:** crea las dos bases de datos (real y de pruebas), carga todas las tablas y reglas de seguridad, da de alta al Responsable general, configura los correos con el código de ingreso y publica la aplicación. Desde ese momento, todos los días se hace un **respaldo cifrado** y el sistema **se revisa solo** y avisa por correo si algo necesita atención.
 
