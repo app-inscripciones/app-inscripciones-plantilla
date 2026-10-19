@@ -62,6 +62,8 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 > 🌐 **GitHub, Supabase y Cloudflare están en inglés.** No hace falta saber inglés: en este manual, cada botón aparece **en negrita, tal cual se ve en la pantalla**, y al lado, entre paréntesis, qué quiere decir. **No uses el traductor de Chrome** en estas páginas: cambia los nombres de los botones y ya no coinciden con el manual.
 
+> ✋ **Regla general: si aparece un casillero, una opción o una pregunta que el manual no nombra, dejalo como está** (vacío o con lo que ya trae) y seguí. Solo hay que tocar lo que el manual dice.
+
 > 🤖 **«¿Sos un robot?»** Al registrarte o entrar, GitHub (y también Google o Cloudflare) a veces muestra un control para comprobar que sos una persona: **deslizar una flecha hacia la derecha**, elegir imágenes o resolver un pequeño juego. Es normal y no tiene nada que ver con la aplicación: hacé lo que pide, despacio. Si sale mal, aparece otro; probá de nuevo. Con el botón del parlante 🔊 se puede hacer escuchando.
 
 1. Entrar a **github.com/signup** (página para crear una cuenta).
@@ -89,6 +91,8 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 3. Completar:
    - **Owner** (dueño): la cuenta de la institución (ya aparece elegida).
    - **Repository name** (nombre): **app-inscripciones**.
+   - **Description** (descripción): dejarlo **vacío**.
+   - **Include all branches** (incluir todas las ramas), si aparece: **no tildarlo**.
    - Elegir **Private** (privado: solo lo ve la institución). **No** elegir Public.
    - Tocar **Create repository** (crear repositorio) y esperar unos segundos.
 
