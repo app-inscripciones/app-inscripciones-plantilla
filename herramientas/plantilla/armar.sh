@@ -9,7 +9,7 @@ mkdir -p "$DESTINO"
 rsync -a --delete \
   --exclude '.git/' --exclude 'node_modules/' --exclude 'dist/' --exclude 'dev-dist/' --exclude '.docs-tmp/' \
   --exclude 'herramientas/videos/' --exclude 'herramientas/manuales/' --exclude 'herramientas/generar_sql_eventos.mjs' \
-  --exclude '.github/workflows/plantilla.yml' --exclude 'config/instalacion.json' \
+  --exclude '.github/workflows/plantilla.yml' --exclude '.github/workflows/base-real-caso-testigo.yml' --exclude 'config/instalacion.json' \
   "$ORIGEN/" "$DESTINO/"
 
 # Conexión: vacía hasta que se instale (la completa el botón «Instalar»).

@@ -12,6 +12,9 @@
 //   SUPABASE_ACCESS_TOKEN, CLOUDFLARE_API_TOKEN, CLAVE_RESPALDO, GMAIL_CLAVE_APLICACION   (secretas)
 //   NOMBRE_INSTITUCION, CORREO_PROYECTO, CORREO_RESPONSABLE, NOMBRE_RESPONSABLE           (del formulario «Instalar»)
 //   CLOUDFLARE_ACCOUNT_ID, SUPABASE_ORG, REGION (opcionales)
+//   Caso testigo (D73, workflow «Base real (caso testigo)»): URL_APP_FIJA (la app ya se publica sola desde GitHub en
+//   Cloudflare: no se toca Cloudflare ni hace falta su llave), PREFIJO_BASES (nombre de las bases que ya existen) y
+//   COPIAR_DE_PRUEBAS=1 (copia de la base de pruebas a la real los datos de la institución y la práctica hecha).
 //   SUPABASE_API, CLOUDFLARE_API (solo para pruebas con un servidor simulado)
 import { readFileSync, writeFileSync, existsSync, appendFileSync } from 'node:fs';
 import { createHmac } from 'node:crypto';
@@ -83,7 +86,8 @@ export async function cargarTablas(sb, bases, raiz = RAIZ, log = console.log) {
 }
 
 export async function instalar(env, { fetchFn = fetch, log = console.log, pausa = 10000, raiz = RAIZ } = {}) {
-  const falta = ['SUPABASE_ACCESS_TOKEN', 'CLOUDFLARE_API_TOKEN', 'CLAVE_RESPALDO', 'GMAIL_CLAVE_APLICACION',
+  const fija = String(env.URL_APP_FIJA || '').trim().replace(/\/+$/, '');
+  const falta = ['SUPABASE_ACCESS_TOKEN', ...(fija ? [] : ['CLOUDFLARE_API_TOKEN']), 'CLAVE_RESPALDO', 'GMAIL_CLAVE_APLICACION',
     'NOMBRE_INSTITUCION', 'CORREO_PROYECTO', 'CORREO_RESPONSABLE', 'NOMBRE_RESPONSABLE'].filter((k) => !String(env[k] || '').trim());
   if (falta.length) throw new Error(`Faltan datos: ${falta.join(', ')}. Revisá los secrets del repositorio y el formulario «Instalar».`);
   if (env.CLAVE_RESPALDO.length < 16) throw new Error('La CLAVE_RESPALDO tiene que tener al menos 16 caracteres.');
@@ -91,29 +95,38 @@ export async function instalar(env, { fetchFn = fetch, log = console.log, pausa 
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo(env.CORREO_RESPONSABLE))) throw new Error('El correo del Responsable general no es válido.');
 
   const corto = nombreCorto(env.NOMBRE_INSTITUCION);
+  const prefijoBases = env.PREFIJO_BASES ? nombreCorto(env.PREFIJO_BASES) : corto;
   const region = env.REGION || 'sa-east-1';
   const sb = cliente(env.SUPABASE_API || 'https://api.supabase.com', env.SUPABASE_ACCESS_TOKEN, 'Supabase', fetchFn);
   const cf = cliente(env.CLOUDFLARE_API || 'https://api.cloudflare.com/client/v4', env.CLOUDFLARE_API_TOKEN, 'Cloudflare', fetchFn);
 
   // 1. Cloudflare Pages ----------------------------------------------------------
   log('1/6 Cloudflare: proyecto de publicación');
-  let cuenta = env.CLOUDFLARE_ACCOUNT_ID;
-  if (!cuenta) {
-    let r;
-    try {
-      r = await cf('GET', '/accounts');
-    } catch (e) {
-      throw new Error(`${e.message} Si la llave no puede ver la cuenta, agregá el secret CLOUDFLARE_ACCOUNT_ID (Cloudflare → página principal → «Account ID»).`);
+  let cuenta = null;
+  let nombrePages = null;
+  let urlApp;
+  if (fija) {
+    urlApp = fija;
+    log(`    La app ya se publica sola desde GitHub en ${urlApp}: no se toca Cloudflare.`);
+  } else {
+    cuenta = env.CLOUDFLARE_ACCOUNT_ID;
+    if (!cuenta) {
+      let r;
+      try {
+        r = await cf('GET', '/accounts');
+      } catch (e) {
+        throw new Error(`${e.message} Si la llave no puede ver la cuenta, agregá el secret CLOUDFLARE_ACCOUNT_ID (Cloudflare → página principal → «Account ID»).`);
+      }
+      if (!r.result || r.result.length === 0) throw new Error('Cloudflare: la llave no tiene acceso a ninguna cuenta.');
+      cuenta = r.result[0].id;
     }
-    if (!r.result || r.result.length === 0) throw new Error('Cloudflare: la llave no tiene acceso a ninguna cuenta.');
-    cuenta = r.result[0].id;
+    nombrePages = `inscripciones-${corto}`.slice(0, 58);
+    let pages = await cf('GET', `/accounts/${cuenta}/pages/projects/${nombrePages}`, undefined, { permitir404: true });
+    if (!pages) pages = await cf('POST', `/accounts/${cuenta}/pages/projects`, { name: nombrePages, production_branch: 'main' });
+    const sub = (pages.result && pages.result.subdomain) || `${nombrePages}.pages.dev`;
+    urlApp = `https://${sub}`;
+    log(`    La app va a estar en ${urlApp}`);
   }
-  const nombrePages = `inscripciones-${corto}`.slice(0, 58);
-  let pages = await cf('GET', `/accounts/${cuenta}/pages/projects/${nombrePages}`, undefined, { permitir404: true });
-  if (!pages) pages = await cf('POST', `/accounts/${cuenta}/pages/projects`, { name: nombrePages, production_branch: 'main' });
-  const sub = (pages.result && pages.result.subdomain) || `${nombrePages}.pages.dev`;
-  const urlApp = `https://${sub}`;
-  log(`    La app va a estar en ${urlApp}`);
 
   // 2. Supabase: las dos bases ----------------------------------------------------
   log('2/6 Supabase: bases real y de pruebas');
@@ -126,7 +139,7 @@ export async function instalar(env, { fetchFn = fetch, log = console.log, pausa 
   const existentes = await sb('GET', '/v1/projects');
   const bases = {};
   for (const tipo of ['real', 'pruebas']) {
-    const nombre = `${corto}-${tipo}`.slice(0, 40);
+    const nombre = `${prefijoBases}-${tipo}`.slice(0, 40);
     const clave = claveBase(env.CLAVE_RESPALDO, nombre);
     let p = existentes.find((x) => x.name === nombre);
     if (!p) {
@@ -164,6 +177,20 @@ export async function instalar(env, { fetchFn = fetch, log = console.log, pausa 
       query: `select public.alta_primer_responsable('${esc(correo(env.CORREO_RESPONSABLE))}', '${esc(env.NOMBRE_RESPONSABLE.trim())}')
               where not exists (select 1 from public.roles_usuario where rol = 'responsable');`,
     });
+  }
+
+  // 4 bis. Caso testigo: lo que ya se cargó en la base de pruebas pasa a la real (sin pisar nada)
+  if (env.COPIAR_DE_PRUEBAS === '1') {
+    log('    Copiando de la base de pruebas a la real: datos de la institución y práctica hecha');
+    const q = (ref, query) => sb('POST', `/v1/projects/${ref}/database/query`, { query });
+    const inst = await q(bases.pruebas.ref, 'select row_to_json(i)::text as fila from public.institucion i where id = 1');
+    if (inst && inst[0] && inst[0].fila) {
+      await q(bases.real.ref, `insert into public.institucion select * from json_populate_record(null::public.institucion, '${esc(inst[0].fila)}'::json) on conflict (id) do nothing`);
+    }
+    const pr = await q(bases.pruebas.ref, `select coalesce(json_agg(p), '[]'::json)::text as filas from public.practicas_hechas p where lower(p.correo) = lower('${esc(correo(env.CORREO_RESPONSABLE))}')`);
+    if (pr && pr[0] && pr[0].filas && pr[0].filas !== '[]') {
+      await q(bases.real.ref, `insert into public.practicas_hechas select * from json_populate_recordset(null::public.practicas_hechas, '${esc(pr[0].filas)}'::json) on conflict do nothing`);
+    }
   }
 
   // 5. Ingreso con código por correo ---------------------------------------------
@@ -213,7 +240,7 @@ export async function instalar(env, { fetchFn = fetch, log = console.log, pausa 
     plantilla: 'https://github.com/inscripciones-iglesia/app-inscripciones-plantilla.git',
     nombreCorto: corto,
     instaladoEn: new Date().toISOString(),
-    app: { url: urlApp, proyectoCloudflare: nombrePages, cuentaCloudflare: cuenta },
+    app: { url: urlApp, proyectoCloudflare: nombrePages, cuentaCloudflare: cuenta, ...(fija ? { publicacion: 'cloudflare-desde-github' } : {}) },
     supabase: { region, real: { nombre: bases.real.nombre, ref: bases.real.ref }, pruebas: { nombre: bases.pruebas.nombre, ref: bases.pruebas.ref } },
   };
   writeFileSync(path.join(raiz, 'config/instalacion.json'), `${JSON.stringify(instalacion, null, 2)}\n`);
@@ -227,7 +254,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   try {
     const r = await instalar(env);
     if (env.GITHUB_OUTPUT) {
-      appendFileSync(env.GITHUB_OUTPUT, `url_app=${r.urlApp}\nproyecto_pages=${r.nombrePages}\ncuenta_cloudflare=${r.cuenta}\n`);
+      appendFileSync(env.GITHUB_OUTPUT, `url_app=${r.urlApp}\nproyecto_pages=${r.nombrePages || ''}\ncuenta_cloudflare=${r.cuenta || ''}\n`);
     }
     if (env.GITHUB_STEP_SUMMARY) {
       appendFileSync(env.GITHUB_STEP_SUMMARY, [

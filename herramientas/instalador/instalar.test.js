@@ -54,6 +54,17 @@ describe('instalador (D34)', () => {
     expect(JSON.stringify(leer('config/instalacion.json'))).not.toContain(ENV_PRUEBA.CLAVE_RESPALDO);
   });
 
+  it('caso testigo (D73): sin Cloudflare, con las bases que ya existen', async () => {
+    const { fetchFn, estado } = apiSimulada({ estadoInicial: 'ACTIVE_HEALTHY' });
+    const env = { ...ENV_PRUEBA, CLOUDFLARE_API_TOKEN: '', NOMBRE_INSTITUCION: 'Iglesia', PREFIJO_BASES: 'inscripciones', URL_APP_FIJA: 'https://inscripciones-iglesia.pages.dev' };
+    const r = await instalar(env, opciones(fetchFn));
+    expect(r.urlApp).toBe('https://inscripciones-iglesia.pages.dev');
+    expect(estado.proyectos.map((p) => p.name)).toEqual(['inscripciones-real', 'inscripciones-pruebas']);
+    expect(estado.llamadas.some((l) => l.includes('/client/v4'))).toBe(false);
+    expect(leer('config/instalacion.json').app).toMatchObject({ proyectoCloudflare: null, publicacion: 'cloudflare-desde-github' });
+    await expect(instalar({ ...ENV_PRUEBA, CLOUDFLARE_API_TOKEN: '' }, opciones(fetchFn))).rejects.toThrow(/CLOUDFLARE_API_TOKEN/);
+  });
+
   it('se puede volver a correr: reutiliza lo que ya existe', async () => {
     const { fetchFn, estado } = apiSimulada();
     await instalar(ENV_PRUEBA, opciones(fetchFn));

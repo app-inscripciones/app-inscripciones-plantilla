@@ -24,13 +24,13 @@ jobs:
       - name: ¿Está instalada con el instalador?
         id: ver
         run: |
-          if [ -f config/instalacion.json ]; then
+          if [ -f config/instalacion.json ] && [ "$(jq -r '.app.proyectoCloudflare // empty' config/instalacion.json)" != "" ]; then
             echo "instalada=si" >> "$GITHUB_OUTPUT"
             echo "proyecto=$(jq -r .app.proyectoCloudflare config/instalacion.json)" >> "$GITHUB_OUTPUT"
             echo "cuenta=$(jq -r .app.cuentaCloudflare config/instalacion.json)" >> "$GITHUB_OUTPUT"
           else
             echo "instalada=no" >> "$GITHUB_OUTPUT"
-            echo "No hay config/instalacion.json: no se publica desde acá."
+            echo "Esta copia se publica sola desde GitHub en Cloudflare (caso testigo): no se publica desde acá."
           fi
 
       - uses: actions/setup-node@v4
