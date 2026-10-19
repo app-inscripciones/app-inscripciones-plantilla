@@ -16,7 +16,7 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(DIR, '..', '..'))
 SALIDA = os.path.join(DIR, 'salida')
 CARPETA = os.path.join(SALIDA, 'Sistema de inscripciones')
-VERSION = 'Borrador del 18/10/2026'
+VERSION = 'Versión 1.0 · piloto · 19/10/2026'
 
 CSS_DOC = """
 @page{size:A4;margin:16mm 16mm 18mm}
@@ -138,7 +138,7 @@ VIDEOS_LOCALES = [
 VIDEO_PRESENTACION = ''
 PASOS = [
     ('hoja', '1', 'Imprimí la Hoja de accesos', 'Antes de empezar. Vas a ir anotando ahí, a mano, cada cuenta y contraseña que crees.', '1 · Hoja de accesos.pdf', '📋'),
-    ('instalar', '2', 'Instalá el sistema', 'Paso a paso, desde crear el Gmail hasta el botón «Instalar». Unos 45 a 60 minutos, con la computadora y un celular.', '2 · Instalación paso a paso.pdf', '🛠️'),
+    ('instalar', '2', 'Instalá el sistema', 'Paso a paso, desde crear el Gmail hasta el botón «Instalar». Entre 1 hora y 1 hora y media, con la computadora y un celular. Se puede hacer en partes.', '2 · Instalación paso a paso.pdf', '🛠️'),
     ('despues', '3', 'Dejá todo listo', 'Datos de la institución, el equipo, la práctica (10 minutos) y el primer evento real.', '3 · Después de instalar.pdf', '✅'),
     ('roles', '4', 'Repartí los manuales por rol', 'Uno para cada rol: Responsable general, Organizador, Tesorero, Consulta, Cargador y Control de presentes.', '4 · Manuales por rol', '📘'),
     ('guias', '5', 'Imprimí las guías rápidas', 'Una hoja por rol, para tener a mano el día del evento.', '5 · Guías rápidas para imprimir', '🗒️'),
@@ -179,6 +179,9 @@ ol.pasos{{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;
 .presentacion h2{{margin:0 0 4px;font-size:21px}} .presentacion p{{margin:0}} .icono-video{{font-size:34px}}
 .importante{{background:#fdecec;border-left:6px solid #c62828;border-radius:10px;padding:12px 16px;margin:18px 0}}
 footer{{color:#6b7280;font-size:14px;margin-top:20px}}
+.opinion{{background:#fff;border:1px solid var(--b);border-radius:12px;padding:14px 18px;margin-top:18px}} .opinion h2{{margin:0 0 6px;font-size:19px}}
+.opinion label{{display:block;font-weight:600;margin:10px 0 0}} .opinion textarea{{display:block;width:100%;min-height:60px;margin-top:4px;font:inherit;padding:8px;border:1px solid var(--b);border-radius:8px}}
+.opinion button{{border:0;cursor:pointer;font:inherit;margin-top:12px}} .chico{{font-size:14px;color:#4b5563}}
 @media (max-width:600px){{.paso{{flex-wrap:wrap}} .hecho{{width:100%}}}}
 </style></head><body>
 <header><div><h1>👋 Empezá por acá</h1><p>Sistema de inscripciones a eventos: inscripciones con y sin internet, control del dinero por colaborador y presentes en la puerta.</p></div></header>
@@ -188,7 +191,7 @@ footer{{color:#6b7280;font-size:14px;margin-top:20px}}
 {f'<br><a class="abrir" href="{VIDEO_PRESENTACION}" target="_blank" rel="noopener">Ver el video</a>' if VIDEO_PRESENTACION else ('<br><a class="abrir" href="7%20%C2%B7%20Videos/0%20-%20Presentaci%C3%B3n.mp4">Ver el video</a>' if os.path.exists(VIDEOS_LOCALES[0][1]) else '<br><i>(El enlace se agrega cuando el video esté publicado.)</i>')}</p></div></div>
 <div class="necesitas"><h2>Qué hace falta</h2><ul>
 <li>Una <b>computadora</b> con internet y el navegador <b>Chrome</b>, y un <b>celular</b>.</li>
-<li>Unas <b>2 horas</b> en total (la instalación lleva entre 45 y 60 minutos).</li>
+<li>Unas <b>2 horas</b> en total (la instalación lleva entre 1 hora y 1 hora y media). <b>Se puede hacer en partes</b>: esta página recuerda lo que ya tildaste.</li>
 <li>Una <b>impresora</b> para la Hoja de accesos y las guías rápidas (o pedí que te las impriman).</li>
 <li>No hace falta saber de tecnología: seguí los pasos <b>en orden</b>, sin saltear ninguno.</li></ul></div>
 <p><b>Hacé los pasos en este orden.</b> Cuando termines uno, tildá «Hecho»: esta página se acuerda (en esta computadora).</p>
@@ -196,6 +199,13 @@ footer{{color:#6b7280;font-size:14px;margin-top:20px}}
 {"".join(items)}
 </ol>
 <div class="importante"><b>⛔ Importante:</b> las contraseñas y claves se anotan <b>solo a mano</b>, en la Hoja de accesos impresa. Nunca en la computadora, en el correo ni en WhatsApp.</div>
+<section class="opinion"><h2>💬 Al terminar: contanos cómo te fue</h2>
+<p>Nadie te va a observar ni acompañar: el paquete tiene que alcanzar solo. Para mejorarlo para las próximas instituciones, respondé estas preguntas (se guardan en esta computadora) y mandáselas a quien te pasó el paquete.</p>
+<label>1. ¿En qué paso dudaste, te trabaste o tuviste que volver atrás?<textarea data-preg="1"></textarea></label>
+<label>2. ¿Qué pantalla o palabra no entendiste?<textarea data-preg="2"></textarea></label>
+<label>3. ¿Cuánto tardaste en total, más o menos?<textarea data-preg="3" rows="1"></textarea></label>
+<button type="button" id="copiar-opinion" class="abrir">Copiar las respuestas</button> <span id="copiado"></span>
+<p class="chico">Después de copiarlas, pegalas en un correo o en un mensaje. <b>No incluyas contraseñas ni claves.</b></p></section>
 <footer>Si algo no sale, mirá el documento 6 («¿Qué hago si…?»). {VERSION}.</footer>
 </main>
 <script>
@@ -210,6 +220,18 @@ footer{{color:#6b7280;font-size:14px;margin-top:20px}}
       hechos[id]=c.checked; li.classList.toggle('listo',c.checked);
       try{{localStorage.setItem(CLAVE,JSON.stringify(hechos));}}catch(e){{}}
     }});
+  }});
+  var CP='empezar-aqui-opinion'; var resp={{}};
+  try{{resp=JSON.parse(localStorage.getItem(CP)||'{{}}')||{{}};}}catch(e){{resp={{}};}}
+  var areas=document.querySelectorAll('textarea[data-preg]');
+  areas.forEach(function(t){{
+    var k=t.getAttribute('data-preg'); t.value=resp[k]||'';
+    t.addEventListener('input',function(){{ resp[k]=t.value; try{{localStorage.setItem(CP,JSON.stringify(resp));}}catch(e){{}} }});
+  }});
+  document.getElementById('copiar-opinion').addEventListener('click',function(){{
+    var NL=String.fromCharCode(10); var txt='Cómo me fue con la instalación (Sistema de inscripciones)'+NL+NL+Array.prototype.map.call(areas,function(t){{return t.parentNode.firstChild.textContent.trim()+NL+(t.value||'-')}}).join(NL+NL);
+    var ok=function(){{document.getElementById('copiado').textContent='✔ Copiado. Pegalo en un correo o mensaje.';}};
+    if(navigator.clipboard){{navigator.clipboard.writeText(txt).then(ok,function(){{prompt('Copiá este texto:',txt);}});}} else {{prompt('Copiá este texto:',txt);}}
   }});
 }})();
 </script>

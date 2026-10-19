@@ -6,7 +6,7 @@
 
 - Una **computadora** con internet y el navegador **Chrome**.
 - Un **celular** (para la verificación en dos pasos y la app **Google Authenticator**).
-- Entre **45 y 60 minutos** sin apuro.
+- Entre **1 hora y 1 hora y media**, sin apuro. **Se puede hacer en partes**: al terminar cada paso, se puede frenar y seguir otro día.
 - La **Hoja de accesos** (documento 1) **impresa** y una lapicera. Las contraseñas y claves se anotan **solo ahí, a mano**: nunca en la computadora, en el correo ni en WhatsApp.
 
 **Cómo es:**
