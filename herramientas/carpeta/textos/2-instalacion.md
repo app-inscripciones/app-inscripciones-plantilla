@@ -128,7 +128,10 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No hace falta crearlas a mano**: lo hace el instalador.
 
-1. Entrar a **supabase.com** → **Start your project** (empezá tu proyecto) → **Continue with GitHub** (entrar con la cuenta de GitHub que creaste en el paso 2) → **Authorize** (autorizar). Queda creada una «organización» (el espacio de la institución en Supabase) con plan **Free** (gratis). Si pregunta un nombre para la organización, poner el de la institución. Si en algún momento pide tarjeta, **no cargarla**, y nunca tocar **Upgrade** (pasar a pago).
+1. Entrar a **supabase.com/dashboard/sign-in** → tocar **Continue with GitHub** (entrar con la cuenta de GitHub que creaste en el paso 2; **no** completar Email ni Password, aunque Chrome los llene solo) → **Authorize** (autorizar). Queda creada una «organización» (el espacio de la institución en Supabase) con plan **Free** (gratis). Si pregunta un nombre para la organización, poner el de la institución. Si en algún momento pide tarjeta, **no cargarla**, y nunca tocar **Upgrade** (pasar a pago).
+
+![Entrar a Supabase: (1) Continue with GitHub](img/supabase-entrar.png)
+
 2. Crear la **llave** para el instalador. Camino corto: abrir **supabase.com/dashboard/account/tokens**. (Camino largo: arriba a la derecha, el ícono de la cuenta → **Account preferences** (preferencias de la cuenta) → **Access Tokens** (llaves de acceso).) Tocar **Generate new token** (crear una llave nueva; la parte verde del botón, no la flechita) y completar:
 
 ![(1) Generate new token](img/supabase-llaves.png)
