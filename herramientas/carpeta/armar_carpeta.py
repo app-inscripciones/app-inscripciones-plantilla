@@ -83,6 +83,7 @@ def hoja_html():
         '<div class="alerta"><b>⛔ Es la llave de todo.</b> Guardala impresa en un lugar seguro (por ejemplo, con otros papeles importantes de la institución). '
         '<b>Nunca</b> la fotografíes, ni la mandes por WhatsApp o correo, ni la copies en la computadora o en la nube. Si cambiás una contraseña, tachá la vieja y anotá la nueva con la fecha. '
         'Si cambia el Responsable general, se le entrega esta hoja en mano.</div>',
+        '<p class="nota">Cada renglón dice <b>qué</b> anotar y, en gris, <b>de dónde sale</b>. Lo que no figura en la hoja no hace falta anotarlo. Los manuales indican en cada paso qué casillas completar (por ejemplo, «📝 Anotá en la hoja: B2»).</p>',
         bloque('A', 'Responsable general', [
             fila('A1', 'Nombre y apellido'), fila('A2', 'Correo con el que entra al panel'), fila('A3', 'Celular'),
         ]),
@@ -108,7 +109,7 @@ def hoja_html():
         ]),
         '<div class="F">' + bloque('F', 'Clave de respaldo (paso 6) · LA MÁS IMPORTANTE', [
             fila('F1', 'CLAVE_RESPALDO', 13, 'Inventada, mínimo 16 caracteres. Sin ella NO se pueden abrir los respaldos. Escribila con letra clara'),
-        ], 'Si alguna vez se cambia, la clave vieja sigue haciendo falta para los respaldos anteriores: no la tachés, anotá al lado la nueva con la fecha.') + '</div>',
+        ], '<b>No es una cuenta:</b> no tiene dirección web, ni usuario, ni correo. La inventás vos, la anotás acá y la pegás una sola vez en GitHub, como secreto <b>CLAVE_RESPALDO</b>. Después GitHub no la deja ver nunca más: <b>esta hoja es la única copia</b>. Si alguna vez se cambia, la clave vieja sigue haciendo falta para los respaldos anteriores: no la tachés, anotá al lado la nueva con la fecha.') + '</div>',
         bloque('G', 'Instalación (pasos 7 y 8)', [
             fila('G1', 'Fecha de instalación'), fila('G2', 'Dirección de la aplicación', 9, '…pages.dev'),
             fila('G3', 'Dirección del panel', 9, '…pages.dev/#panel'),

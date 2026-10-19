@@ -126,7 +126,7 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 > GitHub guarda los secrets cifrados y no los vuelve a mostrar. Si uno se carga mal, se vuelve a crear con el mismo nombre (reemplaza al anterior).
 
-> 📝 **Anotá en la hoja:** F1 (la CLAVE_RESPALDO, letra por letra: es la más importante) y tildá D2 y E4.
+> 📝 **Anotá en la hoja:** F1 (la CLAVE_RESPALDO, letra por letra: es la más importante). **Anotala antes de pegarla en GitHub**: después GitHub no la deja ver nunca más, así que la hoja es la única copia. No es una cuenta: no tiene dirección web ni usuario. Tildá también D2 y E4.
 
 > ✅ **Cómo sé que salió bien:** en **Secrets and variables → Actions** se ven los **cuatro nombres** de la tabla, escritos igual.
 
