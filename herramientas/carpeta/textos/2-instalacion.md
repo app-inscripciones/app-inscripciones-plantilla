@@ -128,7 +128,12 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No hace falta crearlas a mano**: lo hace el instalador.
 
-1. Entrar a **supabase.com/dashboard/sign-in** → tocar **Continue with GitHub** (entrar con la cuenta de GitHub que creaste en el paso 2; **no** completar Email ni Password, aunque Chrome los llene solo) → **Authorize** (autorizar). Queda creada una «organización» (el espacio de la institución en Supabase) con plan **Free** (gratis). Si pregunta un nombre para la organización, poner el de la institución. Si en algún momento pide tarjeta, **no cargarla**, y nunca tocar **Upgrade** (pasar a pago).
+1. Entrar a **supabase.com/dashboard/sign-in** → tocar **Continue with GitHub** (entrar con la cuenta de GitHub que creaste en el paso 2; **no** completar Email ni Password, aunque Chrome los llene solo) → **Authorize** (autorizar). La primera vez, Supabase pide crear una **organization** (organización: el espacio de la institución en Supabase). Si aparece ese formulario:
+   - **Name** (nombre): el de la institución.
+   - **Type** (tipo): **Non-profit** (sin fines de lucro) o, si no está, **Personal**.
+   - **Plan**: **Free - $0/month** (gratis).
+   - Tocar **Create organization** (crear organización).
+   - Si después ofrece **Create a new project** (crear un proyecto nuevo): **no** crear nada. Los proyectos (las bases de datos) los crea solo el botón «Instalar». Seguir con el punto 2. Si en algún momento pide tarjeta, **no cargarla**, y nunca tocar **Upgrade** (pasar a pago).
 
 ![Entrar a Supabase: (1) Continue with GitHub](img/supabase-entrar.png)
 
