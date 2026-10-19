@@ -176,6 +176,8 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ![(1) Settings, (2) Secrets and variables, (3) Actions, (4) New repository secret](img/github-secretos.png)
 
+![Clave nueva: (1) Name: el nombre de la tabla, (2) Secret: pegar el valor, (3) Add secret](img/github-secreto-nuevo.png)
+
 
 | Nombre | Qué se pega |
 |---|---|
