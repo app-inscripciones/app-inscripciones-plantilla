@@ -111,7 +111,7 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
    - **Choose visibility** (quién lo puede ver): **viene en «Public»; hay que cambiarlo**: tocar «Public» y elegir **Private** (privado: solo lo ve la institución).
    - Tocar **Create repository** (crear repositorio) y esperar unos segundos.
 
-![Formulario de la copia: (1) Include all branches en «Off», (2) nombre app-inscripciones, (3) Description vacío, (4) cambiar Public por Private](img/github-copia-formulario.png)
+![Formulario de la copia: (1) Include all branches en «Off», (2) nombre app-inscripciones, (3) Description vacío, (4) cambiar Public por Private, (5) Create repository](img/github-copia-formulario.png)
 
 
 > 📝 **Anotá en la hoja:** C5 (la dirección del repositorio, por ejemplo github.com/inscripciones-laspalmas/app-inscripciones).
