@@ -66,7 +66,8 @@ export function cliente(base, token, nombre, fetchFn) {
       const texto = await r.text();
       if ((r.status === 429 || r.status >= 500) && intento < 4) { await esperar(5000 * intento); continue; }
       if (!r.ok) {
-        const pista = r.status === 401 || r.status === 403 ? ' Revisá que la llave esté bien copiada y tenga los permisos del manual.' : '';
+        let pista = r.status === 401 || r.status === 403 ? ' Revisá que la llave esté bien copiada y tenga los permisos del manual.' : '';
+        if (nombre === 'Cloudflare' && /verif/i.test(texto)) pista = ' Falta verificar la cuenta de Cloudflare: abrí el Gmail, buscá el correo de Cloudflare y tocá «Verify email» (manual, paso 5, punto 2). Después volvé a instalar.';
         throw new Error(`${nombre} respondió ${r.status} en ${metodo} ${ruta}: ${texto.slice(0, 300)}.${pista}`);
       }
       return texto ? JSON.parse(texto) : null;
