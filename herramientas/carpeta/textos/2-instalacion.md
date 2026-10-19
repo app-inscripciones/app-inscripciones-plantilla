@@ -186,8 +186,11 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ## Paso 7. El botón «Instalar»
 
-1. En el repositorio → pestaña **Actions** (acciones: las tareas automáticas), o la dirección del repositorio (casilla C5) con **/actions** al final. Si aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo.
+1. En el repositorio → pestaña **Actions** (acciones: las tareas automáticas), o la dirección del repositorio (casilla C5) con **/actions** al final. Si aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo. Si no aparece ningún cartel, está bien: seguí.
 2. En la lista de la izquierda, tocar **Instalar** → a la derecha aparece una franja con el botón **Run workflow** (ejecutar): tocarlo y se abre un cuadrito.
+
+![(1) Pestaña Actions, (2) Instalar en la lista de la izquierda](img/github-actions-instalar.png)
+
 3. Completar:
    - **Nombre de la institución:** como se va a ver en la aplicación (ej.: «Club Atlético Las Palmas»).
    - **Gmail de la institución:** el del paso 1.
