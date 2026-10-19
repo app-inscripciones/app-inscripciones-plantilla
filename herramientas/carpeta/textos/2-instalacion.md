@@ -78,10 +78,13 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 1. Entrar a **github.com/signup** (página para crear una cuenta).
 2. Completar, uno por uno, lo que pide la pantalla:
    - **Email** (correo): el Gmail de la institución.
-   - **Password** (contraseña): una **contraseña nueva**, distinta de la del Gmail.
+   - **Password** (contraseña): una **contraseña nueva**, distinta de la del Gmail. GitHub pide **15 caracteres o más** (o al menos 8 con algún número y alguna minúscula).
    - **Username** (nombre de usuario): por ejemplo **inscripciones-laspalmas** (letras, números y guiones; sin espacios). Si dice que ya existe, agregale algo (por ejemplo, la ciudad).
    - **Your Country/Region** (país): Argentina.
-   - Tocar **Continue** (continuar) o **Create account** (crear cuenta).
+   - **No** usar los botones «Continue with Google» ni «Continue with Apple»: completar los casilleros. La casilla **Email preferences** (recibir novedades) se deja sin tildar.
+   - Tocar **Create account** (crear cuenta).
+
+![Registro en GitHub: (1) Email, (2) Password, (3) Username, (4) país, (5) Create account](img/github-registro.png)
 3. Aparece el control **«¿sos un robot?»** (ver arriba). Resolverlo.
 4. GitHub manda un **código de 8 números al Gmail**: abrir el Gmail, copiarlo y escribirlo en GitHub.
 5. Si pregunta por un plan, elegir **Free** (gratis). Si hace preguntas sobre para qué lo vas a usar, se pueden saltear con **Skip** (saltear) o **Continue** (continuar).
