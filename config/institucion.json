@@ -1,0 +1,13 @@
+{
+  "_ayuda": "Valores iniciales. El nombre lo completa el botón «Instalar»; el logo y los colores se cargan desde el panel (Institución).",
+  "nombreInstitucion": "Institución",
+  "nombreApp": "Inscripciones",
+  "nombreCorto": "Inscripciones",
+  "zonaHoraria": "America/Argentina/Buenos_Aires",
+  "moneda": "ARS",
+  "colores": {
+    "principal": "#1F4E79",
+    "fondo": "#F6F7F9"
+  },
+  "avisoDatosSalud": "Los datos de salud (intolerancias y restricciones alimentarias) se usan solo para organizar las comidas del evento y los ve únicamente la organización."
+}

@@ -1,0 +1,6 @@
+{
+  "_ayuda": "Lo completa el botón «Instalar» (Actions → Instalar). Son datos públicos: nunca poner acá claves secretas.",
+  "entorno": "sin-instalar",
+  "url": "https://sin-instalar.supabase.co",
+  "clavePublica": "sin-instalar"
+}

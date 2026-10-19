@@ -1,0 +1,98 @@
+{
+  "id": "retiro-matrimonios-modelo",
+  "nombre": "Retiro de matrimonios (modelo)",
+  "fecha": "2026-11-15",
+  "unidad": "pareja",
+  "esModelo": true,
+  "categorias": [],
+  "campos": [
+    {
+      "id": "hombre",
+      "etiqueta": "Nombre y apellido del hombre",
+      "tipo": "texto",
+      "obligatorio": true
+    },
+    {
+      "id": "mujer",
+      "etiqueta": "Nombre y apellido de la mujer",
+      "tipo": "texto",
+      "obligatorio": true
+    },
+    {
+      "id": "telefono",
+      "etiqueta": "Teléfono de contacto",
+      "tipo": "telefono",
+      "obligatorio": true
+    },
+    {
+      "id": "colectivo",
+      "etiqueta": "¿Cómo viajan?",
+      "tipo": "opcion",
+      "obligatorio": true,
+      "opciones": [
+        {
+          "valor": "colectivo",
+          "etiqueta": "Van en colectivo"
+        },
+        {
+          "valor": "propios",
+          "etiqueta": "Van por sus propios medios"
+        }
+      ]
+    },
+    {
+      "id": "restricciones",
+      "etiqueta": "¿Tienen restricciones alimentarias?",
+      "tipo": "si_no",
+      "obligatorio": true,
+      "sensible": true
+    },
+    {
+      "id": "restricciones_cuales",
+      "etiqueta": "¿Cuáles?",
+      "tipo": "texto",
+      "obligatorio": true,
+      "sensible": true,
+      "visibleSi": {
+        "campo": "restricciones",
+        "igual": "si"
+      }
+    }
+  ],
+  "conceptos": [
+    {
+      "id": "matricula",
+      "nombre": "Matrícula",
+      "aplicaSi": null,
+      "precios": [
+        {
+          "monto": 40000
+        }
+      ]
+    }
+  ],
+  "asistencia": {
+    "toma": true,
+    "modoPareja": "pareja",
+    "instancias": [
+      {
+        "id": "sabado-manana",
+        "nombre": "Sábado mañana",
+        "fecha": "2026-11-15",
+        "turno": "mañana"
+      },
+      {
+        "id": "domingo-manana",
+        "nombre": "Domingo mañana",
+        "fecha": "2026-11-16",
+        "turno": "mañana"
+      }
+    ],
+    "camposBusqueda": [
+      "hombre",
+      "mujer",
+      "telefono"
+    ],
+    "campoProcedencia": null
+  }
+}

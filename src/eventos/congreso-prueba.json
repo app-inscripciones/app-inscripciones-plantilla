@@ -1,0 +1,188 @@
+{
+  "id": "congreso-prueba",
+  "nombre": "Congreso de prueba",
+  "fecha": "2026-11-01",
+  "unidad": "persona",
+  "esModelo": true,
+  "categorias": [
+    {
+      "id": "ninos_2_5",
+      "nombre": "Niños de 2 a 5 años",
+      "edadMin": 2,
+      "edadMax": 5
+    },
+    {
+      "id": "ninos_6_12",
+      "nombre": "Niños de 6 a 12 años",
+      "edadMin": 6,
+      "edadMax": 12
+    },
+    {
+      "id": "preadolescentes",
+      "nombre": "Preadolescentes de 13 a 16 años",
+      "edadMin": 13,
+      "edadMax": 16
+    },
+    {
+      "id": "adolescentes",
+      "nombre": "Adolescentes de 17 a 20 años",
+      "edadMin": 17,
+      "edadMax": 20
+    },
+    {
+      "id": "jovenes",
+      "nombre": "Jóvenes de 21 a 30 años",
+      "edadMin": 21,
+      "edadMax": 30
+    },
+    {
+      "id": "adultos",
+      "nombre": "Adultos (casados o mayores de 30)",
+      "edadMin": 31,
+      "edadMax": 120,
+      "nota": "También corresponde a casados de cualquier edad"
+    }
+  ],
+  "campos": [
+    {
+      "id": "nombre",
+      "etiqueta": "Nombre y apellido",
+      "tipo": "texto",
+      "obligatorio": true
+    },
+    {
+      "id": "dni",
+      "etiqueta": "DNI",
+      "tipo": "dni",
+      "obligatorio": true
+    },
+    {
+      "id": "telefono",
+      "etiqueta": "Teléfono",
+      "tipo": "telefono",
+      "obligatorio": true
+    },
+    {
+      "id": "edad",
+      "etiqueta": "Edad",
+      "tipo": "numero",
+      "obligatorio": true,
+      "min": 0,
+      "max": 120
+    },
+    {
+      "id": "iglesia",
+      "etiqueta": "Iglesia de origen",
+      "tipo": "texto",
+      "obligatorio": true
+    },
+    {
+      "id": "usa_transporte",
+      "etiqueta": "¿Usa el transporte?",
+      "tipo": "si_no",
+      "obligatorio": true,
+      "visibleSi": {
+        "campo": "categoria",
+        "en": [
+          "ninos_2_5",
+          "ninos_6_12",
+          "preadolescentes",
+          "adolescentes",
+          "jovenes"
+        ]
+      }
+    },
+    {
+      "id": "gluten",
+      "etiqueta": "¿Tiene intolerancia al gluten?",
+      "tipo": "si_no",
+      "obligatorio": true,
+      "sensible": true
+    },
+    {
+      "id": "restricciones",
+      "etiqueta": "¿Tiene otras restricciones alimentarias?",
+      "tipo": "si_no",
+      "obligatorio": true,
+      "sensible": true
+    },
+    {
+      "id": "restricciones_cuales",
+      "etiqueta": "¿Cuáles?",
+      "tipo": "texto",
+      "obligatorio": true,
+      "sensible": true,
+      "visibleSi": {
+        "campo": "restricciones",
+        "igual": "si"
+      }
+    }
+  ],
+  "conceptos": [
+    {
+      "id": "matricula",
+      "nombre": "Matrícula",
+      "aplicaSi": null,
+      "precios": [
+        {
+          "hasta": "2026-10-21",
+          "nombreTramo": "Precio promocional",
+          "porCategoria": {
+            "ninos_2_5": 2500,
+            "ninos_6_12": 2750,
+            "preadolescentes": 3000,
+            "adolescentes": 3250,
+            "jovenes": 3500,
+            "adultos": 3750
+          }
+        },
+        {
+          "nombreTramo": "Precio de lista",
+          "porCategoria": {
+            "ninos_2_5": 5000,
+            "ninos_6_12": 5500,
+            "preadolescentes": 6000,
+            "adolescentes": 6500,
+            "jovenes": 7000,
+            "adultos": 7500
+          }
+        }
+      ]
+    },
+    {
+      "id": "transporte",
+      "nombre": "Transporte",
+      "aplicaSi": {
+        "campo": "usa_transporte",
+        "igual": "si"
+      },
+      "precios": [
+        {
+          "porCategoria": {
+            "ninos_2_5": 0,
+            "ninos_6_12": 0,
+            "preadolescentes": 1000,
+            "adolescentes": 3000,
+            "jovenes": 3000
+          }
+        }
+      ]
+    }
+  ],
+  "asistencia": {
+    "toma": true,
+    "modoPareja": null,
+    "instancias": [
+      {
+        "id": "llegada",
+        "nombre": "Llegada",
+        "fecha": "2026-11-01"
+      }
+    ],
+    "camposBusqueda": [
+      "nombre",
+      "dni"
+    ],
+    "campoProcedencia": "iglesia"
+  }
+}

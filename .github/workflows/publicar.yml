@@ -1,0 +1,54 @@
+# Publica la app en Cloudflare Pages cada vez que cambia el código (instituciones instaladas con «Instalar»).
+# En la copia del caso testigo no hace nada: ahí Cloudflare publica solo desde GitHub.
+name: Publicar
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publicar
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ¿Está instalada con el instalador?
+        id: ver
+        run: |
+          if [ -f config/instalacion.json ]; then
+            echo "instalada=si" >> "$GITHUB_OUTPUT"
+            echo "proyecto=$(jq -r .app.proyectoCloudflare config/instalacion.json)" >> "$GITHUB_OUTPUT"
+            echo "cuenta=$(jq -r .app.cuentaCloudflare config/instalacion.json)" >> "$GITHUB_OUTPUT"
+          else
+            echo "instalada=no" >> "$GITHUB_OUTPUT"
+            echo "No hay config/instalacion.json: no se publica desde acá."
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.ver.outputs.instalada == 'si'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Probar y preparar la app
+        if: steps.ver.outputs.instalada == 'si'
+        run: |
+          npm ci
+          npm test
+          npm run build
+
+      - name: Publicar
+        if: steps.ver.outputs.instalada == 'si'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ steps.ver.outputs.cuenta }}
+        run: npx --yes wrangler@4 pages deploy dist --project-name "${{ steps.ver.outputs.proyecto }}" --branch main --commit-dirty=true

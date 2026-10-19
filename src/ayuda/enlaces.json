@@ -1,0 +1,20 @@
+{
+  "_nota": "Direcciones del manual (PDF) y del video de cada rol. Se completan cuando se publiquen las versiones finales (etapa Final). Si una dirección está vacía, la app no muestra ese enlace.",
+  "manuales": {
+    "responsable": "",
+    "organizador": "",
+    "tesorero": "",
+    "consulta": "",
+    "cargador": "",
+    "presentes": ""
+  },
+  "videos": {
+    "responsable": "",
+    "organizador": "",
+    "tesorero": "",
+    "consulta": "",
+    "cargador": "",
+    "presentes": ""
+  },
+  "queHagoSi": "#ayuda"
+}
