@@ -60,15 +60,27 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 GitHub guarda el programa de la aplicación y hace las tareas automáticas (instalar, publicar, respaldos, revisión diaria).
 
-1. **github.com/signup** → registrarse con el Gmail de la institución y una **contraseña nueva**.
-2. Usuario: por ejemplo **inscripciones-laspalmas**.
-3. Confirmar con el código que llega al Gmail. Plan **Free**.
-4. **Verificación en dos pasos:** foto de perfil → **Settings** → **Password and authentication** → **Enable two-factor authentication** → **Authenticator app**. En el celular, instalar **Google Authenticator**, tocar **+** y escanear el código. Escribir el número de 6 dígitos.
-5. Descargar los **recovery codes** (códigos de recuperación) e imprimirlos o copiarlos a mano.
+> 🌐 **GitHub, Supabase y Cloudflare están en inglés.** No hace falta saber inglés: en este manual, cada botón aparece **en negrita, tal cual se ve en la pantalla**, y al lado, entre paréntesis, qué quiere decir. **No uses el traductor de Chrome** en estas páginas: cambia los nombres de los botones y ya no coinciden con el manual.
+
+> 🤖 **«¿Sos un robot?»** Al registrarte o entrar, GitHub (y también Google o Cloudflare) a veces muestra un control para comprobar que sos una persona: **deslizar una flecha hacia la derecha**, elegir imágenes o resolver un pequeño juego. Es normal y no tiene nada que ver con la aplicación: hacé lo que pide, despacio. Si sale mal, aparece otro; probá de nuevo. Con el botón del parlante 🔊 se puede hacer escuchando.
+
+1. Entrar a **github.com/signup** (página para crear una cuenta).
+2. Completar, uno por uno, lo que pide la pantalla:
+   - **Email** (correo): el Gmail de la institución.
+   - **Password** (contraseña): una **contraseña nueva**, distinta de la del Gmail.
+   - **Username** (nombre de usuario): por ejemplo **inscripciones-laspalmas** (letras, números y guiones; sin espacios). Si dice que ya existe, agregale algo (por ejemplo, la ciudad).
+   - **Your Country/Region** (país): Argentina.
+   - Tocar **Continue** (continuar) o **Create account** (crear cuenta).
+3. Aparece el control **«¿sos un robot?»** (ver arriba). Resolverlo.
+4. GitHub manda un **código de 8 números al Gmail**: abrir el Gmail, copiarlo y escribirlo en GitHub.
+5. Si pregunta por un plan, elegir **Free** (gratis). Si hace preguntas sobre para qué lo vas a usar, se pueden saltear con **Skip** (saltear) o **Continue** (continuar).
+6. **Verificación en dos pasos** (obligatoria): tocar la **foto de perfil** (el círculo de arriba a la derecha) → **Settings** (configuración) → en el menú de la izquierda, **Password and authentication** (contraseña y autenticación) → **Enable two-factor authentication** (activar la verificación en dos pasos). A veces GitHub ya la pide sola al registrarte: es lo mismo.
+7. Elegir **Authenticator app** (aplicación de autenticación). En el celular, instalar **Google Authenticator** (desde Play Store o App Store), abrirla, tocar **+** → **Escanear un código QR** y apuntar a la pantalla de la computadora. En el celular aparece un número de **6 dígitos** que cambia cada 30 segundos: escribirlo en GitHub y tocar **Continue**.
+8. GitHub muestra los **recovery codes** (códigos de recuperación, sirven si perdés el celular). Tocar **Download** (descargar) e imprimirlos, o copiarlos a mano. Después tocar **I have saved my recovery codes** (ya guardé mis códigos) y **Done** (listo).
 
 > 📝 **Anotá en la hoja:** C1 (usuario), C2 (contraseña), C3 (en qué celular está Google Authenticator) y C4 (dónde guardaste los recovery codes).
 
-> ✅ **Cómo sé que salió bien:** cerrá la sesión de GitHub y volvé a entrar: tiene que pedir la contraseña **y** el número de Google Authenticator.
+> ✅ **Cómo sé que salió bien:** tocá la foto de perfil → **Sign out** (cerrar sesión) y volvé a entrar en **github.com/login**: tiene que pedir la contraseña **y** el número de 6 dígitos de Google Authenticator.
 
 ## Paso 3. La copia de la aplicación
 
