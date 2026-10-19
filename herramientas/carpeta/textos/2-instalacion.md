@@ -201,18 +201,21 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 ## Paso 7. El botón «Instalar»
 
 1. En el repositorio → pestaña **Actions** (acciones: las tareas automáticas), o la dirección del repositorio (casilla C5) con **/actions** al final. Si aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo. Si no aparece ningún cartel, está bien: seguí.
-2. En la lista de la izquierda, tocar **Instalar**. Arriba a la derecha aparece el botón verde **Run workflow** (ejecutar): tocarlo y se abre un cuadrito. (Abajo dice «This workflow has no runs yet»: todavía no se usó, es normal.)
+2. En la lista de la izquierda, tocar **Instalar**. Arriba a la derecha aparece el botón verde **Run workflow** (ejecutar): tocarlo y se abre un panel a la derecha de la pantalla. (Abajo dice «This workflow has no runs yet»: todavía no se usó, es normal.)
 
 ![(1) Instalar, (2) botón Run workflow](img/github-instalar-boton.png)
 
 ![(1) Pestaña Actions, (2) Instalar en la lista de la izquierda](img/github-actions-instalar.png)
 
-3. Completar:
+3. Completar los cuatro casilleros del panel (**Use workflow from: main** se deja como está):
    - **Nombre de la institución:** como se va a ver en la aplicación (ej.: «Club Atlético Las Palmas»).
    - **Gmail de la institución:** el del paso 1.
    - **Correo del primer Responsable general:** con el que va a entrar al panel esa persona (puede ser el personal).
    - **Nombre y apellido del Responsable general.**
-4. Tocar el botón verde **Run workflow** del cuadrito. A los pocos segundos aparece una fila nueva con un círculo amarillo 🟡 (está trabajando; si no aparece, recargar la página con F5). Tarda entre **5 y 15 minutos**: no hace falta quedarse mirando.
+
+![Panel de Instalar: (1) nombre de la institución, (2) Gmail de la institución, (3) correo del Responsable general, (4) su nombre y apellido, (5) Run workflow, abajo de todo](img/github-instalar-formulario.png)
+
+4. Tocar el botón verde **Run workflow** de **abajo de todo** del panel. A los pocos segundos aparece una fila nueva con un círculo amarillo 🟡 (está trabajando; si no aparece, recargar la página con F5). Tarda entre **5 y 15 minutos**: no hace falta quedarse mirando.
 5. Cuando termina en verde ✅, tocar la ejecución: arriba aparece el **resumen** con la dirección de la aplicación y la del panel.
 
 ![Resumen «Instalación terminada» con la dirección de la aplicación y del panel](img/github-instalacion-terminada.png)
