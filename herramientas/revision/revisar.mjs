@@ -73,7 +73,7 @@ export async function revisarBase({ consultar }) {
     return {
       base: null,
       resultado: r('base', 'problema', 'No se pudo conectar con la base de datos', `Puede estar pausada o la conexión cambió (${String(e.message || e).slice(0, 120)}).`,
-        'Entrá a supabase.com, abrí el proyecto de la base real y, si dice «Paused», tocá «Resume project». Tarda unos minutos y no se pierde nada.'),
+        'Si estaba pausada, se despierta sola dos veces por día. Para no esperar: GitHub → pestaña «Actions» → «Despertar la base» → «Run workflow». No se pierde nada.'),
     };
   }
 }
@@ -101,7 +101,7 @@ export async function revisarSupabase({ env, instalacion, fetchFn }) {
     else if (estado && estado !== 'ACTIVE_HEALTHY') {
       const pausada = /PAUSE|INACTIVE/.test(estado);
       out.push(r(`supabase_${tipo}`, tipo === 'real' ? 'problema' : 'aviso', pausada ? `La base ${tipo} está pausada` : `La base ${tipo} no está funcionando bien`, `Supabase dice: ${estado}.`,
-        pausada ? `Entrá a supabase.com, abrí el proyecto «${base.nombre}» y tocá «Resume project». No se pierde nada.` : 'Esperá un rato y volvé a mirar. Si sigue igual, entrá a supabase.com y fijate el estado del proyecto.'));
+        pausada ? 'Se despierta sola dos veces por día. Para no esperar: GitHub → pestaña «Actions» → «Despertar la base» → «Run workflow». No se pierde nada.' : 'Esperá un rato y volvé a mirar. Si sigue igual, entrá a supabase.com y fijate el estado del proyecto.'));
     }
   }
   if (!out.some((x) => x.estado !== 'ok')) out.push(r('llave_supabase', 'ok', 'Llave de Supabase y bases activas', 'La llave sirve y las dos bases están funcionando.'));
@@ -205,6 +205,11 @@ export async function revisar({ env, instalacion, consultar, fetchFn = fetch, pr
   resultados.push(resultado);
   resultados.push(await revisarRespaldo({ env, fetchFn, ahora }));
   resultados.push(...(await revisarSupabase({ env, instalacion, fetchFn })));
+  // D74: si una base estaba pausada y se despertó sola recién, se avisa (sin que haya que hacer nada).
+  for (const tipo of String(env.BASES_DESPERTADAS || '').split(',').filter(Boolean)) {
+    resultados.push(r(`despertada_${tipo}`, 'aviso', `La base ${tipo} estaba pausada y se despertó sola`,
+      'El plan gratuito de Supabase la había pausado por falta de uso. El sistema la volvió a poner en marcha: no se perdió nada.', 'Nada: ya está resuelto.'));
+  }
   const cf = await revisarCloudflare({ env, fetchFn, ahora });
   if (cf) resultados.push(cf);
   for (const x of [revisarVersion(base, esperada), revisarEspacio(base)]) if (x) resultados.push(x);

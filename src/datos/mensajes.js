@@ -5,7 +5,8 @@
 
 export const MENSAJES_PANEL = {
   // Conexión y sesión
-  sin_conexion: 'No se pudo conectar con la base de datos. Revisá que esta computadora tenga internet y probá de nuevo en un minuto.',
+  sin_conexion: 'No se pudo conectar con la base de datos. Revisá que esta computadora tenga internet y probá de nuevo en un minuto. Si tenés internet y sigue pasando, puede ser que la base esté «dormida» (pasa con el plan gratuito): se despierta sola en unas horas, o el Responsable general toca en GitHub «Actions» → «Despertar la base» → «Run workflow». No se pierde nada.',
+  base_pausada: 'La base de datos está «dormida» (el plan gratuito la pausa si no se usa). Se despierta sola en unas horas. Para no esperar, el Responsable general toca en GitHub «Actions» → «Despertar la base» → «Run workflow» (tarda unos minutos). No se pierde nada.',
   sesion_vencida: 'Tu sesión se cerró por seguridad. Volvé a entrar con tu correo: te llega un código nuevo.',
   base_desactualizada: 'La base de datos está desactualizada respecto de la aplicación. El Responsable general tiene que tocar «Actualizar» en GitHub (ver «Actualizaciones» en el manual de instalación).',
   error_base: 'La base de datos no pudo hacer lo que pediste. Actualizá la página (tecla F5) y probá de nuevo. Si vuelve a pasar, anotá lo que estabas haciendo y mirá la guía «¿Qué hago si…?».',
@@ -92,6 +93,7 @@ export function codigoDeErrorSupabase(error) {
   const msg = String(error.message || '');
   if (code === 'PGRST301' || /jwt.*expired/i.test(msg)) return 'sesion_vencida';
   if (code === 'PGRST202' || code === '42883') return 'base_desactualizada';
+  if (String(error.status) === '540' || /project.*paused|paused project/i.test(msg)) return 'base_pausada';
   if (!code || /failed to fetch|network|load failed|fetch/i.test(msg)) return 'sin_conexion';
   return 'error_base';
 }

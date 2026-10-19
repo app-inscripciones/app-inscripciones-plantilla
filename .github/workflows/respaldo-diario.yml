@@ -29,7 +29,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Controlar que estén las claves y armar la conexión
+      # D74: si el plan gratuito pausó una base, se despierta sola antes de seguir (nadie tiene que entrar a supabase.com).
+      - name: Despertar las bases si están pausadas
+        continue-on-error: true
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: node herramientas/instalador/despertar.mjs
+
+            - name: Controlar que estén las claves y armar la conexión
         env:
           SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}

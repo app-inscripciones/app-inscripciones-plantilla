@@ -266,10 +266,19 @@ export const SECCIONES = [
         ],
       },
       {
-        pregunta: 'Supabase pausó la base de datos',
+        pregunta: 'La base de datos está «dormida» o «pausada» (el panel no conecta)',
         pasos: [
-          'Entrá a supabase.com, abrí el proyecto y tocá «Resume project» (el botón blanco; no toques «Upgrade to Pro», que es pago). Tarda unos minutos.',
-          'No se pierde nada. El respaldo diario evita que vuelva a pasar.',
+          'No hagas nada: el sistema la despierta solo, dos veces por día (a las 6 y a las 18). No se pierde nada, y los celulares de los cargadores siguen cargando y envían todo después.',
+          'Si hay apuro (por ejemplo, el día del evento): en GitHub, pestaña «Actions» → a la izquierda «Despertar la base» → «Run workflow» → «Run workflow». Esperá a que termine en verde ✅ (unos 5 a 10 minutos) y actualizá el panel (tecla F5).',
+          'Si termina en rojo ❌ y el mensaje habla de la «llave de Supabase»: creá una llave nueva (manual de instalación, paso 4) y cargala en GitHub con el mismo nombre, SUPABASE_ACCESS_TOKEN. Después volvé a tocar «Run workflow».',
+          'Si termina en rojo por otro motivo: entrá a supabase.com, abrí el proyecto y tocá «Resume project» (el botón blanco; nunca «Upgrade to Pro», que es pago).',
+        ],
+      },
+      {
+        pregunta: 'Llegó un correo: «La base … estaba pausada y se despertó sola»',
+        pasos: [
+          'No hay que hacer nada: el sistema ya la volvió a poner en marcha y no se perdió nada.',
+          'Si querés confirmarlo: en el panel, «Estado del sistema» tiene que decir que las bases están activas.',
         ],
       },
       {

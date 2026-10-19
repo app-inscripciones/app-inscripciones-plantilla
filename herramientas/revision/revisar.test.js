@@ -79,7 +79,7 @@ describe('revisión diaria (D58)', () => {
     const res = await revisar(simulados({ supabase: { aaa: 'INACTIVE', bbb: 'PAUSING' } }).args);
     expect(estado(res, 'supabase_real')).toBe('problema');
     expect(estado(res, 'supabase_pruebas')).toBe('aviso');
-    expect(res.resultados.find((x) => x.id === 'supabase_real').queHacer).toMatch(/Resume project/);
+    expect(res.resultados.find((x) => x.id === 'supabase_real').queHacer).toMatch(/Despertar la base/);
   });
 
   it('la base no responde: problema, y no se puede guardar en la base pero sí avisar por correo', async () => {

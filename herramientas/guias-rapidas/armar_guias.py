@@ -229,7 +229,7 @@ GUIAS = {
          'Irte sin darle el rol Responsable general a otra persona y entregarle la hoja de accesos.']) +
   si([('Aparece «La base de datos está desactualizada»', 'GitHub → Actions → Actualizar → Run workflow. Después F5.'),
       ('Correo «falló el Respaldo diario»', 'GitHub → Actions → Respaldo diario: abrí la ejecución en rojo y seguí la guía «¿Qué hago si…?».'),
-      ('Supabase pausó la base', 'supabase.com → el proyecto → Resume project. No se pierde nada.'),
+      ('La base está «dormida» (no conecta)', 'Nada: se despierta sola 2 veces por día. Con apuro: GitHub → Actions → Despertar la base → Run workflow.'),
       ('A nadie le llega el código', 'Revisá la contraseña de aplicación del Gmail (manual de instalación) y tocá «Instalar» otra vez.')]) +
   datos(['Dirección del panel', 'Gmail de la institución', 'Hoja de accesos guardada en', 'Otro Responsable'])),
 }

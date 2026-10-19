@@ -32,6 +32,7 @@ describe('mensajes de error (Etapa 9)', () => {
   it('distingue internet, sesión vencida, base desactualizada y error de la base', () => {
     expect(codigoDeErrorSupabase({ message: 'TypeError: Failed to fetch', code: '' })).toBe('sin_conexion');
     expect(codigoDeErrorSupabase({ code: 'PGRST301', message: 'JWT expired' })).toBe('sesion_vencida');
+    expect(codigoDeErrorSupabase({ status: 540, message: 'Project paused', code: '' })).toBe('base_pausada');
     expect(codigoDeErrorSupabase({ code: 'PGRST202', message: 'Could not find the function' })).toBe('base_desactualizada');
     expect(codigoDeErrorSupabase({ code: '23514', message: 'violates check constraint' })).toBe('error_base');
   });
