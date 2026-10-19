@@ -14,12 +14,12 @@ export function evaluarEstado(r) {
   if (!ultima) {
     items.push(item('revision', 'aviso', 'Todavía no corrió la revisión diaria',
       'Se hace sola todos los días a la mañana. Si recién se instaló el sistema, mañana ya va a aparecer acá.',
-      'Para hacerla ahora: GitHub → pestaña «Actions» → «Revisión diaria» → «Run workflow».'));
+      'Para hacerla ahora: GitHub → pestaña «Actions» → «Revisión diaria» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo).'));
   } else {
     if (r.horasDesdeUltima > HORAS_REVISION) {
       items.push(item('revision', 'problema', `La revisión diaria no corre hace ${Math.round(r.horasDesdeUltima / 24)} días`,
         'Si la revisión no corre, el sistema no puede avisar cuando algo anda mal.',
-        'GitHub → pestaña «Actions» → «Revisión diaria». Si dice que está desactivada, tocá «Enable workflow». Después tocá «Run workflow».'));
+        'GitHub → pestaña «Actions» → «Revisión diaria». Si dice que está desactivada, tocá «Enable workflow». Después tocá «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo).'));
     }
     // Lo que la base dice en el momento reemplaza a lo que dijo la revisión (por ejemplo, después de «Actualizar»).
     const enVivo = new Set(['version', 'espacio']);
@@ -27,7 +27,7 @@ export function evaluarEstado(r) {
   }
   if (r.version != null && Number(r.version) < VERSION_BASE) {
     items.push(item('version', 'aviso', 'Falta actualizar la base de datos', `La base está en la versión ${r.version} y la app en la ${VERSION_BASE}.`,
-      'GitHub → pestaña «Actions» → «Actualizar» → «Run workflow». Tarda unos 5 minutos y no se pierden datos.'));
+      'GitHub → pestaña «Actions» → «Actualizar» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo). Tarda unos 5 minutos y no se pierden datos.'));
   } else if (r.version != null) items.push(item('version', 'ok', 'Versión de la base', `Al día (versión ${r.version}).`));
   if (r.espacioUsado != null && r.espacioLimite) {
     const pct = Math.round((100 * r.espacioUsado) / r.espacioLimite);

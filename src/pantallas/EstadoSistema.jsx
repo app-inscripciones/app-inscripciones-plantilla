@@ -65,7 +65,7 @@ export default function EstadoSistema({ estado }) {
       </ul>
       <button id="revisar-ahora" className="boton secundario" disabled={revisando} onClick={revisar}>{revisando ? 'Revisando…' : 'Revisar ahora'}</button>
       <p className="ayuda">«Revisar ahora» actualiza lo que el panel puede comprobar en el momento (versión y espacio de la base) y trae la última revisión.
-        La revisión completa (respaldo, llaves y correo) la hace GitHub: para hacerla ya, GitHub → «Actions» → «Revisión diaria» → «Run workflow».</p>
+        La revisión completa (respaldo, llaves y correo) la hace GitHub: para hacerla ya, GitHub → «Actions» → «Revisión diaria» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo).</p>
     </section>
   );
 }

@@ -254,13 +254,37 @@ Los problemas del uso diario están en **6 · ¿Qué hago si…?**
 
 ---
 
+## Cómo se usa una tarea automática de GitHub (Actions)
+
+Instalar, actualizar, despertar la base, recuperar un respaldo: **todas se usan igual**.
+
+1. Entrar a la dirección del repositorio (casilla C5) → pestaña **Actions** (arriba).
+2. En la lista de la izquierda, tocar la tarea (por ejemplo **Despertar la base**).
+3. Arriba a la derecha, botón verde **Run workflow** (ejecutar) → se abre un panel a la derecha.
+4. Si el panel tiene casilleros, completarlos. **Use workflow from: main** se deja como está.
+5. Abajo de todo del panel, otra vez el botón verde **Run workflow**.
+6. Aparece una fila nueva (si no aparece, F5). El círculo dice cómo va:
+
+| Se ve | Quiere decir | Qué hacer |
+|---|---|---|
+| 🟡 círculo amarillo que gira | Está trabajando | Esperar. Se puede cerrar la página |
+| ✅ verde | Terminó bien | Nada. Tocando la fila se ve el resumen |
+| ❌ rojo | Algo falló | Tocar la fila: el mensaje en rojo dice qué pasó y qué hacer |
+| ⚪ gris («Queued», en espera) | GitHub todavía no la empezó | Esperar unos minutos: a veces GitHub tarda |
+
+> ⚠️ Para volver a intentar después de un ❌, usá siempre **Run workflow** (los pasos 3 a 5), **no** «Re-run jobs» (repite la ejecución vieja, con los datos viejos).
+
+> Si arriba aparece un cartel amarillo **«This scheduled workflow is disabled…»** (la tarea está apagada) con el botón **Enable workflow** (activar), tocarlo. No debería pasar: el sistema las mantiene encendidas solo.
+
+---
+
 ## Mantenimiento (después de instalar)
 
 - **El sistema se revisa solo** todos los días a la mañana y, si algo necesita atención, manda un correo **en castellano** a los Responsables generales, con qué hacer. En el panel: **Estado del sistema**.
 - **Respaldos:** todos los días a la madrugada, cifrados con la CLAVE_RESPALDO (F1). Para recuperar uno: GitHub → **Actions** → **Recuperar respaldo (en la base de pruebas)**; para pasarlo a la base real, **Pasar un respaldo a la base real** (pide escribir REEMPLAZAR LA BASE REAL y se puede deshacer).
-- **Actualizaciones:** cuando salga una versión nueva, GitHub → **Actions** → **Actualizar** → **Run workflow**. No se pierden datos. Si el panel dice «La base de datos está desactualizada», es la señal de que hay que tocarlo.
+- **Actualizaciones:** cuando salga una versión nueva, GitHub → **Actions** → **Actualizar** → **Run workflow** (botón verde de arriba a la derecha y, en el panel, **Run workflow** de abajo de todo). No se pierden datos. Si el panel dice «La base de datos está desactualizada», es la señal de que hay que tocarlo.
 - **Si vence una llave:** crear una nueva (pasos 4 o 5) y cargarla en GitHub con el mismo nombre (paso 6). Anotar el vencimiento nuevo (E3).
-- **Si una base se «duerme»:** no hay que hacer nada (se despierta sola dos veces por día). Con apuro: GitHub → **Actions** → **Despertar la base** → **Run workflow**. Ver la tabla de abajo.
+- **Si una base se «duerme»:** no hay que hacer nada (se despierta sola dos veces por día). Con apuro: GitHub → **Actions** → **Despertar la base** → **Run workflow** (botón verde de arriba a la derecha y, en el panel, **Run workflow** de abajo de todo). Ver la tabla de abajo.
 - **Si cambia el Responsable general:** el nuevo se da de alta en **Personas y roles** y se le entrega esta carpeta y la Hoja de accesos.
 
 ## Si una base se «duerme» (pausa del plan gratuito): qué hacer en cada caso
@@ -272,7 +296,7 @@ El plan gratuito de Supabase pausa una base que no se usa durante una semana. **
 | No pasa nada raro | **Nada.** El sistema mantiene las bases despiertas solo |
 | Llega un correo: «La base … estaba pausada y se despertó sola» | **Nada.** Ya está resuelto y no se perdió nada |
 | El panel no conecta o dice que la base está «dormida» | **Esperar**: se despierta sola en unas horas. Los celulares siguen cargando y envían todo después |
-| …y hay apuro (por ejemplo, es el día del evento) | GitHub → **Actions** → **Despertar la base** → **Run workflow** → **Run workflow**. Esperar el verde ✅ (5 a 10 minutos) y actualizar el panel (F5) |
+| …y hay apuro (por ejemplo, es el día del evento) | GitHub → **Actions** → **Despertar la base** → **Run workflow** (botón verde de arriba a la derecha y, en el panel, **Run workflow** de abajo de todo). Esperar el verde ✅ (5 a 10 minutos) y actualizar el panel (F5) |
 | «Despertar la base» termina en rojo ❌ y habla de la «llave de Supabase» | Crear una llave nueva (paso 4) y cargarla en GitHub con el mismo nombre, `SUPABASE_ACCESS_TOKEN` (paso 6). Volver a tocar **Run workflow** |
 | «Despertar la base» termina en rojo ❌ por otro motivo | supabase.com → abrir el proyecto → **Resume project** (el botón blanco; **nunca** «Upgrade to Pro», que es pago) |
 

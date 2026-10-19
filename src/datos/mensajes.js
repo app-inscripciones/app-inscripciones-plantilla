@@ -5,8 +5,8 @@
 
 export const MENSAJES_PANEL = {
   // Conexión y sesión
-  sin_conexion: 'No se pudo conectar con la base de datos. Revisá que esta computadora tenga internet y probá de nuevo en un minuto. Si tenés internet y sigue pasando, puede ser que la base esté «dormida» (pasa con el plan gratuito): se despierta sola en unas horas, o el Responsable general toca en GitHub «Actions» → «Despertar la base» → «Run workflow». No se pierde nada.',
-  base_pausada: 'La base de datos está «dormida» (el plan gratuito la pausa si no se usa). Se despierta sola en unas horas. Para no esperar, el Responsable general toca en GitHub «Actions» → «Despertar la base» → «Run workflow» (tarda unos minutos). No se pierde nada.',
+  sin_conexion: 'No se pudo conectar con la base de datos. Revisá que esta computadora tenga internet y probá de nuevo en un minuto. Si tenés internet y sigue pasando, puede ser que la base esté «dormida» (pasa con el plan gratuito): se despierta sola en unas horas, o el Responsable general toca en GitHub «Actions» → «Despertar la base» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo). No se pierde nada.',
+  base_pausada: 'La base de datos está «dormida» (el plan gratuito la pausa si no se usa). Se despierta sola en unas horas. Para no esperar, el Responsable general toca en GitHub «Actions» → «Despertar la base» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo) (tarda unos minutos). No se pierde nada.',
   sesion_vencida: 'Tu sesión se cerró por seguridad. Volvé a entrar con tu correo: te llega un código nuevo.',
   base_desactualizada: 'La base de datos está desactualizada respecto de la aplicación. El Responsable general tiene que tocar «Actualizar» en GitHub (ver «Actualizaciones» en el manual de instalación).',
   error_base: 'La base de datos no pudo hacer lo que pediste. Actualizá la página (tecla F5) y probá de nuevo. Si vuelve a pasar, anotá lo que estabas haciendo y mirá la guía «¿Qué hago si…?».',

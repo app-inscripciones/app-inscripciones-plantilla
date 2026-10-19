@@ -219,7 +219,7 @@ GUIAS = {
     f'{b("Institución")}: nombre, nombre corto, colores, logo, aviso de salud y contacto.',
     'Abajo ves cómo queda. Los celulares lo toman al abrir la app con internet.']) +
   bloque(4, 'Versión nueva', [
-    'En GitHub: <b>Actions → Actualizar → Run workflow</b>. Unos 5 minutos, sin perder datos.']) + '</div></div>' +
+    'En GitHub: <b>Actions → Actualizar → Run workflow</b> (y en el panel, otra vez <b>Run workflow</b>). Unos 5 minutos, sin perder datos.']) + '</div></div>' +
   bloque(5, 'Mantenimiento: casi todo es automático', [
     'Todos los días a la madrugada se hace un <b>respaldo cifrado</b> y se prueba que se puede recuperar.',
     'Si algo falla, <b>llega un correo de GitHub</b> al Gmail de la institución: buscá ese caso en la guía «¿Qué hago si…?».',
@@ -227,9 +227,9 @@ GUIAS = {
   nunca(['Compartir el Gmail de la institución ni la hoja de accesos.',
          'Borrar la clave de respaldo (CLAVE_RESPALDO): sin ella los respaldos no se pueden abrir.',
          'Irte sin darle el rol Responsable general a otra persona y entregarle la hoja de accesos.']) +
-  si([('Aparece «La base de datos está desactualizada»', 'GitHub → Actions → Actualizar → Run workflow. Después F5.'),
+  si([('Aparece «La base de datos está desactualizada»', 'GitHub → Actions → Actualizar → Run workflow (2 veces: arriba a la derecha y abajo del panel). Después F5.'),
       ('Correo «falló el Respaldo diario»', 'GitHub → Actions → Respaldo diario: abrí la ejecución en rojo y seguí la guía «¿Qué hago si…?».'),
-      ('La base está «dormida» (no conecta)', 'Nada: se despierta sola 2 veces por día. Con apuro: GitHub → Actions → Despertar la base → Run workflow.'),
+      ('La base está «dormida» (no conecta)', 'Nada: se despierta sola 2 veces por día. Con apuro: GitHub → Actions → Despertar la base → Run workflow (2 veces).'),
       ('A nadie le llega el código', 'Revisá la contraseña de aplicación del Gmail (manual de instalación) y tocá «Instalar» otra vez.')]) +
   datos(['Dirección del panel', 'Gmail de la institución', 'Hoja de accesos guardada en', 'Otro Responsable'])),
 }

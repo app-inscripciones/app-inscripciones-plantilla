@@ -52,12 +52,12 @@ export async function revisarRespaldo({ env, fetchFn, ahora }) {
   if (!x.ok) return r('respaldo', 'aviso', 'No se pudo revisar el respaldo', `GitHub respondió ${x.status}.`, 'Mirá GitHub → Actions → «Respaldo diario».');
   const corridas = ((x.cuerpo && x.cuerpo.workflow_runs) || []).filter((c) => c.status === 'completed');
   const ultima = corridas[0];
-  const queHacerCorrer = 'GitHub → pestaña «Actions» → «Respaldo diario». Si dice que está desactivado, tocá «Enable workflow». Después tocá «Run workflow»: tiene que terminar en verde ✅.';
+  const queHacerCorrer = 'GitHub → pestaña «Actions» → «Respaldo diario». Si dice que está desactivado, tocá «Enable workflow». Después tocá «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo): tiene que terminar en verde ✅.';
   if (!ultima) return r('respaldo', 'problema', 'Todavía no se hizo ningún respaldo', 'No hay ninguna copia de seguridad de los datos.', queHacerCorrer);
   const horas = Math.round((ahora - new Date(ultima.created_at)) / 3600000);
   if (ultima.conclusion !== 'success') {
     return r('respaldo', 'problema', 'El último respaldo falló', `Fue el ${fecha(ultima.created_at)}.`,
-      'GitHub → «Actions» → «Respaldo diario» → abrí la ejecución en rojo ❌ y buscá el mensaje en la guía «¿Qué hago si…?» («falló el Respaldo diario»). Después tocá «Run workflow».');
+      'GitHub → «Actions» → «Respaldo diario» → abrí la ejecución en rojo ❌ y buscá el mensaje en la guía «¿Qué hago si…?» («falló el Respaldo diario»). Después tocá «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo).');
   }
   if (horas > HORAS_RESPALDO) {
     return r('respaldo', 'problema', `El respaldo no corre hace ${Math.round(horas / 24)} días`, `El último salió bien el ${fecha(ultima.created_at)}, pero desde entonces no se hizo otro.`, queHacerCorrer);
@@ -73,7 +73,7 @@ export async function revisarBase({ consultar }) {
     return {
       base: null,
       resultado: r('base', 'problema', 'No se pudo conectar con la base de datos', `Puede estar pausada o la conexión cambió (${String(e.message || e).slice(0, 120)}).`,
-        'Si estaba pausada, se despierta sola dos veces por día. Para no esperar: GitHub → pestaña «Actions» → «Despertar la base» → «Run workflow». No se pierde nada.'),
+        'Si estaba pausada, se despierta sola dos veces por día. Para no esperar: GitHub → pestaña «Actions» → «Despertar la base» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo). No se pierde nada.'),
     };
   }
 }
@@ -101,7 +101,7 @@ export async function revisarSupabase({ env, instalacion, fetchFn }) {
     else if (estado && estado !== 'ACTIVE_HEALTHY') {
       const pausada = /PAUSE|INACTIVE/.test(estado);
       out.push(r(`supabase_${tipo}`, tipo === 'real' ? 'problema' : 'aviso', pausada ? `La base ${tipo} está pausada` : `La base ${tipo} no está funcionando bien`, `Supabase dice: ${estado}.`,
-        pausada ? 'Se despierta sola dos veces por día. Para no esperar: GitHub → pestaña «Actions» → «Despertar la base» → «Run workflow». No se pierde nada.' : 'Esperá un rato y volvé a mirar. Si sigue igual, entrá a supabase.com y fijate el estado del proyecto.'));
+        pausada ? 'Se despierta sola dos veces por día. Para no esperar: GitHub → pestaña «Actions» → «Despertar la base» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo). No se pierde nada.' : 'Esperá un rato y volvé a mirar. Si sigue igual, entrá a supabase.com y fijate el estado del proyecto.'));
     }
   }
   if (!out.some((x) => x.estado !== 'ok')) out.push(r('llave_supabase', 'ok', 'Llave de Supabase y bases activas', 'La llave sirve y las dos bases están funcionando.'));
@@ -133,7 +133,7 @@ export function revisarVersion(base, esperada) {
   if (!base) return null;
   if (Number(base.version) < esperada) {
     return r('version', 'aviso', 'Falta actualizar la base de datos', `La base está en la versión ${base.version} y el programa en la ${esperada}.`,
-      'GitHub → pestaña «Actions» → «Actualizar» → «Run workflow». Tarda unos 5 minutos y no se pierden datos.');
+      'GitHub → pestaña «Actions» → «Actualizar» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo). Tarda unos 5 minutos y no se pierden datos.');
   }
   return r('version', 'ok', 'Versión de la base', `Al día (versión ${base.version}).`);
 }

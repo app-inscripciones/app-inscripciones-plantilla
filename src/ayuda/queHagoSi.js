@@ -198,7 +198,7 @@ export const SECCIONES = [
         pregunta: 'Aparece «La base de datos está desactualizada»',
         pasos: [
           'Hay una versión nueva de la app y falta actualizar la base.',
-          'El Responsable general entra a GitHub → pestaña «Actions» → «Actualizar» → «Run workflow».',
+          'El Responsable general entra a GitHub → pestaña «Actions» → «Actualizar» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo).',
           'Cuando termine en verde ✅, actualizá la página del panel (tecla F5).',
         ],
       },
@@ -262,15 +262,15 @@ export const SECCIONES = [
           'Entrá a GitHub → pestaña «Actions» → «Respaldo diario» y abrí la ejecución en rojo ❌.',
           'Si el mensaje habla de la llave de Supabase («401» o «token»), creá una llave nueva y cargala de nuevo (manual de instalación, pasos 4 y 6).',
           'Si dice que la base está pausada, mirá el caso siguiente.',
-          'Después tocá «Run workflow» en «Respaldo diario»: tiene que terminar en verde ✅.',
+          'Después tocá «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo) en «Respaldo diario»: tiene que terminar en verde ✅.',
         ],
       },
       {
         pregunta: 'La base de datos está «dormida» o «pausada» (el panel no conecta)',
         pasos: [
           'No hagas nada: el sistema la despierta solo, dos veces por día (a las 6 y a las 18). No se pierde nada, y los celulares de los cargadores siguen cargando y envían todo después.',
-          'Si hay apuro (por ejemplo, el día del evento): en GitHub, pestaña «Actions» → a la izquierda «Despertar la base» → «Run workflow» → «Run workflow». Esperá a que termine en verde ✅ (unos 5 a 10 minutos) y actualizá el panel (tecla F5).',
-          'Si termina en rojo ❌ y el mensaje habla de la «llave de Supabase»: creá una llave nueva (manual de instalación, paso 4) y cargala en GitHub con el mismo nombre, SUPABASE_ACCESS_TOKEN. Después volvé a tocar «Run workflow».',
+          'Si hay apuro (por ejemplo, el día del evento): en GitHub, pestaña «Actions» → a la izquierda «Despertar la base» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo). Esperá a que termine en verde ✅ (unos 5 a 10 minutos) y actualizá el panel (tecla F5).',
+          'Si termina en rojo ❌ y el mensaje habla de la «llave de Supabase»: creá una llave nueva (manual de instalación, paso 4) y cargala en GitHub con el mismo nombre, SUPABASE_ACCESS_TOKEN. Después volvé a tocar «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo).',
           'Si termina en rojo por otro motivo: entrá a supabase.com, abrí el proyecto y tocá «Resume project» (el botón blanco; nunca «Upgrade to Pro», que es pago).',
         ],
       },
@@ -287,7 +287,7 @@ export const SECCIONES = [
           'Lo manda solo el sistema, todos los días a la mañana, cuando algo necesita atención. No es publicidad ni un engaño: viene del Gmail de la institución.',
           'El correo dice qué pasó y qué hacer. Lo mismo se ve en el panel, en «Estado del sistema».',
           '🔴 es un problema para resolver pronto (por ejemplo, un respaldo que falló). 🟡 es un aviso (por ejemplo, una llave que vence en un mes).',
-          'Cuando lo arregles, al día siguiente la revisión lo confirma sola. Para no esperar: GitHub → «Actions» → «Revisión diaria» → «Run workflow».',
+          'Cuando lo arregles, al día siguiente la revisión lo confirma sola. Para no esperar: GitHub → «Actions» → «Revisión diaria» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo).',
         ],
       },
       {
@@ -318,7 +318,7 @@ export const SECCIONES = [
       {
         pregunta: 'Quiero actualizar la app a una versión nueva',
         pasos: [
-          'GitHub → pestaña «Actions» → «Actualizar» → «Run workflow». Tarda unos 5 minutos y no se pierden datos.',
+          'GitHub → pestaña «Actions» → «Actualizar» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo). Tarda unos 5 minutos y no se pierden datos.',
           'Si al final aparece un aviso amarillo sobre «.github/workflows», seguí el manual de instalación («Actualizaciones»).',
         ],
       },
