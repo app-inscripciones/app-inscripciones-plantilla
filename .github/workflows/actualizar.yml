@@ -45,7 +45,7 @@ jobs:
           git add -A
           if git diff --cached --quiet; then echo "Ya estaba al día."; else
             git commit -m "Actualización a la versión $(node -p 'require("./package.json").version')"
-            git push
+            git push || { git pull --rebase -q && git push; }
           fi
 
       - uses: actions/setup-node@v4
