@@ -47,7 +47,7 @@ export default function Activar({ codigoInicial = '', alActivar }) {
           ) : (
             <>
               <li>Tocá el menú <strong>⋮</strong> (los tres puntitos de arriba a la derecha).</li>
-              <li>Elegí <strong>Instalar aplicación</strong> (o «Agregar a la pantalla principal»).</li>
+              <li>Elegí <strong>Instalar aplicación</strong> (o «Agregar a la pantalla principal»). Si esas opciones no aparecen, elegí primero <strong>Abrir en Chrome</strong> y volvé a tocar ⋮.</li>
             </>
           )}
           <li>Cerrá el navegador y abrí la app desde el <strong>ícono nuevo</strong> de tu pantalla.</li>
