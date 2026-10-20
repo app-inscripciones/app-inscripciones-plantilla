@@ -181,7 +181,7 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 ![Inicio de Cloudflare: (1) el ícono de la persona, arriba a la derecha. Lo demás no se toca](img/cloudflare-inicio.png)
 
 4. **Verificación en dos pasos:** no hace falta. Como se entra con Google, la protege la verificación en dos pasos del Gmail (paso 1).
-5. Crear la **llave**. Camino corto: abrir **dash.cloudflare.com/profile/api-tokens**. (Camino largo: **My Profile** → **API Tokens** (llaves).) Tocar el botón azul **Create Token** (crear llave), arriba a la derecha. Se abre una lista de plantillas (API token templates): **no elegir ninguna**; bajar con la ruedita hasta el final, donde dice **Create Custom Token** (llave a medida), y tocar **Get started** (empezar). No hacer caso al cartel azul que recomienda «Account API Tokens»: se usa este botón **Create Token**, el azul de arriba a la derecha.
+5. Crear la **llave**. Camino corto: abrir **dash.cloudflare.com/profile/api-tokens**. (Camino largo: el **ícono de la persona** arriba a la derecha → **Profile** (perfil) → en el menú de la izquierda, **API Tokens** (llaves).) Tocar el botón azul **Create Token** (crear llave), arriba a la derecha. Se abre una lista de plantillas (API token templates): **no elegir ninguna**; bajar con la ruedita hasta el final, donde dice **Create Custom Token** (llave a medida), y tocar **Get started** (empezar). No hacer caso al cartel azul que recomienda «Account API Tokens»: se usa este botón **Create Token**, el azul de arriba a la derecha.
 
 ![(1) ícono de la persona, (2) Profile](img/cloudflare-menu.png)
 
