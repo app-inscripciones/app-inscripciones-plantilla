@@ -189,9 +189,17 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
    - **Token name** (nombre): «Instalador».
    - **Permissions** (permisos), en la primera fila elegir: **Account** → **Cloudflare Pages** → **Edit** (editar). Tocar **+ Add more** (agregar otro) y en la segunda fila: **Account** → **Account Settings** → **Read** (leer).
-   - **Account Resources** (cuentas): **Include** (incluir) → la cuenta de la institución.
+   - **Account Resources** (cuentas): **Include** (incluir) → la cuenta de la institución (aparece como «…@gmail.com's Account»; si dice «All accounts», también sirve).
+   - **Client IP address filtering** (filtrar por dirección): **dejarlo vacío**.
    - Si aparece **TTL** (fecha de vencimiento), dejarla vacía. Si obliga a poner una, elegir la más lejana y 📝 **anotarla ya en la hoja, casilla E2**.
    - Abajo: **Continue to summary** (ver resumen) → **Create Token** (crear llave).
+
+![Plantillas: no elegir ninguna; (1) Get started de Create Custom Token](img/cloudflare-plantillas.png)
+
+![(1) Instalador, (2) Account · Cloudflare Pages · Edit, (3) Account · Account Settings · Read, (4) Include y la cuenta](img/cloudflare-llave-1.png)
+
+![Client IP y TTL se dejan vacíos; (5) Continue to summary](img/cloudflare-llave-2.png)
+
 6. Copiar la llave. **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. ⛔ **Esta no se anota** (si se pierde, se crea otra).
 
 > 📝 **Revisá en la hoja:** E1 tildada (se entra con Google) y E2 (vencimiento de la llave, si tiene).
