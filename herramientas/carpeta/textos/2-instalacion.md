@@ -90,9 +90,13 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 ![(1) El celular después del +54, (2) por mensaje de texto, (3) Siguiente](img/gseg-4-telefono.png)
 
 4. Aparece **«Ahora tu cuenta está protegida por la verificación en dos pasos»**: se activó sola. Tocá **Listo**.
-5. En la misma página, abajo, tocá **Códigos de verificación alternativos** → **Obtener códigos**. Aparecen **10 códigos de 8 números**. 📝 **Anotalos ya en la hoja, casilla B5.** Cada uno sirve una sola vez para entrar si no tenés el celular.
+5. En la misma página, abajo, tocá **Códigos de verificación alternativos** → botón **Obtén códigos de seguridad**. Aparecen **10 códigos de 8 números**. 📝 **Copialos ya en la hoja, casilla B5.** (También se puede tocar **Imprimir códigos** y guardar esa hoja junto con la de accesos.) Cada uno sirve una sola vez para entrar si no tenés el celular. Después volvé con la flecha ← de arriba.
 
 ![(1) Listo; (2) después, Códigos de verificación alternativos](img/gseg-5-protegida.png)
+
+![(1) Obtén códigos de seguridad](img/gcod-1-obtener.png)
+
+![(2) Los 10 códigos (acá tapados): copiarlos en B5; (3) o Imprimir códigos](img/gcod-2-lista.png)
 
    **Si al entrar ya aparece una lista** con **Número de teléfono** con un ✅ verde y abajo el botón **«Desactivar la verificación en dos pasos»**: **ya está activada** (pasa cuando el celular ya estaba cargado). Seguí directo con el punto 5.
 
