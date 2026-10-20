@@ -212,7 +212,12 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ## Paso 6. Cargar las cuatro claves en GitHub
 
-1. En GitHub, abrir el repositorio **app-inscripciones** de la institución → pestaña **Settings** (configuración; arriba, a la derecha de la fila de pestañas) → en el menú de la izquierda, **Secrets and variables** (secretos y variables) → **Actions**. Camino corto: escribir en el navegador la dirección del repositorio (casilla C5) y agregarle al final **/settings/secrets/actions**.
+> 🔑 **Si saliste de GitHub o cerraste la página:** entrar a **github.com/login** → escribir el usuario (casilla C1) o el Gmail de la institución, y la contraseña (C2) → **Sign in** (entrar) → GitHub pide un número de **6 dígitos**: abrir **Google Authenticator** en el celular (C3) y escribir el número que dice «GitHub». Si Chrome ofrece completar la contraseña, sirve igual.
+
+1. Abrir esta dirección, **cambiando USUARIO por el usuario de GitHub de la institución** (casilla C1):
+   **https://github.com/USUARIO/app-inscripciones/settings/secrets/actions**
+   (por ejemplo, si el usuario es inscripciones-laspalmas: https://github.com/inscripciones-laspalmas/app-inscripciones/settings/secrets/actions). También es la dirección de la casilla C5 con **/settings/secrets/actions** agregado al final.
+   Camino largo, por si la dirección no funciona: entrar a GitHub → arriba a la izquierda, el repositorio **app-inscripciones** (o la dirección de la casilla C5) → pestaña **Settings** (configuración; arriba, a la derecha de la fila de pestañas) → en el menú de la izquierda, **Secrets and variables** (secretos y variables) → **Actions**.
 2. Para cada una de las cuatro claves de la tabla: tocar el botón verde **New repository secret** (nuevo secreto) → en **Name** (nombre) escribir el nombre **exactamente** así, con mayúsculas y guiones bajos → en **Secret** (secreto) pegar el valor → **Add secret** (agregar). **No** usar «Manage environment secrets» (es otra cosa): siempre el botón verde **New repository secret**, de la parte de abajo.
 
 ![(1) Settings, (2) Secrets and variables, (3) Actions, (4) New repository secret](img/github-secretos.png)
