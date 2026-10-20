@@ -105,7 +105,7 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 **Contraseña de aplicación** (para que el sistema pueda mandar los códigos de ingreso por correo):
 
-1. Con la sesión del Gmail de la institución abierta, entrar a **myaccount.google.com/apppasswords**.
+1. En la **misma ventana de Chrome** donde está abierta la cuenta de Google de la institución, hacé clic en la **barra de direcciones** (la de arriba de todo, donde se escriben las páginas), borrá lo que haya, escribí **myaccount.google.com/apppasswords** y apretá **Enter**. Si pide la contraseña, escribila (B2). Se abre la página **«Contraseñas de aplicaciones»**. (No hay botón para llegar tocando: hay que escribir la dirección.)
 2. Nombre: «Supabase» → **Crear**.
 3. Aparece una clave de **16 letras**. 📝 **Anotalo ya en la hoja, casilla B6.** **Google la muestra una sola vez**: anotala antes de cerrar ese cartel. Se usa en el paso 6.
 
