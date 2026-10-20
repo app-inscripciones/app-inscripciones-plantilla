@@ -42,6 +42,9 @@ export const MENSAJES_PANEL = {
   pendiente_rendir: 'Todavía falta rendir efectivo o tickets de la terminal en este evento. Primero el Tesorero registra esas entregas en «Rendiciones»; después se puede archivar.',
   no_archivado: 'Ese evento ya está a la vista (no estaba archivado).',
   inscripciones_cerradas: 'Las inscripciones de este evento están cerradas: no se pueden crear QR de cargador. Sí se pueden crear QR de control de presentes. Para volver a abrirlas: «Resumen» → «Volver a abrir las inscripciones».',
+  // D77: QR con varios eventos.
+  varios_solo_carga: 'Varios eventos en un mismo QR se pueden elegir solo para cargadores. Para el control de presentes, hacé un QR por evento.',
+  mezcla_practica: 'No se puede mezclar un evento de práctica con eventos reales en el mismo QR. Hacé un QR para la práctica y otro para los eventos reales.',
   horario_invalido: 'Revisá el horario: el final tiene que ser después del comienzo, todavía no tiene que haber pasado y no puede durar más de 7 días.',
   instancia_con_marcas: 'Ese momento ya tiene presentes marcados: no se puede cambiar ni borrar. Sí se pueden agregar otros.',
 

@@ -25,7 +25,7 @@ const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 export const ARCHIVOS_SQL = [
   '001_base.sql', '003_accesos_qr.sql', '004_usuarios.sql', '005_panel_control.sql', '006_gestion.sql',
   '007_presentes.sql', '008_institucion.sql', '009_asistente_eventos.sql', '010_cierre_y_sin_cobro.sql', '011_permisos.sql', '012_control_monto.sql', '013_categorias.sql',
-  '014_practica.sql', '015_modalidad.sql', '016_revision.sql', '017_tickets.sql', '018_grupos.sql', '019_autopresente.sql', '020_borrar_archivar.sql', '021_practica_previa.sql', '022_baja_clave_organizador.sql',
+  '014_practica.sql', '015_modalidad.sql', '016_revision.sql', '017_tickets.sql', '018_grupos.sql', '019_autopresente.sql', '020_borrar_archivar.sql', '021_practica_previa.sql', '022_baja_clave_organizador.sql', '023_varios_eventos.sql',
 ];
 
 // «Iglesia Bautista Central» → «iglesia-bautista-central» (máx. 30 letras).

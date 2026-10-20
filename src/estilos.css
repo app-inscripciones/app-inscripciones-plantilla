@@ -505,3 +505,13 @@ div.tarjeta-opcion { cursor: default; flex-wrap: wrap; }
 body:has(.barra-inferior) .firma { padding-bottom: 130px; }
 @media print { .firma { display: none; } }
 .firma span { white-space: nowrap; }
+/* D77: elegir el evento cuando el QR tiene varios */
+.lista-eventos { display: flex; flex-direction: column; gap: 12px; margin: 12px 0 20px; }
+.elegir-evento { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 2px; width: 100%;
+  background: var(--color-principal, #1F4E79); color: #fff; border: none; }
+.elegir-evento:disabled { background: #d5d9df; color: #555; }
+.resumen-evento { border-top: 2px solid #d5d9df; margin-top: 16px; padding-top: 4px; }
+.titulo-evento { font-size: 1.15rem; margin-bottom: 4px; }
+.otros-eventos { border: 1px solid #d5d9df; border-radius: 8px; padding: 10px 12px; }
+.otros-eventos .casilla { display: block; padding: 8px 0; font-size: 1.05rem; }
+.otros-eventos .casilla input { width: 22px; height: 22px; vertical-align: middle; }

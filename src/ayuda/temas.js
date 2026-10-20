@@ -61,7 +61,8 @@ export const TEMAS = {
     titulo: 'QR de colaboradores',
     rol: 'organizador',
     puntos: [
-      'Cada QR sirve para una persona, un celular, un evento, una tarea (cargar o puerta) y un horario.',
+      'Cada QR sirve para una persona, un celular, una tarea (cargar o puerta) y un horario.',
+      'Un QR de cargador puede servir para varios eventos: al crearlo, tildá los demás eventos en «¿Va a inscribir también para otros eventos?». En el celular, antes de cada inscripción elige el evento. El QR de puerta es siempre de un solo evento.',
       'Imprimilo o mandalo por WhatsApp. El código se muestra una sola vez: si se pierde, creá otro.',
       'La persona escanea el QR, instala la app y la abre desde el ícono para activarla. Hace falta internet solo esa vez.',
       'Para cortar un acceso antes de tiempo, tocá «Cerrar este QR». Lo que ya cargó y no envió llega igual.',
@@ -105,6 +106,7 @@ export const TEMAS = {
     rol: 'cargador',
     puntos: [
       'Tocá «+ Nueva inscripción», completá los datos y revisá la pantalla de confirmación antes de guardar.',
+      'Si tu QR tiene varios eventos, primero elegís para cuál es la inscripción: el formulario y los precios son los de ese evento.',
       'Si el evento es por grupo (equipos, familias), cargá los datos del grupo y después los de cada integrante. Con «+ Agregar integrante» sumás más; marcá quién es el responsable.',
       'El monto lo calcula la app: cobrá exactamente lo que dice.',
       'Funciona sin internet. Cada inscripción se guarda en el celular (🟡) y se envía sola cuando vuelve la señal (🟢).',
@@ -135,6 +137,7 @@ export const TEMAS = {
       'Muestra cuánto cobraste en efectivo, con terminal y por transferencia, incluso lo que todavía no se envió.',
       'Al Tesorero se le entrega el efectivo y los tickets en papel de la terminal. Las transferencias no se entregan: ya están en la cuenta.',
       'Antes de rendir, conectate a internet y esperá a que todo esté en 🟢.',
+      'Si tu QR tiene varios eventos, el resumen viene separado por evento: rendí cada evento por separado.',
     ],
   },
 };

@@ -11,7 +11,12 @@ if [ ! -f config/instalacion.json ]; then
   echo "::error::Esta copia no se instaló con el botón «Instalar» (falta config/instalacion.json)."; false
 fi
 if [ "$(jq -r '.app.publicacion // empty' config/instalacion.json)" = "cloudflare-desde-github" ]; then
-  echo "::error::Este es el repositorio del caso testigo (de donde sale la plantilla): no se actualiza desde la plantilla."; false
+  # Caso testigo (de donde sale la plantilla): el código ya es el último y Cloudflare publica solo desde GitHub.
+  # Solo se ponen al día las bases.
+  trap - ERR
+  node herramientas/instalador/actualizar.mjs
+  resumen "## ✅ Bases al día (caso testigo)"; resumen ""; resumen "Este repositorio es el de origen: no trae código de la plantilla, solo actualizó las bases. No se perdió ningún dato."
+  exit 0
 fi
 
 echo "::group::Traer la versión nueva de la plantilla"

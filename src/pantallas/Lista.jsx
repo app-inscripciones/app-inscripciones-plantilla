@@ -18,7 +18,9 @@ function titulo(evento, i) {
   return i.datos.nombre || 'Sin nombre';
 }
 
-export default function Lista({ evento, inscripciones, alVolver }) {
+export default function Lista({ eventos, inscripciones, alVolver }) {
+  const varios = eventos.length > 1;
+  const deEvento = (id) => eventos.find((e) => e.id === id) || eventos[0];
   return (
     <main className="contenido">
       <h2>Inscripciones en este dispositivo</h2>
@@ -26,10 +28,12 @@ export default function Lista({ evento, inscripciones, alVolver }) {
       <ul className="lista">
         {inscripciones.map((i) => {
           const e = ESTADOS[i.estado] || ESTADOS.pendiente;
-          const cat = evento.categorias.find((c) => c.id === i.categoria);
+          const evento = deEvento(i.eventoId);
+          const cat = (evento.categorias || []).find((c) => c.id === i.categoria);
           return (
             <li key={i.id} className="item">
               <div className="item-titulo">{titulo(evento, i)}</div>
+              {varios && <div className="item-detalle"><strong>{evento.nombre}</strong></div>}
               <div className="item-detalle">
                 {cat ? `${cat.nombre} · ` : ''}
                 {formatoPesos(i.monto)} · {nombreMedio(i.pago.medio)}

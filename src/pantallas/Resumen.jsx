@@ -2,13 +2,35 @@ import Ayuda from './Ayuda.jsx';
 import { formatoPesos } from '../logica/precios.js';
 import { formatoFechaHora } from '../logica/fechas.js';
 
-export default function Resumen({ cargador, resumen, alVolver }) {
-  if (!resumen) return null;
+// D77: con un QR de varios eventos, el efectivo se rinde por separado para cada evento.
+export default function Resumen({ cargador, resumenes, eventos = [], alVolver }) {
+  if (!resumenes) return null;
+  const varios = resumenes.length > 1;
+  const nombre = (id) => (eventos.find((e) => e.id === id) || {}).nombre || '';
   return (
     <main className="contenido">
       <h2>Resumen para rendir</h2>
       <Ayuda tema="rendir" />
       <p className="ayuda">Cargador: <strong>{cargador}</strong>. Incluye todo lo cargado en este dispositivo.</p>
+      {varios && <p className="advertencia">Tenés varios eventos: rendí <strong>cada evento por separado</strong> (el Tesorero lo registra en cada uno).</p>}
+      {resumenes.map(({ eventoId, resumen }) => (
+        <section key={eventoId} className={varios ? 'resumen-evento' : ''}>
+          {varios && <h2 className="titulo-evento">{nombre(eventoId)}</h2>}
+          <ResumenUno resumen={resumen} />
+        </section>
+      ))}
+      <p className="ayuda">
+        Es todo lo que cobraste con este celular. Lo que ya le entregaste al Tesorero no se descuenta acá: el Tesorero lo
+        registra en el panel. Antes de rendir, conectate a internet para que se envíe todo.
+      </p>
+      <button className="boton secundario" onClick={alVolver}>Volver</button>
+    </main>
+  );
+}
+
+function ResumenUno({ resumen }) {
+  return (
+    <>
 
       <h3>Para entregarle al Tesorero</h3>
       <div className="rendir">
@@ -40,12 +62,6 @@ export default function Resumen({ cargador, resumen, alVolver }) {
           <tr className="fuerte"><td>Total cobrado</td><td>{resumen.cantidad}</td><td>{formatoPesos(resumen.total)}</td></tr>
         </tbody>
       </table>
-
-      <p className="ayuda">
-        Es todo lo que cobraste con este celular. Lo que ya le entregaste al Tesorero no se descuenta acá: el Tesorero lo
-        registra en el panel. Antes de rendir, conectate a internet para que se envíe todo.
-      </p>
-      <button className="boton secundario" onClick={alVolver}>Volver</button>
-    </main>
+    </>
   );
 }

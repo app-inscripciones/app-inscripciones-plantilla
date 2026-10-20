@@ -15,7 +15,8 @@ const PantallaAutopresente = lazy(() => import('./pantallas/PantallaAutopresente
 const cargandoPantalla = <div className="contenido">Cargando…</div>;
 import { formatoHorario } from './logica/fechas.js';
 import { sincronizar, recuperarEnvioInterrumpido, MENSAJES_ERROR } from './datos/sincronizacion.js';
-import { leerSesion, estadoAcceso, actualizarEstadoSesion, terminarAcceso } from './datos/sesion.js';
+import { leerSesion, estadoAcceso, actualizarEstadoSesion, terminarAcceso, eventosDeSesion, eventoDisponible } from './datos/sesion.js';
+import ElegirEvento from './pantallas/ElegirEvento.jsx';
 import { borrarPuerta } from './datos/puerta.js';
 import Puerta from './pantallas/Puerta.jsx';
 import { BotonDejarAcceso, CambiarAcceso, AvisoPrimeraVez } from './pantallas/DejarAcceso.jsx';
@@ -101,16 +102,24 @@ function AppColaborador() {
   const [primeraVez, setPrimeraVez] = useState(false);
 
   const evento = sesion ? sesion.evento : null;
+  // D77: un QR de carga puede tener varios eventos; antes de cada inscripción se elige uno.
+  const eventos = eventosDeSesion(sesion);
+  const varios = eventos.length > 1;
+  const [eventoElegido, setEventoElegido] = useState(null);
+  const eventoFormulario = varios ? eventos.find((e) => e.id === eventoElegido) || null : evento;
+  const idsEventos = eventos.map((e) => e.id).join('|');
   const cargador = sesion ? sesion.colaborador : null;
   const estado = estadoAcceso(sesion, ahora);
 
   const recargar = useCallback(async () => {
     setUltimaSinc(await leerAjuste('ultimaSincronizacion'));
     setPendientesTotales(await db.inscripciones.where('estado').anyOf('pendiente', 'enviando', 'error').count());
-    if (!evento || !cargador) return;
-    setInscripciones(await inscripcionesDelEvento(evento.id));
-    setResumen(await resumenCargador(evento.id, cargador));
-  }, [evento, cargador]);
+    if (!idsEventos || !cargador) return;
+    const ids = idsEventos.split('|');
+    const listas = await Promise.all(ids.map((id) => inscripcionesDelEvento(id)));
+    setInscripciones(listas.flat().sort((a, b) => String(b.creadaEn).localeCompare(String(a.creadaEn))));
+    setResumen(await Promise.all(ids.map(async (id) => ({ eventoId: id, resumen: await resumenCargador(id, cargador) }))));
+  }, [idsEventos, cargador]);
 
   const enviarAhora = useCallback(async () => {
     // Sin red no tiene sentido intentar: se envía solo cuando vuelve internet (evento «online»).
@@ -162,7 +171,7 @@ function AppColaborador() {
 
   const encabezado = (
     <header className="encabezado">
-      <Marca titulo={evento ? evento.nombre : null} />
+      <Marca titulo={varios ? `${eventos.length} eventos` : evento ? evento.nombre : null} />
       <span className={`conexion ${enLinea ? 'si' : 'no'}`}>{enLinea ? 'Con internet' : 'Sin internet'}</span>
     </header>
   );
@@ -253,6 +262,7 @@ function AppColaborador() {
   const datosAcceso = (
     <p className="saludo">
       {sesion.tarea === 'cargar' ? 'Cargador' : 'Control de presentes'}: <strong>{cargador}</strong><br />
+      {varios && <small className="ayuda">Eventos: {eventos.map((e) => e.nombre).join(', ')}<br /></small>}
       <small className="ayuda">Horario: {formatoHorario(sesion.desde, sesion.hasta)}</small>
     </p>
   );
@@ -306,7 +316,7 @@ function AppColaborador() {
         {encabezado}
         {franjas}
         {pantalla === 'resumen' ? (
-          <Resumen cargador={cargador} resumen={resumen} alVolver={volver} />
+          <Resumen cargador={cargador} resumenes={resumen} eventos={eventos} alVolver={volver} />
         ) : (
           <main className="contenido">
             {datosAcceso}
@@ -349,7 +359,7 @@ function AppColaborador() {
           {avisoPrimeraVez}
           {aviso && <div className="exito" role="status">{aviso}</div>}
           {datosAcceso}
-          <button className="boton principal grande" onClick={() => { setAviso(''); setPantalla('formulario'); }}>
+          <button className="boton principal grande" onClick={() => { setAviso(''); setPantalla(varios ? 'elegir' : 'formulario'); }}>
             + Nueva inscripción
           </button>
           <div className="tarjetas">
@@ -367,12 +377,18 @@ function AppColaborador() {
         </main>
       )}
 
-      {pantalla === 'formulario' && (
+      {pantalla === 'elegir' && (
+        <ElegirEvento eventos={eventos} disponible={(id) => eventoDisponible(sesion, id)}
+          alElegir={(id) => { setEventoElegido(id); setPantalla('formulario'); }} alVolver={volver} />
+      )}
+
+      {pantalla === 'formulario' && eventoFormulario && (
         <Formulario
-          evento={evento}
+          key={eventoFormulario.id}
+          evento={eventoFormulario}
           cargador={cargador}
           sesionId={sesion.sesionId}
-          presenciales={sesion.presenciales}
+          presenciales={varios ? (sesion.eventosEstado && sesion.eventosEstado[eventoFormulario.id] ? sesion.eventosEstado[eventoFormulario.id].presenciales : null) : sesion.presenciales}
           alCancelar={volver}
           alGuardar={(texto) => {
             setAviso(texto);
@@ -382,9 +398,9 @@ function AppColaborador() {
         />
       )}
 
-      {pantalla === 'lista' && <Lista evento={evento} inscripciones={inscripciones} alVolver={volver} />}
+      {pantalla === 'lista' && <Lista eventos={eventos} inscripciones={inscripciones} alVolver={volver} />}
 
-      {pantalla === 'resumen' && <Resumen cargador={cargador} resumen={resumen} alVolver={volver} />}
+      {pantalla === 'resumen' && <Resumen cargador={cargador} resumenes={resumen} eventos={eventos} alVolver={volver} />}
     </>
   );
 }

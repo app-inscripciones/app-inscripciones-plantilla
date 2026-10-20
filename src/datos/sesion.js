@@ -45,6 +45,19 @@ export function estadoAcceso(sesion, ahora = new Date()) {
 
 export const claveToken = claveTokenSesion;
 
+// D77: los eventos del acceso (uno, salvo que el QR tenga varios).
+export function eventosDeSesion(sesion) {
+  if (!sesion) return [];
+  return Array.isArray(sesion.eventos) && sesion.eventos.length ? sesion.eventos : sesion.evento ? [sesion.evento] : [];
+}
+
+// Si todavía se puede inscribir en ese evento (no cerró sus inscripciones ni dejó de estar disponible).
+export function eventoDisponible(sesion, eventoId) {
+  const e = sesion && sesion.eventosEstado ? sesion.eventosEstado[eventoId] : null;
+  if (!e) return true;
+  return e.disponible !== false && !e.inscripcionesCerradasEn;
+}
+
 export async function leerSesion() {
   return leerAjuste('sesionActual');
 }
@@ -75,6 +88,8 @@ export async function activarAcceso(codigoEscrito, fetchFn = fetch) {
     hasta: r.hasta,
     cerradoEn: null,
     evento: r.evento,
+    // D77: un QR de carga puede tener varios eventos (el cargador elige uno antes de cada inscripción).
+    eventos: Array.isArray(r.eventos) && r.eventos.length ? r.eventos : [r.evento],
     activadaEn: new Date().toISOString(),
   };
   await guardarAjuste(claveToken(r.sesionId), r.token);
@@ -96,7 +111,17 @@ export async function actualizarEstadoSesion(fetchFn = fetch) {
     return sesion; // sin internet: sigue lo que sabía
   }
   let cambios = null;
-  if (r && r.ok) cambios = { desde: r.desde, hasta: r.hasta, cerradoEn: r.cerradoEn, inscripcionesCerradasEn: r.inscripcionesCerradasEn || null, presenciales: r.presenciales || null };
+  if (r && r.ok) {
+    cambios = { desde: r.desde, hasta: r.hasta, cerradoEn: r.cerradoEn, inscripcionesCerradasEn: r.inscripcionesCerradasEn || null, presenciales: r.presenciales || null };
+    if (Array.isArray(r.eventos) && r.eventos.length) {
+      cambios.eventosEstado = Object.fromEntries(r.eventos.map((e) => [e.id, e]));
+      // Con varios eventos, el celular pasa a «solo envío» recién cuando no queda ninguno abierto para inscribir.
+      if (eventosDeSesion(sesion).length > 1) {
+        const cerrados = r.eventos.map((e) => (e.disponible === false ? e.inscripcionesCerradasEn || r.ahora : e.inscripcionesCerradasEn));
+        cambios.inscripcionesCerradasEn = cerrados.every(Boolean) ? cerrados.sort()[cerrados.length - 1] : null;
+      }
+    }
+  }
   else if (r && r.error === 'sesion_invalida') cambios = { cerradoEn: sesion.cerradoEn || new Date().toISOString() };
   if (!cambios) return sesion;
   return db.transaction('rw', db.ajustes, async () => {

@@ -390,6 +390,12 @@ export default function Panel() {
       if (r && r.ok && recargarPracticaRef.current) recargarPracticaRef.current();
       return r;
     },
+    // D77: un QR de cargador con varios eventos.
+    crearVarios: async (p) => {
+      const r = await rpc('panel_crear_acceso_varios', p);
+      if (r && r.ok && recargarPracticaRef.current) recargarPracticaRef.current();
+      return r;
+    },
     cerrar: (id) => rpc('panel_cerrar_acceso', { p_acceso: id }),
     autopresentes: (ev) => rpc('panel_autopresentes', { p_evento: ev }),
     crearAutopresente: (p) => rpc('panel_crear_autopresente', p),

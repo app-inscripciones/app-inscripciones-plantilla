@@ -2,7 +2,7 @@
 // Junta el resultado de la última revisión diaria (la hace GitHub y la guarda en la base) con lo que el panel
 // puede comprobar en el momento: si la revisión dejó de correr, la versión de la base y el espacio.
 
-export const VERSION_BASE = 22; // número del último archivo de supabase/ (la prueba lo controla)
+export const VERSION_BASE = 23; // número del último archivo de supabase/ (la prueba lo controla)
 export const HORAS_REVISION = 36;
 
 const item = (id, estado, titulo, detalle = '', queHacer = '') => ({ id, estado, titulo, detalle, queHacer });

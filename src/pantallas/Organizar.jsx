@@ -181,6 +181,9 @@ const MENSAJES = {
   datos_invalidos: 'Faltan datos.',
   sin_conexion: 'No hay internet. Esta pantalla necesita conexión.',
   sin_permiso: 'Tu usuario no tiene permiso para esto (hace falta el rol Organizador).',
+  varios_solo_carga: 'Varios eventos en un mismo QR se pueden elegir solo para cargadores.',
+  mezcla_practica: 'No se puede mezclar un evento de práctica con eventos reales en el mismo QR.',
+  evento_archivado: 'Uno de los eventos está archivado: no se le pueden crear QR.',
 };
 
 const horario = (a) => formatoHorario(a.desde, a.hasta);
@@ -288,12 +291,19 @@ export function AccesosQR({ api, mostrarVolver = true, eventoInicial = '', formI
   if (!datos) return <main className="contenido">{error ? <div className="error-grande">{error}</div> : 'Cargando…'}</main>;
 
   const evento = datos.eventos.find((e) => e.id === eventoId);
-  const accesos = datos.accesos.filter((a) => a.eventoId === eventoId);
+  // D77: un QR de cargador puede tener varios eventos; aparece en la lista de cada uno.
+  const idsDe = (a) => (Array.isArray(a.eventoIds) && a.eventoIds.length ? a.eventoIds : [a.eventoId]);
+  const nombreDe = (id) => (datos.eventos.find((e) => e.id === id) || {}).nombre || '';
+  const accesos = datos.accesos.filter((a) => idsDe(a).includes(eventoId));
+  // Otros eventos que se pueden sumar al QR de cargador: abiertos para inscribir y del mismo tipo (práctica o real).
+  const otrosEventos = evento ? datos.eventos.filter((e) => e.id !== eventoId && !e.inscripcionesCerradas && !!e.practica === !!evento.practica) : [];
 
   if (nuevo && evento) {
+    const ids = [eventoId, ...(nuevo.otros || [])];
+    const eventoTarjeta = ids.length > 1 ? { ...evento, nombre: ids.map(nombreDe).join(' · ') } : evento;
     return (
       <main className="contenido">
-        <TarjetaQR acceso={nuevo} evento={evento} alCerrar={() => { setNuevo(null); cargar(); }} />
+        <TarjetaQR acceso={nuevo} evento={eventoTarjeta} alCerrar={() => { setNuevo(null); cargar(); }} />
       </main>
     );
   }
@@ -301,7 +311,7 @@ export function AccesosQR({ api, mostrarVolver = true, eventoInicial = '', formI
   const abrirForm = (tarea) => {
     const ahora = new Date();
     const fin = new Date(ahora.getTime() + 4 * 3600 * 1000);
-    setForm({ tarea, nombre: '', dia: diaLocal(ahora), desde: horaRedonda(ahora), hasta: horaRedonda(fin) });
+    setForm({ tarea, nombre: '', dia: diaLocal(ahora), desde: horaRedonda(ahora), hasta: horaRedonda(fin), otros: [] });
     setError('');
   };
 
@@ -310,13 +320,14 @@ export function AccesosQR({ api, mostrarVolver = true, eventoInicial = '', formI
     let hasta = new Date(`${form.dia}T${form.hasta}`);
     if (hasta <= desde) hasta = new Date(hasta.getTime() + 24 * 3600 * 1000); // termina al día siguiente
     setOcupado(true);
-    const r = await api.crear({
-      p_evento: eventoId, p_nombre: form.nombre, p_tarea: form.tarea,
-      p_desde: desde.toISOString(), p_hasta: hasta.toISOString(),
-    });
+    const otros = form.tarea === 'cargar' ? (form.otros || []) : [];
+    const comunes = { p_nombre: form.nombre, p_tarea: form.tarea, p_desde: desde.toISOString(), p_hasta: hasta.toISOString() };
+    const r = otros.length && api.crearVarios
+      ? await api.crearVarios({ p_eventos: [eventoId, ...otros], ...comunes })
+      : await api.crear({ p_evento: eventoId, ...comunes });
     setOcupado(false);
     if (!r.ok) { setError(MENSAJES[r.error] || MENSAJES.datos_invalidos); return; }
-    setNuevo({ codigo: r.codigo, colaborador: form.nombre.trim().replace(/\s+/g, ' '), tarea: form.tarea, desde: desde.toISOString(), hasta: hasta.toISOString() });
+    setNuevo({ codigo: r.codigo, colaborador: form.nombre.trim().replace(/\s+/g, ' '), tarea: form.tarea, desde: desde.toISOString(), hasta: hasta.toISOString(), otros });
     setForm(null);
   };
 
@@ -363,6 +374,22 @@ export function AccesosQR({ api, mostrarVolver = true, eventoInicial = '', formI
             <input id="nombre-colaborador" list="colaboradores" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} placeholder="Ej.: Ana Pérez" />
             <datalist id="colaboradores">{datos.colaboradores.map((n) => <option key={n} value={n} />)}</datalist>
           </label>
+          {form.tarea === 'cargar' && api.crearVarios && otrosEventos.length > 0 && (
+            <fieldset className="campo otros-eventos">
+              <legend className="etiqueta">¿Va a inscribir también para otros eventos? (opcional)</legend>
+              <p className="ayuda">Tildá los que quieras. Con un solo QR, en su celular va a elegir el evento antes de cada inscripción.</p>
+              {otrosEventos.map((e) => {
+                const tildado = (form.otros || []).includes(e.id);
+                return (
+                  <label key={e.id} className="casilla">
+                    <input type="checkbox" checked={tildado}
+                      onChange={() => setForm({ ...form, otros: tildado ? form.otros.filter((x) => x !== e.id) : [...(form.otros || []), e.id] })} />
+                    {' '}{e.nombre} <small>· {formatoDia(e.fecha)}</small>
+                  </label>
+                );
+              })}
+            </fieldset>
+          )}
           <label className="campo">
             <span className="etiqueta">Día</span>
             <input id="dia-acceso" type="date" value={form.dia} onChange={(e) => setForm({ ...form, dia: e.target.value })} />
@@ -402,6 +429,7 @@ export function AccesosQR({ api, mostrarVolver = true, eventoInicial = '', formI
                 <li key={a.id} className="item">
                   <div className="item-titulo">{a.colaborador}</div>
                   <div className="item-detalle">{TAREAS[a.tarea].corto} · {horario(a)}</div>
+                  {idsDe(a).length > 1 && <div className="item-detalle">Eventos de este QR: {idsDe(a).map(nombreDe).filter(Boolean).join(', ')}</div>}
                   <div className={`item-estado estado-${est.clase}`}>{est.texto}{a.tarea === 'cargar' ? ` · ${a.inscripciones} inscripciones recibidas` : ''}</div>
                   {abierto && aCerrar !== a.id && (
                     <button className="boton-chico" style={{ marginLeft: 0 }} onClick={() => setACerrar(a.id)}>Cerrar este QR</button>

@@ -164,3 +164,20 @@ describe('Dejar el acceso', () => {
 function respuestaDejar(cuerpo) {
   return async () => ({ ok: true, json: async () => cuerpo });
 }
+
+// D77: QR de cargador con varios eventos.
+import { eventosDeSesion, eventoDisponible } from './sesion.js';
+describe('varios eventos en un QR (D77)', () => {
+  it('sesión vieja (un evento) o nueva (varios)', () => {
+    expect(eventosDeSesion(null)).toEqual([]);
+    expect(eventosDeSesion({ evento: { id: 'a' } }).map((e) => e.id)).toEqual(['a']);
+    expect(eventosDeSesion({ evento: { id: 'a' }, eventos: [{ id: 'a' }, { id: 'b' }] }).map((e) => e.id)).toEqual(['a', 'b']);
+  });
+  it('un evento con las inscripciones cerradas no se puede elegir', () => {
+    const s = { eventosEstado: { a: { inscripcionesCerradasEn: null }, b: { inscripcionesCerradasEn: '2026-10-20T10:00:00Z' }, c: { disponible: false } } };
+    expect(eventoDisponible(s, 'a')).toBe(true);
+    expect(eventoDisponible(s, 'b')).toBe(false);
+    expect(eventoDisponible(s, 'c')).toBe(false);
+    expect(eventoDisponible({}, 'x')).toBe(true);
+  });
+});
