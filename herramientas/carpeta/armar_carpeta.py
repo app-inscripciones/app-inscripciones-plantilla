@@ -38,6 +38,15 @@ figure{margin:2mm 0 4mm;page-break-inside:avoid} figure img{max-width:100%;max-h
 """
 
 def md_a_html(md_texto, titulo):
+    # Una imagen entre dos puntos de una lista numerada va adentro del punto anterior (si no, la numeración vuelve a 1).
+    lineas = md_texto.split('\n')
+    for k, l in enumerate(lineas):
+        if l.startswith('!['):
+            sig = next((x for x in lineas[k + 1:] if x.strip() and not x.strip().startswith('![')), '')
+            ant = next((x for x in reversed(lineas[:k]) if x.strip() and not x.strip().startswith('![')), '')
+            if re.match(r'^(\d+\.|\s+-) ', sig) and re.match(r'^(\d+\.|\s+\S)', ant):
+                lineas[k] = '    ' + l.strip()
+    md_texto = '\n'.join(lineas)
     cuerpo = markdown.markdown(md_texto, extensions=['tables'])
     # Capturas marcadas (textos/img): van dentro del PDF, como imagen embebida.
     def _img(m):

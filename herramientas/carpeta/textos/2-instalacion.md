@@ -44,7 +44,6 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 ![Verificación en dos pasos ya activada: (1) Códigos de verificación alternativos; abajo, «Desactivar…» indica que ya está activa](img/google-2pasos-activa.png)
 
-
 > Si Google pide «escaneá este QR con tu celular»: usar los **datos móviles** del celular (no el Wi-Fi) y no reintentar muchas veces seguidas; después de varios intentos, Google bloquea el acceso por unas horas.
 
 **Contraseña de aplicación** (para que el sistema pueda mandar los códigos de ingreso por correo):
@@ -54,7 +53,6 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 3. Aparece una clave de **16 letras**. 📝 **Anotalo ya en la hoja, casilla B6.** **Google la muestra una sola vez**: anotala antes de cerrar ese cartel. Se usa en el paso 6.
 
 ![Contraseñas de aplicación: (1) escribir «Supabase», (2) Crear](img/google-contrasena-app.png)
-
 
 > Si la página dice que no está disponible, la verificación en dos pasos todavía no quedó activa: esperar unos minutos y volver a probar.
 
@@ -76,7 +74,6 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 ![Control «¿sos un robot?»: deslizar la flecha hacia la derecha](img/github-robot.png)
 
-
 1. Entrar a **github.com/signup** (página para crear una cuenta).
 2. Completar, uno por uno, lo que pide la pantalla:
    - **Email** (correo): el Gmail de la institución.
@@ -87,13 +84,16 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
    - Tocar **Create account** (crear cuenta).
 
 ![Registro en GitHub: (1) Email, (2) Password, (3) Username, (4) país, (5) Create account](img/github-registro.png)
+
 3. Aparece el control **«¿sos un robot?»** (ver arriba). Resolverlo.
 4. GitHub manda un **código de 8 números al Gmail**: abrir el Gmail, copiarlo y escribirlo en GitHub.
 5. Si pregunta por un plan, elegir **Free** (gratis). Si hace preguntas sobre para qué lo vas a usar, se pueden saltear con **Skip** (saltear) o **Continue** (continuar).
 6. **Verificación en dos pasos** (obligatoria): tocar la **foto de perfil** (el círculo de arriba a la derecha) → **Settings** (configuración) → en el menú de la izquierda, **Password and authentication** (contraseña y autenticación) → **bajar con la ruedita del mouse** hasta el título **Two-factor authentication** (verificación en dos pasos) → botón verde **Enable two-factor authentication** (activar).
 
 ![(1) Password and authentication, (2) bajar hasta Two-factor authentication](img/github-2pasos.png)
+
  A veces GitHub ya la pide sola al registrarte: es lo mismo.
+
 7. Elegir **Authenticator app** (aplicación de autenticación). En el celular, instalar **Google Authenticator** (desde Play Store o App Store), abrirla, tocar **+** → **Escanear un código QR** y apuntar a la pantalla de la computadora. En el celular aparece un número de **6 dígitos** que cambia cada 30 segundos: escribirlo en GitHub y tocar **Continue**. 📝 **Anotalo ya en la hoja, casilla C3.** (en qué celular quedó Google Authenticator)
 8. GitHub muestra los **recovery codes** (códigos de recuperación, sirven si perdés el celular). Tocar **Download** (descargar) e imprimirlos, o copiarlos a mano. 📝 **Anotalo ya en la hoja, casilla C4.** (dónde quedaron guardados) Después tocar **I have saved my recovery codes** (ya guardé mis códigos) y **Done** (listo).
 
@@ -118,13 +118,11 @@ GitHub guarda el programa de la aplicación y hace las tareas automáticas (inst
 
 ![Formulario de la copia: (1) Include all branches en «Off», (2) nombre app-inscripciones, (3) Description vacío, (4) cambiar Public por Private, (5) Create repository](img/github-copia-formulario.png)
 
-
 > 📝 **Anotá en la hoja:** C5 (la dirección del repositorio, por ejemplo github.com/inscripciones-laspalmas/app-inscripciones).
 
 > ✅ **Cómo sé que salió bien:** arriba a la izquierda dice **inscripciones-laspalmas / app-inscripciones** con la etiqueta **Private**.
 
 ![Copia lista: el nombre app-inscripciones con la etiqueta «Private»](img/github-copia-lista.png)
-
 
 ## Paso 4. La cuenta de Supabase y su llave
 
@@ -133,15 +131,16 @@ Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No
 1. Entrar a **supabase.com/dashboard/sign-in** → tocar **Continue with GitHub** (entrar con la cuenta de GitHub que creaste en el paso 2; **no** completar Email ni Password, aunque Chrome los llene solo) → aparece **Authorize Supabase** (autorizar a Supabase a usar tu cuenta de GitHub): no hay que elegir nada; esperar unos segundos a que el botón verde **Authorize supabase** se ponga oscuro y tocarlo.
 
 ![(1) Authorize supabase](img/supabase-autorizar.png)
+
  Después hay que crear una **organization** (organización: el espacio de la institución en Supabase). A veces Supabase muestra el formulario solo; si no, abrir **supabase.com/dashboard/new**. **Sin organización no se puede crear la llave** (en el punto 2, la lista de organizaciones aparece vacía: «No results found»). En el formulario:
    - **Name** (nombre): viene escrito algo como «…'s Org»: **borrarlo** y escribir el nombre de la institución. 📝 **Anotalo ya en la hoja, casilla D1.**
    - **Type** (tipo): **Non-profit** (sin fines de lucro) o, si no está, **Personal**.
    - **Plan**: **Free - $0/month** (gratis).
    - Tocar **Create organization** (crear organización).
 
-![Organización: (1) nombre de la institución, (2) Type, (3) Plan Free, (4) Create organization](img/supabase-organizacion.png)
-
    - Si después ofrece **Create a new project** (crear un proyecto nuevo): **no** crear nada. Los proyectos (las bases de datos) los crea solo el botón «Instalar». Seguir con el punto 2. Si en algún momento pide tarjeta, **no cargarla**, y nunca tocar **Upgrade** (pasar a pago).
+
+![Organización: (1) nombre de la institución, (2) Type, (3) Plan Free, (4) Create organization](img/supabase-organizacion.png)
 
 ![Entrar a Supabase: (1) Continue with GitHub](img/supabase-entrar.png)
 
@@ -159,7 +158,6 @@ Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No
 ![(3) Preset · Full access, (4) Review access](img/supabase-llave-2.png)
 
 ![Paso 2 de 2: no tocar la lista; (5) Create token](img/supabase-llave-3.png)
-
 
 3. Copiar la llave (empieza con `sbp_`). **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. ⛔ **Esta no se anota** (si se pierde, se crea otra).
 
@@ -183,16 +181,16 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 4. **Verificación en dos pasos:** no hace falta. Como se entra con Google, la protege la verificación en dos pasos del Gmail (paso 1).
 5. Crear la **llave**. Camino corto: abrir **dash.cloudflare.com/profile/api-tokens**. (Camino largo: el **ícono de la persona** arriba a la derecha → **Profile** (perfil) → en el menú de la izquierda, **API Tokens** (llaves).) Tocar el botón azul **Create Token** (crear llave), arriba a la derecha. Se abre una lista de plantillas (API token templates): **no elegir ninguna**; bajar con la ruedita hasta el final, donde dice **Create Custom Token** (llave a medida), y tocar **Get started** (empezar). No hacer caso al cartel azul que recomienda «Account API Tokens»: se usa este botón **Create Token**, el azul de arriba a la derecha.
 
-![(1) ícono de la persona, (2) Profile](img/cloudflare-menu.png)
-
-![(1) API Tokens, (2) Create Token](img/cloudflare-llaves.png)
-
    - **Token name** (nombre): «Instalador».
    - **Permissions** (permisos), en la primera fila elegir: **Account** → **Cloudflare Pages** → **Edit** (editar). Tocar **+ Add more** (agregar otro) y en la segunda fila: **Account** → **Account Settings** → **Read** (leer).
    - **Account Resources** (cuentas): **Include** (incluir) → la cuenta de la institución (aparece como «…@gmail.com's Account»; si dice «All accounts», también sirve).
    - **Client IP address filtering** (filtrar por dirección): **dejarlo vacío**.
    - Si aparece **TTL** (fecha de vencimiento), dejarla vacía. Si obliga a poner una, elegir la más lejana y 📝 **anotarla ya en la hoja, casilla E2**.
    - Abajo: **Continue to summary** (ver resumen) → **Create Token** (crear llave).
+
+![(1) ícono de la persona, (2) Profile](img/cloudflare-menu.png)
+
+![(1) API Tokens, (2) Create Token](img/cloudflare-llaves.png)
 
 ![Plantillas: no elegir ninguna; (1) Get started de Create Custom Token](img/cloudflare-plantillas.png)
 
@@ -232,7 +230,6 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ![Clave nueva: (1) Name: el nombre de la tabla, (2) Secret: pegar el valor, (3) Add secret](img/github-secreto-nuevo.png)
 
-
 | Nombre | Qué se pega |
 |---|---|
 | `SUPABASE_ACCESS_TOKEN` | La llave de Supabase (paso 4) |
@@ -248,12 +245,12 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ![Las cuatro claves cargadas (el orden no importa)](img/github-secretos-listos.png)
 
-
 ## Paso 7. El botón «Instalar»
 
 **Cómo llegar a la página de «Instalar»** (hay dos caminos; usá el que te resulte más fácil):
 
 **Camino A, escribiendo la dirección:**
+
 1. En Chrome, hacé clic en la barra de direcciones de arriba (donde se escriben las páginas), borrá lo que haya y escribí, **cambiando USUARIO por el usuario de GitHub de la institución** (casilla C1):
    **github.com/USUARIO/app-inscripciones/actions/workflows/instalar.yml**
    Por ejemplo: github.com/inscripciones-laspalmas/app-inscripciones/actions/workflows/instalar.yml. Apretá **Enter**.
@@ -261,13 +258,16 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 3. Si dice **«404 – Page not found»** (página no encontrada): la dirección quedó mal escrita (revisá el usuario, C1) o no entraste a GitHub. Probá el camino B.
 
 **Camino B, tocando:**
+
 1. Entrar a **github.com** (si pide entrar, ver «🔑 Si saliste de GitHub» en el paso 6).
 2. A la izquierda aparece la lista **Top repositories** (tus repositorios): tocar **app-inscripciones**. (Si no la ves, tocá el ícono ☰ de arriba a la izquierda y buscala ahí.)
 3. Arriba, en la fila de pestañas (Code, Issues, Pull requests, **Actions**…), tocar **Actions** (acciones: las tareas automáticas).
 
 ![Página del repositorio: (A) pestaña Actions, para Instalar, Actualizar y las demás tareas; (S) pestaña Settings, para las claves](img/github-repo-pestanas.png)
 
-4. En la lista de la izquierda, tocar **Instalar**.
+4. En la lista de la izquierda, tocar **Instalar**. (A la derecha puede haber filas en verde ✅ de otras tareas, como «Respaldo diario»: es normal, corren solas.)
+
+![Pestaña Actions: tocar Instalar en la lista de la izquierda](img/github-actions-lista.png)
 
 **Llegaste bien si ves** arriba el título **Instalar**, a la derecha el botón verde **Run workflow** y abajo «This workflow has no runs yet» (todavía no se usó: es normal). Si en lugar de eso aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo y volver a tocar **Instalar** en la lista de la izquierda.
 
@@ -276,19 +276,24 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 **Ahora sí, instalar:**
 
 1. Tocar el botón verde **Run workflow** (ejecutar), arriba a la derecha. Se abre un panel a la derecha de la pantalla.
-2. Completar los cuatro casilleros del panel (**Use workflow from: main** se deja como está):
-   - **Nombre de la institución:** como se va a ver en la aplicación (ej.: «Club Atlético Las Palmas»).
-   - **Gmail de la institución:** el del paso 1.
-   - **Correo del primer Responsable general:** con el que va a entrar al panel esa persona (puede ser el personal). 📝 **Anotalo ya en la hoja, casilla A2.**
-   - **Nombre y apellido del Responsable general.**
+2. Completar los cuatro casilleros del panel, **copiando de la hoja de accesos** (**Use workflow from: main** se deja como está):
 
-![Panel de Instalar: (1) nombre de la institución, (2) Gmail de la institución, (3) correo del Responsable general, (4) su nombre y apellido, (5) Run workflow, abajo de todo](img/github-instalar-formulario.png)
+| Casillero del panel | Qué poner | De dónde sale |
+|---|---|---|
+| **Nombre de la institución** | El nombre como se va a ver en la aplicación (ej.: «Club Atlético Las Palmas») | Hoja de accesos, arriba: **Institución** |
+| **Gmail de la institución** | El Gmail creado en el paso 1 | Casilla **B1** |
+| **Correo del primer Responsable general** | El correo con el que esa persona va a entrar al panel (puede ser su correo personal o el mismo Gmail de la institución); tiene que poder recibir correos | Casilla **A2** (si está vacía, 📝 **anotalo ya**) |
+| **Nombre y apellido del Responsable general** | Su nombre y apellido | Casilla **A1** |
 
-3. Tocar el botón verde **Run workflow** de **abajo de todo** del panel. A los pocos segundos aparece una fila nueva con un círculo amarillo 🟡 (está trabajando; si no aparece, recargar la página con F5). Tarda entre **5 y 15 minutos**: no hace falta quedarse mirando.
+![Panel de Instalar: (1) Institución, (2) B1, (3) A2, (4) A1, (5) Run workflow, abajo de todo](img/github-instalar-panel-2.png)
+
+3. Tocar el botón verde **Run workflow** de **abajo de todo** del panel. A los pocos segundos aparece una fila nueva con un círculo amarillo 🟡 (está trabajando; si no aparece, recargar la página con F5). Tarda entre **5 y 15 minutos**: no hace falta quedarse mirando. Tocando esa fila se ve el detalle: **Status** (estado) dice **Queued** (en espera) y después **In progress** (trabajando). **No** tocar **Cancel workflow** (cancelar).
+
+![Instalación en marcha: (1) Status «Queued» (en espera, después «In progress»). (✗) Cancel workflow no se toca](img/github-instalar-corriendo.png)
+
 4. Cuando termina en verde ✅, tocar la ejecución: arriba aparece el **resumen** con la dirección de la aplicación y la del panel. 📝 **Anotá ya en la hoja: G1 (fecha de hoy), G2 (dirección de la aplicación) y G3 (dirección del panel).**
 
 ![Resumen «Instalación terminada» con la dirección de la aplicación y del panel](img/github-instalacion-terminada.png)
-
 
 **Qué hace solo el instalador:** crea las dos bases de datos (real y de pruebas), carga todas las tablas y reglas de seguridad, da de alta al Responsable general, configura los correos con el código de ingreso y publica la aplicación. Desde ese momento, todos los días se hace un **respaldo cifrado** y el sistema **se revisa solo** y avisa por correo si algo necesita atención.
 

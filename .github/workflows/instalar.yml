@@ -13,16 +13,16 @@ on:
   workflow_dispatch:
     inputs:
       nombre_institucion:
-        description: 'Nombre de la institución (ej.: Club Atlético Las Palmas)'
+        description: 'Nombre de la institución, como se va a ver en la app (hoja de accesos: arriba, «Institución»)'
         required: true
       correo_proyecto:
-        description: 'Gmail de la institución (desde ahí salen los códigos de ingreso)'
+        description: 'Gmail de la institución, el del paso 1 (hoja de accesos: casilla B1)'
         required: true
       correo_responsable:
-        description: 'Correo del primer Responsable general'
+        description: 'Correo con el que va a entrar al panel el Responsable general (hoja de accesos: casilla A2)'
         required: true
       nombre_responsable:
-        description: 'Nombre y apellido del Responsable general'
+        description: 'Nombre y apellido del Responsable general (hoja de accesos: casilla A1)'
         required: true
 
 permissions:
