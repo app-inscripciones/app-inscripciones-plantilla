@@ -168,6 +168,7 @@ function PasoCategorias({ b, set, recordatorios }) {
             </div>
           ))}
           <button className="boton-chico" style={{ marginLeft: 0 }} onClick={agregar}>+ Agregar categoría</button>
+          <p className="ayuda">Cambiá los nombres y las edades como quieras; las que no uses, sacalas con «Quitar». Las edades sirven para que la app avise si la edad cargada no corresponde a la categoría elegida. Los precios de cada categoría se cargan más adelante, en «Cobro».</p>
         </div>
       )}
       {b.usaCategorias && <Avisos lista={recordatorios} titulo="💡 Para revisar" />}
