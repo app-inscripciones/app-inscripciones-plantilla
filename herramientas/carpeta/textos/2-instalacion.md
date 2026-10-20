@@ -150,11 +150,13 @@ Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No
    - **Name** (nombre): «Instalador». **Expires in** (vence en): **Never** (nunca).
    - **Resource access** (a qué tiene acceso): **Organization** (organización) → elegir la organización.
    - **Permissions** (permisos): tocar «Preset · No access» → **Full access** (acceso completo). Aparece un aviso amarillo: es normal.
-   - **Review access** (revisar) → confirmar.
+   - **Review access** (revisar). Aparece el «Step 2 of 2» (paso 2 de 2): una lista larga con etiquetas «READ-WRITE». **No hay que tocar nada**: tocar **Create token** (crear la llave), abajo a la derecha.
 
 ![(1) Instalador y Never, (2) Organization, (4) Review access](img/supabase-llave-1.png)
 
 ![(3) Preset · Full access, (4) Review access](img/supabase-llave-2.png)
+
+![Paso 2 de 2: no tocar la lista; (5) Create token](img/supabase-llave-3.png)
 
 
 3. Copiar la llave (empieza con `sbp_`). **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. **No se anota en ningún lado.**
