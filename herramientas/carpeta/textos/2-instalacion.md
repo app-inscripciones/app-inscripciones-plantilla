@@ -311,6 +311,9 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 > ✅ **Cómo sé que salió bien:** entrás al panel y arriba dice «Hola, *tu nombre* · Responsable general».
 
+![Primer ingreso: (1) «Hola, … · Responsable general», (2) la lista Primeros pasos, en 0 de 6](img/panel-primer-ingreso.png)
+
+
 ---
 
 ## Si algo sale mal durante la instalación
