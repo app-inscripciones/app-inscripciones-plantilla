@@ -20,11 +20,15 @@ describe('tareas automáticas de GitHub', () => {
 import { existsSync } from 'node:fs';
 describe('cáscaras de las tareas (D76)', () => {
   const caso = ['plantilla.yml', 'base-real-caso-testigo.yml'];   // solo existen en el caso testigo
+  const esOrigen = existsSync(new URL('plantilla.yml', dir));
   for (const f of readdirSync(dir).filter((x) => x.endsWith('.yml') && !caso.includes(x))) {
     it(`${f} llama a un programa que existe`, () => {
       const w = parse(readFileSync(new URL(f, dir), 'utf8'));
       const pasos = Object.values(w.jobs).flatMap((j) => j.steps || []);
       const llamada = pasos.map((p) => p.run || '').find((r) => r.includes('herramientas/tareas/correr.sh'));
+      // En el repositorio de origen (el único que tiene plantilla.yml) todas tienen que ser cáscaras. En las copias
+      // instaladas antes de D76 las tareas viejas siguen sirviendo: no se exige (GitHub no deja que «Actualizar» las cambie).
+      if (!esOrigen) return;
       expect(llamada).toBeTruthy();
       const tarea = llamada.trim().split(/\s+/).pop();
       expect(existsSync(new URL(`../tareas/${tarea}.sh`, import.meta.url))).toBe(true);
