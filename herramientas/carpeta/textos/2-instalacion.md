@@ -240,7 +240,7 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ## Paso 7. El botón «Instalar»
 
-1. En el repositorio → pestaña **Actions** (acciones: las tareas automáticas), o la dirección del repositorio (casilla C5) con **/actions** al final. Si aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo. Si no aparece ningún cartel, está bien: seguí.
+1. Abrir **https://github.com/USUARIO/app-inscripciones/actions/workflows/instalar.yml**, cambiando USUARIO por el de la casilla C1 (si saliste de GitHub, ver «Si saliste de GitHub» en el paso 6). Camino largo: el repositorio → pestaña **Actions** (acciones: las tareas automáticas). Si aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo. Si no aparece ningún cartel, está bien: seguí.
 2. En la lista de la izquierda, tocar **Instalar**. Arriba a la derecha aparece el botón verde **Run workflow** (ejecutar): tocarlo y se abre un panel a la derecha de la pantalla. (Abajo dice «This workflow has no runs yet»: todavía no se usó, es normal.)
 
 ![(1) Instalar, (2) botón Run workflow](img/github-instalar-boton.png)
