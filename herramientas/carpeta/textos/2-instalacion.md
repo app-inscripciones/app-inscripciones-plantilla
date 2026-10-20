@@ -238,6 +238,9 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 > ✅ **Cómo sé que salió bien:** en **Secrets and variables → Actions**, debajo de **Repository secrets**, se ven los **cuatro nombres** de la tabla, escritos igual. (El valor no se ve nunca: es normal.)
 
+![Las cuatro claves cargadas (el orden no importa)](img/github-secretos-listos.png)
+
+
 ## Paso 7. El botón «Instalar»
 
 1. Abrir **https://github.com/USUARIO/app-inscripciones/actions/workflows/instalar.yml**, cambiando USUARIO por el de la casilla C1 (si saliste de GitHub, ver «Si saliste de GitHub» en el paso 6). Camino largo: el repositorio → pestaña **Actions** (acciones: las tareas automáticas). Si aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo. Si no aparece ningún cartel, está bien: seguí.
