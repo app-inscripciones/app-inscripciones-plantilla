@@ -106,10 +106,21 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 **Contraseña de aplicación** (para que el sistema pueda mandar los códigos de ingreso por correo):
 
 1. En la **misma ventana de Chrome** donde está abierta la cuenta de Google de la institución, hacé clic en la **barra de direcciones** (la de arriba de todo, donde se escriben las páginas), borrá lo que haya, escribí **myaccount.google.com/apppasswords** y apretá **Enter**. Si pide la contraseña, escribila (B2). Se abre la página **«Contraseñas de aplicaciones»**. (No hay botón para llegar tocando: hay que escribir la dirección.)
-2. Nombre: «Supabase» → **Crear**.
-3. Aparece una clave de **16 letras**. 📝 **Anotalo ya en la hoja, casilla B6.** **Google la muestra una sola vez**: anotala antes de cerrar ese cartel. Se usa en el paso 6.
+2. **Google puede pedir «Demuestra que eres tú»** (demostrá que sos vos), porque es una página delicada:
+   - Si pide **confirmar el número de teléfono**: primero tocá la **banderita** de la izquierda y elegí **Argentina** (a veces viene la de Estados Unidos). Escribí el celular (B3), sin 0 y sin 15, y tocá **Enviar**.
+   - Llega un SMS con un código: escribilo (después de la «G-») y tocá **Siguiente**.
 
-![Contraseñas de aplicación: (1) escribir «Supabase», (2) Crear](img/google-contrasena-app.png)
+![Demostrá que sos vos: (1) la banderita: elegir Argentina, (2) el celular, (3) Enviar](img/gapp-1-demostrar.png)
+
+![(1) el código del SMS, (2) Siguiente](img/gapp-2-codigo.png)
+
+3. En **«Contraseñas de aplicación»**, donde dice **Nombre de la aplicación**, escribí **Supabase** y tocá **Crear**.
+
+![(1) Supabase, (2) Crear](img/gapp-3-crear.png)
+
+4. Aparece **«Contraseña de aplicación generada»**: una clave de **16 letras** en cuatro grupos (por ejemplo «abcd efgh ijkl mnop»). 📝 **Anotala ya en la hoja, casilla B6, antes de tocar Hecho: Google la muestra una sola vez.** (El cartel dice «no la escribas»: en este sistema sí hace falta, porque se pega en GitHub en el paso 6; por eso va solo a la hoja de papel.) Después tocá **Hecho**.
+
+![(1) La clave de 16 letras (acá tapada): anotarla en B6; (2) Hecho](img/gapp-4-generada.png)
 
 > Si la página dice que no está disponible, la verificación en dos pasos todavía no quedó activa: esperar unos minutos y volver a probar.
 
