@@ -131,7 +131,7 @@ Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No
 1. Entrar a **supabase.com/dashboard/sign-in** → tocar **Continue with GitHub** (entrar con la cuenta de GitHub que creaste en el paso 2; **no** completar Email ni Password, aunque Chrome los llene solo) → aparece **Authorize Supabase** (autorizar a Supabase a usar tu cuenta de GitHub): no hay que elegir nada; esperar unos segundos a que el botón verde **Authorize supabase** se ponga oscuro y tocarlo.
 
 ![(1) Authorize supabase](img/supabase-autorizar.png)
- La primera vez, Supabase pide crear una **organization** (organización: el espacio de la institución en Supabase). Si aparece ese formulario:
+ Después hay que crear una **organization** (organización: el espacio de la institución en Supabase). A veces Supabase muestra el formulario solo; si no, abrir **supabase.com/dashboard/new**. **Sin organización no se puede crear la llave** (en el punto 2, la lista de organizaciones aparece vacía: «No results found»). En el formulario:
    - **Name** (nombre): el de la institución.
    - **Type** (tipo): **Non-profit** (sin fines de lucro) o, si no está, **Personal**.
    - **Plan**: **Free - $0/month** (gratis).
