@@ -132,10 +132,13 @@ Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No
 
 ![(1) Authorize supabase](img/supabase-autorizar.png)
  Después hay que crear una **organization** (organización: el espacio de la institución en Supabase). A veces Supabase muestra el formulario solo; si no, abrir **supabase.com/dashboard/new**. **Sin organización no se puede crear la llave** (en el punto 2, la lista de organizaciones aparece vacía: «No results found»). En el formulario:
-   - **Name** (nombre): el de la institución.
+   - **Name** (nombre): viene escrito algo como «…'s Org»: **borrarlo** y escribir el nombre de la institución.
    - **Type** (tipo): **Non-profit** (sin fines de lucro) o, si no está, **Personal**.
    - **Plan**: **Free - $0/month** (gratis).
    - Tocar **Create organization** (crear organización).
+
+![Organización: (1) nombre de la institución, (2) Type, (3) Plan Free, (4) Create organization](img/supabase-organizacion.png)
+
    - Si después ofrece **Create a new project** (crear un proyecto nuevo): **no** crear nada. Los proyectos (las bases de datos) los crea solo el botón «Instalar». Seguir con el punto 2. Si en algún momento pide tarjeta, **no cargarla**, y nunca tocar **Upgrade** (pasar a pago).
 
 ![Entrar a Supabase: (1) Continue with GitHub](img/supabase-entrar.png)
