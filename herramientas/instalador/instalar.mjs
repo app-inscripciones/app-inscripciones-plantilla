@@ -264,7 +264,7 @@ export async function instalar(env, { fetchFn = fetch, log = console.log, pausa 
     _ayuda: 'Lo escribe el instalador. Datos públicos (sin contraseñas).',
     institucion: env.NOMBRE_INSTITUCION.trim(),
     correo: correo(env.CORREO_PROYECTO),
-    plantilla: 'https://github.com/inscripciones-iglesia/app-inscripciones-plantilla.git',
+    plantilla: 'https://github.com/app-inscripciones/app-inscripciones-plantilla.git',
     nombreCorto: corto,
     instaladoEn: new Date().toISOString(),
     app: { url: urlApp, proyectoCloudflare: nombrePages, cuentaCloudflare: cuenta, ...(fija ? { publicacion: 'cloudflare-desde-github' } : {}) },

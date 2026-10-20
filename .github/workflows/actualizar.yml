@@ -33,7 +33,7 @@ jobs:
 
       - name: Traer la versión nueva de la plantilla
         run: |
-          PLANTILLA=$(jq -r '.plantilla // "https://github.com/inscripciones-iglesia/app-inscripciones-plantilla.git"' config/instalacion.json)
+          PLANTILLA=$(jq -r '.plantilla // "https://github.com/app-inscripciones/app-inscripciones-plantilla.git"' config/instalacion.json)
           git clone --depth 1 "$PLANTILLA" /tmp/plantilla
           rsync -a --delete --exclude '.git/' --exclude '.github/' --exclude 'config/' --exclude 'node_modules/' /tmp/plantilla/ ./
           rsync -a --ignore-existing /tmp/plantilla/config/ config/
