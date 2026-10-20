@@ -73,17 +73,33 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 8. **Correo de recuperación** (si no lo pidió en el punto 7): agregar el correo personal del Responsable general (**myaccount.google.com → Seguridad → Correo de recuperación**). Evita quedar bloqueado. 📝 **Anotalo ya en la hoja, casilla B4.**
 
-**Verificación en dos pasos (obligatoria):**
+**Verificación en dos pasos (obligatoria):** protege la cuenta: aunque alguien sepa la contraseña, no puede entrar sin el celular.
 
-1. Entrar a **myaccount.google.com/security** y tocar **Verificación en dos pasos**.
-2. **Mirá qué aparece:**
-   - Si hay un botón **«Comenzar»** o **«Activar»**: tocarlo, cargar el celular y escribir el código que llega por SMS.
-   - Si aparece una lista (Llaves de acceso, Notificación de Google, Authenticator, **Número de teléfono** con un ✅ verde, **Códigos de verificación alternativos**) y abajo el botón **«Desactivar la verificación en dos pasos»**: **ya está activada**. No hace falta ningún SMS; seguí con el punto 3. (Pasa cuando el celular ya estaba cargado en la cuenta.)
-3. Tocar **«Códigos de verificación alternativos»** (la última fila) → **Obtener códigos**. Aparecen **10 códigos de 8 números**. 📝 **Anotalo ya en la hoja, casilla B5.** Cada uno sirve una sola vez para entrar si no tenés el celular.
+1. Entrá a **myaccount.google.com/security** (o, en la página «Google Cuenta», tocá **Seguridad e inicio de sesión** a la izquierda). Bajá hasta **«Cómo inicias sesión en Google»** y tocá **Verificación en dos pasos**.
+
+![(1) Verificación en dos pasos (dice «desactivada»)](img/gseg-1-seguridad.png)
+
+2. **Primero hay que agregar el celular.** Tocá **Número de teléfono**. (Si tocás antes el botón azul «Activar verificación en dos pasos», aparece el cartel «Añade segundos pasos a tu cuenta»: tocá **Atrás** y hacé este punto.)
+
+![(1) Número de teléfono, primero. (✗) El botón azul todavía no](img/gseg-2-dos-pasos.png)
+
+![Si aparece este cartel, tocá Atrás](img/gseg-3-cartel.png)
+
+3. Tocá **Añadir número de teléfono**. Escribí el celular del Responsable general **después del +54**: con el **9**, la característica sin 0 y el número sin 15 (por ejemplo, **9 362 4555666**). Dejá marcado **Recibir códigos por mensaje de texto** y tocá **Siguiente**. Llega un SMS con un código: escribilo y tocá **Verificar**. 📝 **Anotá el celular en la hoja, casilla B3.**
+
+![(1) El celular después del +54, (2) por mensaje de texto, (3) Siguiente](img/gseg-4-telefono.png)
+
+4. Aparece **«Ahora tu cuenta está protegida por la verificación en dos pasos»**: se activó sola. Tocá **Listo**.
+5. En la misma página, abajo, tocá **Códigos de verificación alternativos** → **Obtener códigos**. Aparecen **10 códigos de 8 números**. 📝 **Anotalos ya en la hoja, casilla B5.** Cada uno sirve una sola vez para entrar si no tenés el celular.
+
+![(1) Listo; (2) después, Códigos de verificación alternativos](img/gseg-5-protegida.png)
+
+   **Si al entrar ya aparece una lista** con **Número de teléfono** con un ✅ verde y abajo el botón **«Desactivar la verificación en dos pasos»**: **ya está activada** (pasa cuando el celular ya estaba cargado). Seguí directo con el punto 5.
+
+![Ya activada: (1) Códigos de verificación alternativos; «Desactivar…» abajo indica que ya está activa](img/google-2pasos-activa.png)
 
 > **Si el SMS no llega:** revisá el número: en Argentina va **+54 9** y la característica sin 0 y sin 15 (por ejemplo, +54 9 362 4555666). Elegí **«Llamada de voz»** para que Google te dicte el código. Esperá 2 o 3 minutos antes de pedir otro. Si sigue sin llegar, usá otro número o probá unas horas más tarde (Google limita los códigos a un número que ya está en varias cuentas).
 
-![Verificación en dos pasos ya activada: (1) Códigos de verificación alternativos; abajo, «Desactivar…» indica que ya está activa](img/google-2pasos-activa.png)
 
 > Si Google pide «escaneá este QR con tu celular»: usar los **datos móviles** del celular (no el Wi-Fi) y no reintentar muchas veces seguidas; después de varios intentos, Google bloquea el acceso por unas horas.
 
