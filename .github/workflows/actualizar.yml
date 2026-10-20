@@ -80,7 +80,7 @@ jobs:
             if [ "${{ job.status }}" = "success" ]; then
               echo "## ✅ Actualización terminada"
               echo ""
-              echo "La app y las bases quedaron en la versión $(node -p 'require(\"./package.json\").version'). No se perdió ningún dato. En los celulares, la versión nueva aparece sola la próxima vez que abran la app con internet."
+              echo "La app y las bases quedaron en la versión $(node -p 'require("./package.json").version'). No se perdió ningún dato. En los celulares, la versión nueva aparece sola la próxima vez que abran la app con internet."
               if [ "${TAREAS_DISTINTAS:-}" = "1" ]; then
                 echo ""
                 echo "ℹ️ Algunas tareas automáticas de GitHub (la carpeta .github) tienen mejoras que GitHub no deja instalar solas. **No hace falta hacer nada**: la app funciona igual."
