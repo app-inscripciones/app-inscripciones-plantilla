@@ -113,9 +113,9 @@ def hoja_html():
             tilde('D2', 'Llave «Instalador» cargada en GitHub como SUPABASE_ACCESS_TOKEN (la llave no se anota)'),
         ]),
         bloque('E', 'Cloudflare (paso 5)', [
-            fila('E1', 'Contraseña'), fila('E2', 'Dónde están los backup codes'),
-            fila('E3', 'Vencimiento de la llave «Instalador»', 8, 'Si no tiene, escribí «no vence»'),
-            tilde('E4', 'Llave cargada en GitHub como CLOUDFLARE_API_TOKEN (la llave no se anota)'),
+            tilde('E1', 'Se entra con «Continue with Google» y el Gmail de la institución (B1): no tiene contraseña propia'),
+            fila('E2', 'Vencimiento de la llave «Instalador»', 8, 'Si no tiene, escribí «no vence»'),
+            tilde('E3', 'Llave cargada en GitHub como CLOUDFLARE_API_TOKEN (la llave no se anota)'),
         ]),
         '<div class="F">' + bloque('F', 'Clave de respaldo (paso 6) · LA MÁS IMPORTANTE', [
             fila('F1', 'CLAVE_RESPALDO', 13, 'Inventada, mínimo 16 caracteres. Sin ella NO se pueden abrir los respaldos. Escribila con letra clara'),

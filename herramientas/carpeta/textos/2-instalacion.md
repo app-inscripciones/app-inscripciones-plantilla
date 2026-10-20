@@ -171,25 +171,25 @@ Supabase es donde van a estar las bases de datos (la real y la de pruebas). **No
 
 Cloudflare publica la aplicación en internet (una dirección como `inscripciones-laspalmas.pages.dev`).
 
-1. Entrar a **dash.cloudflare.com/sign-up** (crear cuenta) → **Email** (correo): el Gmail de la institución; **Password** (contraseña): una **contraseña nueva** 📝 **Anotalo ya en la hoja, casilla E1.** → **Sign up** (registrarse). **No** usar «Continue with Google / Apple / GitHub»: completar los casilleros. Abajo, en **Let us know you are human** (demostrá que sos una persona), el cuadro se verifica solo («Verificando…»); si aparece una casilla, tildarla.
+1. Entrar a **dash.cloudflare.com/sign-up** (crear cuenta) y tocar **Continue with Google** (entrar con Google). Elegir **el Gmail de la institución** (el del paso 1) y aceptar. Así Cloudflare **no tiene contraseña propia** ni hace falta verificar el correo: se entra siempre con ese Gmail. 📝 **Tildá ya en la hoja la casilla E1.** Si aparece **Let us know you are human** (demostrá que sos una persona), se verifica solo («Verificando…»); si aparece una casilla, tildarla.
 
-![Registro en Cloudflare: (1) Email, (2) Password, (3) el control de persona, que se verifica solo](img/cloudflare-registro.png)
+![Registro en Cloudflare: (1) Continue with Google, con el Gmail de la institución](img/cloudflare-registro.png)
 
-2. Abrir el Gmail: llega un correo de Cloudflare. Tocar el enlace **Verify email** (verificar el correo).
+2. Si Cloudflare manda un correo pidiendo **Verify email** (verificar el correo), abrir el Gmail y tocar el enlace. Entrando con Google, normalmente no hace falta.
 3. Si Cloudflare ofrece agregar un dominio (**Add a domain**), elegir un plan o hacer preguntas: **saltear** (**Skip**) o cerrar. No hace falta nada de eso, y nunca cargar tarjeta. Al terminar aparece la página de inicio («Ready when you are»): **no tocar** «Create app», «Add a domain» ni «Protect your app». Lo único que se usa está en el ícono de la persona, arriba a la derecha.
 
 ![Inicio de Cloudflare: (1) el ícono de la persona, arriba a la derecha. Lo demás no se toca](img/cloudflare-inicio.png)
 
-4. **Verificación en dos pasos:** ícono de la persona (arriba a la derecha) → **My Profile** (mi perfil) → **Authentication** (autenticación) → **Two-Factor Authentication** (verificación en dos pasos) → escanear el código con **Google Authenticator** (como en GitHub) → escribir el número de 6 dígitos → guardar los **backup codes** (códigos de respaldo; imprimirlos o copiarlos a mano). 📝 **Anotalo ya en la hoja, casilla E2.** (dónde quedaron guardados)
+4. **Verificación en dos pasos:** no hace falta. Como se entra con Google, la protege la verificación en dos pasos del Gmail (paso 1).
 5. Crear la **llave**. Camino corto: abrir **dash.cloudflare.com/profile/api-tokens**. (Camino largo: **My Profile** → **API Tokens** (llaves).) Tocar **Create Token** (crear llave) → bajar hasta **Create Custom Token** (llave a medida) → **Get started** (empezar).
    - **Token name** (nombre): «Instalador».
    - **Permissions** (permisos), en la primera fila elegir: **Account** → **Cloudflare Pages** → **Edit** (editar). Tocar **+ Add more** (agregar otro) y en la segunda fila: **Account** → **Account Settings** → **Read** (leer).
    - **Account Resources** (cuentas): **Include** (incluir) → la cuenta de la institución.
-   - Si aparece **TTL** (fecha de vencimiento), dejarla vacía. Si obliga a poner una, elegir la más lejana y 📝 **anotarla ya en la hoja, casilla E3**.
+   - Si aparece **TTL** (fecha de vencimiento), dejarla vacía. Si obliga a poner una, elegir la más lejana y 📝 **anotarla ya en la hoja, casilla E2**.
    - Abajo: **Continue to summary** (ver resumen) → **Create Token** (crear llave).
 6. Copiar la llave. **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. ⛔ **Esta no se anota** (si se pierde, se crea otra).
 
-> 📝 **Anotá en la hoja:** E1 (contraseña), E2 (dónde guardaste los backup codes) y E3 (fecha de vencimiento de la llave, si tiene).
+> 📝 **Revisá en la hoja:** E1 tildada (se entra con Google) y E2 (vencimiento de la llave, si tiene).
 
 > ✅ **Cómo sé que salió bien:** en **My Profile → API Tokens** aparece «Instalador» con estado **Active** (activa).
 
@@ -212,7 +212,7 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 > GitHub guarda los secrets cifrados y no los vuelve a mostrar. Si uno se carga mal, se vuelve a crear con el mismo nombre (reemplaza al anterior).
 
-> 📝 **Anotá en la hoja:** F1 (la CLAVE_RESPALDO, letra por letra: es la más importante). **Anotala antes de pegarla en GitHub**: después GitHub no la deja ver nunca más, así que la hoja es la única copia. No es una cuenta: no tiene dirección web ni usuario. Tildá también D2 y E4.
+> 📝 **Anotá en la hoja:** F1 (la CLAVE_RESPALDO, letra por letra: es la más importante). **Anotala antes de pegarla en GitHub**: después GitHub no la deja ver nunca más, así que la hoja es la única copia. No es una cuenta: no tiene dirección web ni usuario. Tildá también D2 y E3.
 
 > ✅ **Cómo sé que salió bien:** en **Secrets and variables → Actions**, debajo de **Repository secrets**, se ven los **cuatro nombres** de la tabla, escritos igual. (El valor no se ve nunca: es normal.)
 
@@ -302,7 +302,7 @@ Instalar, actualizar, despertar la base, recuperar un respaldo: **todas se usan 
 - **El sistema se revisa solo** todos los días a la mañana y, si algo necesita atención, manda un correo **en castellano** a los Responsables generales, con qué hacer. En el panel: **Estado del sistema**.
 - **Respaldos:** todos los días a la madrugada, cifrados con la CLAVE_RESPALDO (F1). Para recuperar uno: GitHub → **Actions** → **Recuperar respaldo (en la base de pruebas)**; para pasarlo a la base real, **Pasar un respaldo a la base real** (pide escribir REEMPLAZAR LA BASE REAL y se puede deshacer).
 - **Actualizaciones:** cuando salga una versión nueva, GitHub → **Actions** → **Actualizar** → **Run workflow** (botón verde de arriba a la derecha y, en el panel, **Run workflow** de abajo de todo). No se pierden datos. Si el panel dice «La base de datos está desactualizada», es la señal de que hay que tocarlo.
-- **Si vence una llave:** crear una nueva (pasos 4 o 5) y cargarla en GitHub con el mismo nombre (paso 6). Anotar el vencimiento nuevo (E3).
+- **Si vence una llave:** crear una nueva (pasos 4 o 5) y cargarla en GitHub con el mismo nombre (paso 6). Anotar el vencimiento nuevo (E2).
 - **Si una base se «duerme»:** no hay que hacer nada (se despierta sola dos veces por día). Con apuro: GitHub → **Actions** → **Despertar la base** → **Run workflow** (botón verde de arriba a la derecha y, en el panel, **Run workflow** de abajo de todo). Ver la tabla de abajo.
 - **Si cambia el Responsable general:** el nuevo se da de alta en **Personas y roles** y se le entrega esta carpeta y la Hoja de accesos.
 
