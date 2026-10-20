@@ -85,7 +85,7 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 ![Si aparece este cartel, tocá Atrás](img/gseg-3-cartel.png)
 
-3. Tocá **Añadir número de teléfono**. Escribí el celular del Responsable general **después del +54**: con el **9**, la característica sin 0 y el número sin 15 (por ejemplo, **9 362 4555666**). Dejá marcado **Recibir códigos por mensaje de texto** y tocá **Siguiente**. Llega un SMS con un código: escribilo y tocá **Verificar**. 📝 **Anotá el celular en la hoja, casilla B3.**
+3. Tocá **Añadir número de teléfono**. Escribí el celular del Responsable general **después del +54**: la característica **sin el 0** y el número **sin el 15** (por ejemplo, **362 4555666**). Google también lo acepta con un 9 adelante (9 362 4555666): las dos formas sirven. Si el SMS no llega, probá de la otra forma. Dejá marcado **Recibir códigos por mensaje de texto** y tocá **Siguiente**. Llega un SMS con un código: escribilo y tocá **Verificar**. 📝 **Anotá el celular en la hoja, casilla B3.**
 
 ![(1) El celular después del +54, (2) por mensaje de texto, (3) Siguiente](img/gseg-4-telefono.png)
 
@@ -98,7 +98,7 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 ![Ya activada: (1) Códigos de verificación alternativos; «Desactivar…» abajo indica que ya está activa](img/google-2pasos-activa.png)
 
-> **Si el SMS no llega:** revisá el número: en Argentina va **+54 9** y la característica sin 0 y sin 15 (por ejemplo, +54 9 362 4555666). Elegí **«Llamada de voz»** para que Google te dicte el código. Esperá 2 o 3 minutos antes de pedir otro. Si sigue sin llegar, usá otro número o probá unas horas más tarde (Google limita los códigos a un número que ya está en varias cuentas).
+> **Si el SMS no llega:** revisá el número: después del +54 va la característica sin 0 y el número sin 15 (por ejemplo, +54 362 4555666; con un 9 adelante también sirve). Elegí **«Llamada de voz»** para que Google te dicte el código. Esperá 2 o 3 minutos antes de pedir otro. Si sigue sin llegar, usá otro número o probá unas horas más tarde (Google limita los códigos a un número que ya está en varias cuentas).
 
 
 > Si Google pide «escaneá este QR con tu celular»: usar los **datos móviles** del celular (no el Wi-Fi) y no reintentar muchas veces seguidas; después de varios intentos, Google bloquea el acceso por unas horas.
