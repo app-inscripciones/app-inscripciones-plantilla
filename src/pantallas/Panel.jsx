@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Marca from './Marca.jsx';
 import { rpc, pedirCodigo, verificarCodigo, haySesion, salir, correoValido, MENSAJES_PANEL, NOMBRES_ROLES, mensajeError } from '../datos/panel.js';
 import { AccesosQR } from './Organizar.jsx';
@@ -381,9 +381,15 @@ export default function Panel() {
     } else setEstado('error');
   }, []);
   useEffect(() => { cargarPerfil(); }, [cargarPerfil]);
+  // Al crear un QR, la guía de práctica pasa sola al paso siguiente (sin cambiar de pestaña ni recargar).
+  const recargarPracticaRef = useRef(null);
   const apiQR = useMemo(() => ({
     datos: () => rpc('panel_datos_accesos'),
-    crear: (p) => rpc('panel_crear_acceso', p),
+    crear: async (p) => {
+      const r = await rpc('panel_crear_acceso', p);
+      if (r && r.ok && recargarPracticaRef.current) recargarPracticaRef.current();
+      return r;
+    },
     cerrar: (id) => rpc('panel_cerrar_acceso', { p_acceso: id }),
     autopresentes: (ev) => rpc('panel_autopresentes', { p_evento: ev }),
     crearAutopresente: (p) => rpc('panel_crear_autopresente', p),
@@ -393,6 +399,7 @@ export default function Panel() {
   const esResponsable = estado === 'listo' && !!yo && (yo.roles || []).includes('responsable');
   const est = useEstadoSistema(esResponsable);
   const practica = usePractica(estado === 'listo');
+  recargarPracticaRef.current = practica.recargar;
   const pp = usePrimerosPasos({ activo: esResponsable, institucionConfigurada: inst.configurada, eventos, respaldoOk: est.respaldoOk,
     practicaHecha: !!(practica.datos && practica.datos.alguienPracticoOrganizador) });
   const recargarPasos = pp.recargar;
