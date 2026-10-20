@@ -146,8 +146,8 @@ function PasoCategorias({ b, set, recordatorios }) {
       <h2>¿Hay categorías de participantes?</h2>
       <p className="ayuda">Sirven para cobrar distinto según la categoría (por ejemplo, niños más barato) y para ver cuántos hay de cada una. Quien carga la inscripción elige la categoría de una lista.</p>
       <div className="tarjetas-opcion">
-        <Tarjeta id="cat-no" elegida={!b.usaCategorias} icono="➖" titulo="No, todos iguales" alElegir={() => set({ ...b, usaCategorias: false })} />
-        <Tarjeta id="cat-si" elegida={b.usaCategorias} icono="🧒🧑🧓" titulo="Sí, hay categorías" alElegir={() => set({ ...b, usaCategorias: true })} />
+        <Tarjeta id="cat-no" elegida={!b.usaCategorias} icono="🟰" titulo="No, todos iguales" texto="Todos pagan lo mismo y se cuentan juntos." alElegir={() => set({ ...b, usaCategorias: false })} />
+        <Tarjeta id="cat-si" elegida={b.usaCategorias} icono="👨‍👩‍👧" titulo="Sí, hay categorías" texto="Por ejemplo: niños, jóvenes y adultos, con precios distintos." alElegir={() => set({ ...b, usaCategorias: true })} />
       </div>
       {b.usaCategorias && (
         <div className="panel-form">
