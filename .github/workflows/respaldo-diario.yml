@@ -1,139 +1,40 @@
-# Respaldo diario de la base central (D18).
-#  · Todos los días: copia completa de los datos (pg_dump), CIFRADA con la clave de respaldo,
-#    guardada 90 días en GitHub (pestaña Actions → la ejecución → «Artifacts»).
-#  · Al conectarse todos los días, también evita que Supabase pause el proyecto gratuito.
-#  · Prueba de recuperación: cada vez, la copia se descifra y se carga en una base vacía
-#    dentro de GitHub para comprobar que sirve. Si algo falla, GitHub manda un correo de aviso.
-#
-# Necesita estos «secrets» del repositorio (Settings → Secrets and variables → Actions):
-#  · CLAVE_RESPALDO: una clave larga para cifrar las copias (anotarla en la hoja de accesos:
-#    sin ella las copias no se pueden abrir).
-#  · Y además, UNO de estos dos:
-#    - Instalación automática (Etapa 8): SUPABASE_ACCESS_TOKEN. La conexión se arma sola con
-#      config/instalacion.json y la clave de la base se calcula a partir de CLAVE_RESPALDO.
-#    - Instalación a mano (caso testigo): SUPABASE_DB_URL, la cadena «Session pooler» del proyecto REAL.
+# Respaldo diario cifrado de la base central, con prueba de recuperación (D18). Se guarda 90 días en «Artifacts».
+# ⚠️ Esta es una «cáscara» (D76): solo dice CUÁNDO corre la tarea. Lo que HACE está en herramientas/tareas/respaldo-diario.sh,
+# que se actualiza con el botón «Actualizar». Este archivo casi nunca cambia: no hace falta tocarlo.
 name: Respaldo diario
 
 on:
   schedule:
     - cron: '17 6 * * *'   # todos los días a las 03:17 (hora argentina)
-  workflow_dispatch: {}    # también se puede correr a mano: Actions → Respaldo diario → Run workflow
+  workflow_dispatch: {}
 
 permissions:
   contents: read
 
 jobs:
-  respaldo:
+  tarea:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
-      # D74: si el plan gratuito pausó una base, se despierta sola antes de seguir (nadie tiene que entrar a supabase.com).
-      # Antes de terminar la instalación (botón «Instalar») no hay nada que revisar ni respaldar: la tarea termina en
-      # verde sin hacer nada, para no mandar correos de error a quien está instalando.
-      - name: ¿Ya está instalado?
-        env:
-          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
-        run: |
-          if [ -f config/instalacion.json ] || [ -n "$SUPABASE_DB_URL" ]; then echo "INSTALADO=1" >> "$GITHUB_ENV"
-          else echo "Todavía no se tocó el botón «Instalar»: no hay nada que hacer." | tee -a "$GITHUB_STEP_SUMMARY"; fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-      - name: Despertar las bases si están pausadas
-        if: env.INSTALADO == '1'
-        continue-on-error: true
+      - name: Hacer el respaldo
         env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-        run: node herramientas/instalador/despertar.mjs
+          SECRETOS: ${{ toJSON(secrets) }}
+          ENTRADAS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash herramientas/tareas/correr.sh respaldo-diario
 
-      - name: Controlar que estén las claves y armar la conexión
-        if: env.INSTALADO == '1'
-        env:
-          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-          CLAVE_RESPALDO: ${{ secrets.CLAVE_RESPALDO }}
-        run: |
-          if [ -z "$CLAVE_RESPALDO" ]; then
-            echo "::error::Falta el secret CLAVE_RESPALDO (ver el manual, sección de respaldos)."; exit 1
-          fi
-          if [ -n "$SUPABASE_DB_URL" ]; then
-            URL="$SUPABASE_DB_URL"
-          elif [ -f config/instalacion.json ] && [ -n "$SUPABASE_ACCESS_TOKEN" ]; then
-            URL=$(node herramientas/instalador/url-base.mjs real)
-            # Mantiene activa también la base de pruebas (el plan gratuito pausa las bases sin uso).
-            REF=$(jq -r .supabase.pruebas.ref config/instalacion.json)
-            curl -sf -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
-              -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" \
-              -d '{"query":"select 1"}' > /dev/null || echo "::warning::No se pudo tocar la base de pruebas."
-          else
-            echo "::error::Falta SUPABASE_DB_URL (instalación a mano) o SUPABASE_ACCESS_TOKEN (instalación automática)."; exit 1
-          fi
-          echo "::add-mask::$URL"
-          echo "URL_BASE=$URL" >> "$GITHUB_ENV"
-
-      - name: Copiar los datos de la base
-        if: env.INSTALADO == '1'
-        env:
-          SUPABASE_DB_URL: ${{ env.URL_BASE }}
-        run: |
-          mkdir -p salida
-          docker run --rm -v "$PWD/salida:/salida" -e URL="$SUPABASE_DB_URL" postgres:17 \
-            sh -c 'pg_dump "$URL" --schema=public --no-owner --no-privileges --format=custom --file=/salida/respaldo.dump'
-          ls -l salida
-
-      # D56: los eventos de práctica se borran solos al terminar su semana (después de copiarlos).
-      # Si la base todavía no tiene la función (falta «Actualizar»), no hace nada. Nunca frena el respaldo.
-      - name: Borrar los eventos de práctica vencidos
-        if: env.INSTALADO == '1'
-        continue-on-error: true
-        env:
-          SUPABASE_DB_URL: ${{ env.URL_BASE }}
-        run: |
-          docker run --rm -e URL="$SUPABASE_DB_URL" postgres:17 psql "$URL" -v ON_ERROR_STOP=1 -q -c \
-            "do \$\$ begin if to_regprocedure('public.limpiar_practicas()') is not null then raise notice 'Prácticas borradas: %', public.limpiar_practicas(); end if; end \$\$;"
-
-      - name: Cifrar la copia
-        if: env.INSTALADO == '1'
-        env:
-          CLAVE_RESPALDO: ${{ secrets.CLAVE_RESPALDO }}
-        run: |
-          FECHA=$(TZ=America/Argentina/Buenos_Aires date +%Y-%m-%d)
-          echo "FECHA=$FECHA" >> "$GITHUB_ENV"
-          gpg --batch --yes --pinentry-mode loopback --passphrase "$CLAVE_RESPALDO" \
-              --symmetric --cipher-algo AES256 -o "salida/respaldo-$FECHA.dump.gpg" salida/respaldo.dump
-          rm salida/respaldo.dump
-
-      - name: Guardar la copia cifrada (90 días)
-        if: env.INSTALADO == '1'
+      - name: Guardar la copia (90 días)
+        if: always() && env.ARTEFACTO != ''
         uses: actions/upload-artifact@v4
         with:
-          name: respaldo-${{ env.FECHA }}
-          path: salida/respaldo-${{ env.FECHA }}.dump.gpg
+          name: ${{ env.ARTEFACTO }}
+          path: salida/subir/
           retention-days: 90
-          if-no-files-found: error
-
-      - name: Prueba de recuperación en una base vacía
-        if: env.INSTALADO == '1'
-        env:
-          CLAVE_RESPALDO: ${{ secrets.CLAVE_RESPALDO }}
-        run: |
-          gpg --batch --yes --pinentry-mode loopback --passphrase "$CLAVE_RESPALDO" \
-              -d -o salida/prueba.dump "salida/respaldo-$FECHA.dump.gpg"
-          docker run -d --name prueba -e POSTGRES_PASSWORD=prueba -v "$PWD/salida:/salida" postgres:17
-          for i in $(seq 1 30); do docker exec prueba pg_isready -U postgres && break; sleep 2; done
-          docker exec prueba psql -U postgres -v ON_ERROR_STOP=1 -q -c "
-            drop schema public cascade;
-            create role anon nologin; create role authenticated nologin; create role supabase_auth_admin nologin;
-            create schema extensions; create extension pgcrypto with schema extensions;
-            create schema auth; create function auth.jwt() returns jsonb language sql stable as \$\$ select '{}'::jsonb \$\$;"
-          docker exec prueba pg_restore -U postgres -d postgres --no-owner --no-privileges /salida/prueba.dump
-          docker exec prueba psql -U postgres -At -c "
-            select 'eventos: ' || count(*) from public.eventos
-            union all select 'inscripciones: ' || count(*) from public.inscripciones
-            union all select 'rendiciones: ' || count(*) from public.rendiciones
-            union all select 'usuarios: ' || count(*) from public.usuarios" | tee conteo.txt
-          {
-            echo "## Respaldo del $FECHA"
-            echo "Copia cifrada guardada y **recuperada con éxito** en una base de prueba:"
-            echo '```'; cat conteo.txt; echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
+          if-no-files-found: ignore

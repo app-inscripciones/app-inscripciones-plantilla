@@ -30,5 +30,6 @@ actualiza las bases (sin perder datos) y vuelve a publicar la app.
 | `src/` | La aplicación (React + Vite, instalable, funciona sin conexión) |
 | `supabase/` | Tablas, reglas de seguridad y funciones de la base (PostgreSQL) |
 | `herramientas/instalador/` | El instalador y el actualizador automáticos |
-| `.github/workflows/` | Instalar, Actualizar, Publicar y Respaldo diario |
+| `.github/workflows/` | Cáscaras de las tareas automáticas (cuándo corren) |
+| `herramientas/tareas/` | Lo que hace cada tarea automática (se actualiza con «Actualizar») |
 | `config/` | Datos públicos de la instalación (los completa el instalador) |

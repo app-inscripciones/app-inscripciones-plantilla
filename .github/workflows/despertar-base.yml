@@ -1,10 +1,6 @@
-# D74 · Mantener todo despierto, sin que nadie tenga que hacer nada.
-#  · Dos veces por día revisa las dos bases de Supabase: si el plan gratuito las pausó, las despierta solas
-#    (lo mismo que el botón «Resume project» de supabase.com), y les hace una consulta mínima para que no se pausen.
-#  · GitHub apaga las tareas programadas de un repositorio que pasa 60 días sin cambios: esta tarea las vuelve a
-#    habilitar todos los días y, una vez por mes, anota la fecha en .github/actividad.txt para que nunca se apaguen.
-#  · También es un botón: Actions → «Despertar la base» → Run workflow (para no esperar).
-# Usa SUPABASE_ACCESS_TOKEN y config/instalacion.json (los deja el botón «Instalar»).
+# D74 · Mantener todo despierto, sin que nadie tenga que hacer nada (bases de Supabase y tareas de GitHub).
+# ⚠️ Esta es una «cáscara» (D76): solo dice CUÁNDO corre la tarea. Lo que HACE está en herramientas/tareas/despertar-base.sh,
+# que se actualiza con el botón «Actualizar». Este archivo casi nunca cambia: no hace falta tocarlo.
 name: Despertar la base
 
 on:
@@ -21,31 +17,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  despertar:
+  tarea:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
-      - name: Despertar las bases si están pausadas
-        env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-        run: node herramientas/instalador/despertar.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-      - name: Que GitHub no apague las tareas automáticas
-        if: always()
+      - name: Despertar y mantener activo
         env:
+          SECRETOS: ${{ toJSON(secrets) }}
+          ENTRADAS: ${{ toJSON(inputs) }}
           GH_TOKEN: ${{ github.token }}
-        run: |
-          for t in respaldo-diario.yml revision-diaria.yml despertar-base.yml; do
-            [ -f ".github/workflows/$t" ] && gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/$t/enable" >/dev/null 2>&1 || true
-          done
-          ULTIMO=$(git log -1 --format=%ct)
-          AHORA=$(date +%s)
-          if [ $(( (AHORA - ULTIMO) / 86400 )) -ge 30 ]; then
-            date -u +%Y-%m-%d > .github/actividad.txt
-            git config user.name "Sistema"
-            git config user.email "sistema@users.noreply.github.com"
-            git add .github/actividad.txt
-            git commit -m "Actividad mensual (para que GitHub no apague las tareas automáticas)" && { git push || { git pull --rebase -q && git push; }; } || true
-          fi
+        run: bash herramientas/tareas/correr.sh despertar-base
+
+      - name: Guardar la copia (90 días)
+        if: always() && env.ARTEFACTO != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTEFACTO }}
+          path: salida/subir/
+          retention-days: 90
+          if-no-files-found: ignore

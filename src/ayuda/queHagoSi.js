@@ -319,7 +319,7 @@ export const SECCIONES = [
         pregunta: 'Quiero actualizar la app a una versión nueva',
         pasos: [
           'GitHub → pestaña «Actions» → «Actualizar» → «Run workflow» (el botón verde de arriba a la derecha; en el panel que se abre, otra vez «Run workflow», abajo de todo). Tarda unos 5 minutos y no se pierden datos.',
-          'Si al final aparece un aviso amarillo sobre «.github/workflows», seguí el manual de instalación («Actualizaciones»).',
+          'Si al final aparece un aviso sobre «.github», no hace falta hacer nada: la app funciona igual.',
         ],
       },
     ],

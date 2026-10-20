@@ -1,8 +1,7 @@
 # P13 · Actualizar una institución ya instalada con la última versión de la plantilla pública.
-# Actions → Actualizar → Run workflow. Trae el código nuevo (sin tocar config/), actualiza las bases
-# (las tablas y los datos se conservan) y vuelve a publicar la app.
-# Los cambios en .github/workflows no se pueden traer automáticamente (GitHub no lo permite): si una versión
-# los trae, el manual explica cómo copiarlos a mano.
+# Actions → Actualizar → Run workflow. Los datos se conservan.
+# ⚠️ Esta es una «cáscara» (D76): solo dice CUÁNDO corre la tarea. Lo que HACE está en herramientas/tareas/actualizar.sh,
+# que se actualiza con el botón «Actualizar». Este archivo casi nunca cambia: no hace falta tocarlo.
 name: Actualizar
 
 on:
@@ -16,78 +15,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  actualizar:
+  tarea:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-
-      - name: ¿Está instalada con el instalador?
-        run: |
-          if [ ! -f config/instalacion.json ]; then
-            echo "::error::Esta copia no se instaló con el botón «Instalar» (falta config/instalacion.json)."; exit 1
-          fi
-          if [ "$(jq -r '.app.publicacion // empty' config/instalacion.json)" = "cloudflare-desde-github" ]; then
-            echo "::error::Este es el repositorio del caso testigo (de donde sale la plantilla): no se actualiza desde la plantilla."; exit 1
-          fi
-
-      - name: Traer la versión nueva de la plantilla
-        run: |
-          PLANTILLA=$(jq -r '.plantilla // "https://github.com/app-inscripciones/app-inscripciones-plantilla.git"' config/instalacion.json)
-          git clone --depth 1 "$PLANTILLA" /tmp/plantilla
-          rsync -a --delete --exclude '.git/' --exclude '.github/' --exclude 'config/' --exclude 'node_modules/' /tmp/plantilla/ ./
-          rsync -a --ignore-existing /tmp/plantilla/config/ config/
-          if ! diff -rq /tmp/plantilla/.github .github > /dev/null; then
-            echo "TAREAS_DISTINTAS=1" >> "$GITHUB_ENV"
-          fi
-          git config user.name "Actualizador"
-          git config user.email "actualizador@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then echo "Ya estaba al día."; else
-            git commit -m "Actualización a la versión $(node -p 'require("./package.json").version')"
-            git push || { git pull --rebase -q && git push; }
-          fi
 
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
-      - name: Actualizar las bases
+      - name: Actualizar todo
         env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-        run: node herramientas/instalador/actualizar.mjs
+          SECRETOS: ${{ toJSON(secrets) }}
+          ENTRADAS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash herramientas/tareas/correr.sh actualizar
 
-      - name: Probar y preparar la app
-        run: |
-          npm ci
-          npm test -- --reporter=dot   # sin el informe técnico de pruebas en el resumen
-          npm run build
-
-      - name: Publicar
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          CUENTA="${CLOUDFLARE_ACCOUNT_ID:-$(jq -r .app.cuentaCloudflare config/instalacion.json)}"
-          CLOUDFLARE_ACCOUNT_ID="$CUENTA" npx --yes wrangler@4 pages deploy dist \
-            --project-name "$(jq -r .app.proyectoCloudflare config/instalacion.json)" --branch main --commit-dirty=true
-
-      - name: Resumen
-        if: always()
-        run: |
-          {
-            if [ "${{ job.status }}" = "success" ]; then
-              echo "## ✅ Actualización terminada"
-              echo ""
-              echo "La app y las bases quedaron en la versión $(node -p 'require("./package.json").version'). No se perdió ningún dato. En los celulares, la versión nueva aparece sola la próxima vez que abran la app con internet."
-              if [ "${TAREAS_DISTINTAS:-}" = "1" ]; then
-                echo ""
-                echo "ℹ️ Algunas tareas automáticas de GitHub (la carpeta .github) tienen mejoras que GitHub no deja instalar solas. **No hace falta hacer nada**: la app funciona igual."
-              fi
-            else
-              echo "## ❌ La actualización no terminó"
-              echo ""
-              echo "No se perdió ningún dato. Tocá la fila en rojo, leé el mensaje y volvé a tocar **Run workflow** (no «Re-run jobs»). Si sigue fallando, buscá el mensaje en «¿Qué hago si…?»."
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Guardar la copia (90 días)
+        if: always() && env.ARTEFACTO != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTEFACTO }}
+          path: salida/subir/
+          retention-days: 90
+          if-no-files-found: ignore

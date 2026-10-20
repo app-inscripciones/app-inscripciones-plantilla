@@ -1,12 +1,10 @@
 # Instalación automática para una institución nueva (D34, Etapa 8).
 # Antes, a mano (ver el manual de instalación): crear el Gmail, las cuentas de GitHub, Supabase y Cloudflare,
 # la copia de este repositorio y cargar 4 secrets (Settings → Secrets and variables → Actions):
-#   SUPABASE_ACCESS_TOKEN   llave de Supabase (Account → Access Tokens)
-#   CLOUDFLARE_API_TOKEN    llave de Cloudflare (My Profile → API Tokens, permiso «Cloudflare Pages: Edit»)
-#   CLAVE_RESPALDO          clave larga inventada (mínimo 16 caracteres): cifra los respaldos. Anotarla en la hoja de accesos.
-#   GMAIL_CLAVE_APLICACION  contraseña de aplicación del Gmail de la institución (16 letras)
-# Después: Actions → Instalar → Run workflow → completar los 4 datos → Run workflow.
-# Se puede volver a correr: lo que ya está hecho se reutiliza.
+#   SUPABASE_ACCESS_TOKEN, CLOUDFLARE_API_TOKEN, CLAVE_RESPALDO y GMAIL_CLAVE_APLICACION.
+# Después: Actions → Instalar → Run workflow → completar los 4 datos → Run workflow. Se puede volver a correr.
+# ⚠️ Esta es una «cáscara» (D76): solo dice CUÁNDO corre la tarea. Lo que HACE está en herramientas/tareas/instalar.sh,
+# que se actualiza con el botón «Actualizar». Este archivo casi nunca cambia: no hace falta tocarlo.
 name: Instalar
 
 on:
@@ -33,7 +31,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  instalar:
+  tarea:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -44,37 +42,18 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Crear las bases, cargar las tablas y configurar el correo
-        id: inst
+      - name: Instalar todo
         env:
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLAVE_RESPALDO: ${{ secrets.CLAVE_RESPALDO }}
-          GMAIL_CLAVE_APLICACION: ${{ secrets.GMAIL_CLAVE_APLICACION }}
-          NOMBRE_INSTITUCION: ${{ inputs.nombre_institucion }}
-          CORREO_PROYECTO: ${{ inputs.correo_proyecto }}
-          CORREO_RESPONSABLE: ${{ inputs.correo_responsable }}
-          NOMBRE_RESPONSABLE: ${{ inputs.nombre_responsable }}
-        run: node herramientas/instalador/instalar.mjs
+          SECRETOS: ${{ toJSON(secrets) }}
+          ENTRADAS: ${{ toJSON(inputs) }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash herramientas/tareas/correr.sh instalar
 
-      - name: Guardar la configuración en el repositorio
-        env:
-          NOMBRE_INSTITUCION: ${{ inputs.nombre_institucion }}
-        run: |
-          git config user.name "Instalador"
-          git config user.email "instalador@users.noreply.github.com"
-          git add config/conexion.json config/institucion.json config/instalacion.json
-          if git diff --cached --quiet; then echo "Sin cambios."; else git commit -m "Instalación: configuración de $NOMBRE_INSTITUCION" && { git push || { git pull --rebase -q && git push; }; }; fi
-
-      - name: Preparar la app
-        run: |
-          npm ci
-          npm test -- --reporter=dot   # sin el informe técnico de pruebas en el resumen
-          npm run build
-
-      - name: Publicar en Cloudflare Pages
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ steps.inst.outputs.cuenta_cloudflare }}
-        run: npx --yes wrangler@4 pages deploy dist --project-name "${{ steps.inst.outputs.proyecto_pages }}" --branch main --commit-dirty=true
+      - name: Guardar la copia (90 días)
+        if: always() && env.ARTEFACTO != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTEFACTO }}
+          path: salida/subir/
+          retention-days: 90
+          if-no-files-found: ignore

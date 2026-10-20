@@ -1,11 +1,6 @@
 # Recuperar un respaldo EN LA BASE DE PRUEBAS (D59). Nunca toca la base real.
-#  · Se elige la fecha del respaldo (vacío = el más reciente). Se guardan 90 días.
-#  · La base de pruebas queda con los datos de ese día: ahí se puede mirar lo que se perdió
-#    (Supabase → proyecto de pruebas → Table Editor) sin riesgo.
-#  · Para pasar esos datos a la base real está el otro botón: «Pasar un respaldo a la base real».
-#
-# Usa CLAVE_RESPALDO y la conexión a la base de pruebas: en las instalaciones automáticas se arma sola
-# (SUPABASE_ACCESS_TOKEN); en una instalación a mano, el secret SUPABASE_DB_URL_PRUEBAS («Session pooler» de pruebas).
+# ⚠️ Esta es una «cáscara» (D76): solo dice CUÁNDO corre la tarea. Lo que HACE está en herramientas/tareas/recuperar-respaldo.sh,
+# que se actualiza con el botón «Actualizar». Este archivo casi nunca cambia: no hace falta tocarlo.
 name: Recuperar respaldo (en la base de pruebas)
 
 on:
@@ -25,28 +20,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  recuperar:
+  tarea:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
-      - name: Armar la conexión a la base de pruebas
-        env:
-          SUPABASE_DB_URL_PRUEBAS: ${{ secrets.SUPABASE_DB_URL_PRUEBAS }}
-          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-          CLAVE_RESPALDO: ${{ secrets.CLAVE_RESPALDO }}
-        run: |
-          if [ -n "$SUPABASE_DB_URL_PRUEBAS" ]; then URL="$SUPABASE_DB_URL_PRUEBAS"
-          elif [ -f config/instalacion.json ] && [ -n "$SUPABASE_ACCESS_TOKEN" ]; then URL=$(node herramientas/instalador/url-base.mjs pruebas)
-          else echo "::error::Falta la conexión a la base de pruebas (SUPABASE_DB_URL_PRUEBAS o SUPABASE_ACCESS_TOKEN)."; exit 1; fi
-          echo "::add-mask::$URL"
-          echo "URL_DESTINO=$URL" >> "$GITHUB_ENV"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-      - name: Recuperar
+      - name: Recuperar en la base de pruebas
         env:
-          DESTINO: pruebas
-          FECHA: ${{ inputs.fecha }}
-          CLAVE_RESPALDO: ${{ secrets.CLAVE_RESPALDO }}
+          SECRETOS: ${{ toJSON(secrets) }}
+          ENTRADAS: ${{ toJSON(inputs) }}
           GH_TOKEN: ${{ github.token }}
-        run: bash herramientas/recuperar/recuperar.sh
+        run: bash herramientas/tareas/correr.sh recuperar-respaldo
+
+      - name: Guardar la copia (90 días)
+        if: always() && env.ARTEFACTO != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTEFACTO }}
+          path: salida/subir/
+          retention-days: 90
+          if-no-files-found: ignore
