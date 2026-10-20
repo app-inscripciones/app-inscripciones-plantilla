@@ -176,7 +176,10 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 ![Registro en Cloudflare: (1) Email, (2) Password, (3) el control de persona, que se verifica solo](img/cloudflare-registro.png)
 
 2. Abrir el Gmail: llega un correo de Cloudflare. Tocar el enlace **Verify email** (verificar el correo).
-3. Si Cloudflare ofrece agregar un dominio (**Add a domain**), elegir un plan o hacer preguntas: **saltear** (**Skip**) o cerrar. No hace falta nada de eso, y nunca cargar tarjeta.
+3. Si Cloudflare ofrece agregar un dominio (**Add a domain**), elegir un plan o hacer preguntas: **saltear** (**Skip**) o cerrar. No hace falta nada de eso, y nunca cargar tarjeta. Al terminar aparece la página de inicio («Ready when you are»): **no tocar** «Create app», «Add a domain» ni «Protect your app». Lo único que se usa está en el ícono de la persona, arriba a la derecha.
+
+![Inicio de Cloudflare: (1) el ícono de la persona, arriba a la derecha. Lo demás no se toca](img/cloudflare-inicio.png)
+
 4. **Verificación en dos pasos:** ícono de la persona (arriba a la derecha) → **My Profile** (mi perfil) → **Authentication** (autenticación) → **Two-Factor Authentication** (verificación en dos pasos) → escanear el código con **Google Authenticator** (como en GitHub) → escribir el número de 6 dígitos → guardar los **backup codes** (códigos de respaldo; imprimirlos o copiarlos a mano). 📝 **Anotalo ya en la hoja, casilla E2.** (dónde quedaron guardados)
 5. Crear la **llave**. Camino corto: abrir **dash.cloudflare.com/profile/api-tokens**. (Camino largo: **My Profile** → **API Tokens** (llaves).) Tocar **Create Token** (crear llave) → bajar hasta **Create Custom Token** (llave a medida) → **Get started** (empezar).
    - **Token name** (nombre): «Instalador».
