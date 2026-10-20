@@ -307,6 +307,9 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 1. Abrir la dirección del panel (G3) en la computadora.
 2. Escribir el correo del Responsable general → **Enviarme el código** → escribir el código de 6 números que llega por correo (la primera vez, mirar en **Spam** o **Promociones**).
+
+![Ingresar al panel: (1) el correo del Responsable general (A2), (2) Enviarme el código](img/panel-ingresar.png)
+
 3. Arriba del Resumen aparece la lista **Primeros pasos**. Seguí el documento **3 · Después de instalar**.
 
 > ✅ **Cómo sé que salió bien:** entrás al panel y arriba dice «Hola, *tu nombre* · Responsable general».
