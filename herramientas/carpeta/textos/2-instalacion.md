@@ -202,7 +202,9 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ![Resumen: tiene que decir «Cloudflare Pages:Edit, Account Settings:Read»; (6) Create Token](img/cloudflare-llave-3.png)
 
-6. Copiar la llave. **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. ⛔ **Esta no se anota** (si se pierde, se crea otra).
+6. Aparece «Instalador API token was successfully created» (la llave se creó). **La llave es el texto del primer recuadro, el de línea punteada, que empieza con `cfut_`.** Copiarla con el iconito de dos cuadraditos de la derecha de ese recuadro. **No** copiar el recuadro de abajo («Test this token», el que empieza con `curl`): eso es para técnicos. **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. ⛔ **Esta no se anota** (si se pierde, se crea otra).
+
+![(1) la llave: el recuadro punteado que empieza con cfut_, (2) el iconito para copiarla. El recuadro de abajo (✗) no se usa](img/cloudflare-llave-creada.png)
 
 > 📝 **Revisá en la hoja:** E1 tildada (se entra con Google) y E2 (vencimiento de la llave, si tiene).
 
