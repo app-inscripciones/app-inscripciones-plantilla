@@ -196,7 +196,7 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 > 📝 **Revisá en la hoja:** E1 tildada (se entra con Google) y E2 (vencimiento de la llave, si tiene).
 
-> ✅ **Cómo sé que salió bien:** en **My Profile → API Tokens** aparece «Instalador» con estado **Active** (activa).
+> ✅ **Cómo sé que salió bien:** en **Profile → API Tokens** aparece «Instalador» con estado **Active** (activa).
 
 ## Paso 6. Cargar las cuatro claves en GitHub
 
