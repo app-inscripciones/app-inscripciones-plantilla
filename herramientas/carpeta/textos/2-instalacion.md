@@ -200,6 +200,8 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ![Client IP y TTL se dejan vacíos; (5) Continue to summary](img/cloudflare-llave-2.png)
 
+![Resumen: tiene que decir «Cloudflare Pages:Edit, Account Settings:Read»; (6) Create Token](img/cloudflare-llave-3.png)
+
 6. Copiar la llave. **Se muestra una sola vez.** Dejar esa pestaña abierta y pegarla en el paso 6. ⛔ **Esta no se anota** (si se pierde, se crea otra).
 
 > 📝 **Revisá en la hoja:** E1 tildada (se entra con Google) y E2 (vencimiento de la llave, si tiene).
