@@ -25,12 +25,35 @@
 
 Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana otra persona se hace cargo, se le entrega este acceso.
 
-1. Entrar a **accounts.google.com/signup**.
-2. Nombre: algo que identifique a la institución (por ejemplo «Inscripciones» «Club Las Palmas»).
-3. Dirección: por ejemplo **inscripciones.laspalmas@gmail.com**. 📝 **Anotalo ya en la hoja, casilla B1.**
-4. Contraseña larga y nueva. 📝 **Anotalo ya en la hoja, casilla B2.** (Antes de tocar «Siguiente»: después Google no la vuelve a mostrar.)
-5. Teléfono: el celular del Responsable general. 📝 **Anotalo ya en la hoja, casilla B3.**
-6. **Correo de recuperación:** agregar el correo personal del Responsable general (**myaccount.google.com → Seguridad → Correo de recuperación**). Evita quedar bloqueado. 📝 **Anotalo ya en la hoja, casilla B4.**
+**Crear la cuenta** (se hace en la computadora, con Chrome):
+
+1. En Chrome, escribí en la barra de arriba **accounts.google.com/signup** y apretá **Enter**. Si ya tenés tu Gmail personal abierto en ese Chrome, mejor abrí una **ventana de incógnito** (Ctrl + Shift + N) y hacelo ahí: así no se mezclan las cuentas.
+2. **«Crea una cuenta de Google»**: en **Nombre** escribí algo que identifique al sistema, por ejemplo «Inscripciones», y en **Apellidos** el nombre de la institución, por ejemplo «Club Las Palmas». Tocá **Siguiente**.
+
+![(1) Nombre, (2) Apellidos, (3) Siguiente](img/gmail-1-nombre.png)
+
+3. **«Información básica»**: la fecha de nacimiento y el género **del Responsable general** (tiene que ser mayor de edad). Tocá **Siguiente**.
+
+![(1) Fecha de nacimiento, (2) Género, (3) Siguiente](img/gmail-2-fecha.png)
+
+4. **«Cómo iniciarás sesión»** (la dirección de Gmail): escribí la dirección, por ejemplo **inscripciones.laspalmas** (Google agrega «@gmail.com» solo). Si dice que ya existe, agregale algo (la ciudad, un número). A veces Google muestra dos o tres direcciones sugeridas y la opción **«Crea tu propia dirección de Gmail»**: elegí esa. **No** toques «Usar tu correo electrónico». Tocá **Siguiente**. 📝 **Anotalo ya en la hoja, casilla B1** (la dirección completa, con @gmail.com).
+
+![(1) La dirección, (2) Siguiente. (✗) «Usar tu correo electrónico» no se usa](img/gmail-3-direccion.png)
+
+5. **«Crea una contraseña segura»**: una contraseña larga, nueva, que no uses en otro lado. Escribila dos veces (**Contraseña** y **Confirmar**). 📝 **Anotala ya en la hoja, casilla B2, antes de tocar Siguiente.** Tocá **Siguiente**.
+
+![(1) Contraseña, (2) Confirmar, (3) Siguiente](img/gmail-4-contrasena.png)
+
+6. **«Verifica algunos datos antes de crear una cuenta»**: Google muestra un **código QR** (un cuadrado de puntitos). En el celular del Responsable general, abrí la **cámara**, apuntá al QR y tocá el enlace que aparece. Seguí los pasos en el celular (puede pedir mandar un SMS) y **volvé a la computadora**. Usá los **datos móviles** del celular, no el Wi-Fi, y no reintentes muchas veces seguidas (después de varios intentos, Google frena unas horas). Otras veces, en lugar del QR, pide directamente el número de celular y manda un código por SMS. 📝 **Anotá el celular en la hoja, casilla B3.**
+
+![Verificación con el celular: escanear el QR con la cámara del celular y seguir los pasos ahí](img/gmail-5-qr.png)
+
+   En el celular puede aparecer, en inglés, **«Are you trying to verify your info?»** (¿estás intentando verificar tus datos?), con el tipo de computadora y la ciudad. Si coinciden con los tuyos, tocá **Yes, continue** (sí, continuar).
+
+![En el celular: (1) Yes, continue](img/gmail-6-celular.png)
+
+7. Si pregunta un **correo de recuperación**, poné el correo personal del Responsable general. Si ofrece **agregar el número a otros servicios** o **personalizar la configuración**, elegí lo más simple («Saltar», «Ahora no» o la opción **Express**). Aceptá las **condiciones** (**Acepto**). Al final aparece la bandeja de Gmail: la cuenta está creada.
+8. **Correo de recuperación** (si no lo pidió en el punto 7): agregar el correo personal del Responsable general (**myaccount.google.com → Seguridad → Correo de recuperación**). Evita quedar bloqueado. 📝 **Anotalo ya en la hoja, casilla B4.**
 
 **Verificación en dos pasos (obligatoria):**
 
