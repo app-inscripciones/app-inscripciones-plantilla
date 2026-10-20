@@ -52,7 +52,11 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 ![En el celular: (1) Yes, continue](img/gmail-6-celular.png)
 
-7. Si pregunta un **correo de recuperación**, poné el correo personal del Responsable general. Si ofrece **agregar el número a otros servicios** o **personalizar la configuración**, elegí lo más simple («Saltar», «Ahora no» o la opción **Express**). Aceptá las **condiciones** (**Acepto**). Al final aparece la bandeja de Gmail: la cuenta está creada.
+7. **«Añadir correo de recuperación»**: poné el correo personal del Responsable general y tocá **Siguiente** (no «Saltar»): sirve para recuperar la cuenta si se olvida la contraseña. 📝 **Anotalo ya en la hoja, casilla B4.**
+
+![(1) El correo personal del Responsable general, (2) Siguiente](img/gmail-7-recuperacion.png)
+
+   Después: Si ofrece **agregar el número a otros servicios** o **personalizar la configuración**, elegí lo más simple («Saltar», «Ahora no» o la opción **Express**). Aceptá las **condiciones** (**Acepto**). Al final aparece la bandeja de Gmail: la cuenta está creada.
 8. **Correo de recuperación** (si no lo pidió en el punto 7): agregar el correo personal del Responsable general (**myaccount.google.com → Seguridad → Correo de recuperación**). Evita quedar bloqueado. 📝 **Anotalo ya en la hoja, casilla B4.**
 
 **Verificación en dos pasos (obligatoria):**
