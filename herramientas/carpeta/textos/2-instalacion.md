@@ -56,7 +56,19 @@ Todas las cuentas quedan a nombre de este correo, no de una persona. Si mañana 
 
 ![(1) El correo personal del Responsable general, (2) Siguiente](img/gmail-7-recuperacion.png)
 
-   Después: Si ofrece **agregar el número a otros servicios** o **personalizar la configuración**, elegí lo más simple («Saltar», «Ahora no» o la opción **Express**). Aceptá las **condiciones** (**Acepto**). Al final aparece la bandeja de Gmail: la cuenta está creada.
+   Después aparecen, en este orden (pueden variar un poco):
+   - **«Add a recovery contact»** (agregar un contacto de recuperación, una persona de confianza): tocar **Saltar**.
+   - **«Revisa la información de tu cuenta»**: muestra el nombre y la dirección nueva. Tocar **Siguiente**.
+   - **«Privacidad y Términos»**: un texto largo. Bajar hasta el final y tocar **Acepto** (abajo a la derecha).
+   - Si ofrece **agregar el número a otros servicios** o **personalizar la configuración**, elegir lo más simple («Saltar», «Ahora no» o la opción **Express**).
+   Al final aparece la bandeja de Gmail: la cuenta está creada.
+
+![Contacto de recuperación: (1) Saltar](img/gmail-8-contacto.png)
+
+![Revisá la información: (1) Siguiente](img/gmail-9-revisar.png)
+
+![Privacidad y Términos: bajar hasta el final y tocar Acepto (marcado)](img/gmail-10-terminos.png)
+
 8. **Correo de recuperación** (si no lo pidió en el punto 7): agregar el correo personal del Responsable general (**myaccount.google.com → Seguridad → Correo de recuperación**). Evita quedar bloqueado. 📝 **Anotalo ya en la hoja, casilla B4.**
 
 **Verificación en dos pasos (obligatoria):**
