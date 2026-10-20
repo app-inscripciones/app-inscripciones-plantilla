@@ -264,6 +264,9 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 1. Entrar a **github.com** (si pide entrar, ver «🔑 Si saliste de GitHub» en el paso 6).
 2. A la izquierda aparece la lista **Top repositories** (tus repositorios): tocar **app-inscripciones**. (Si no la ves, tocá el ícono ☰ de arriba a la izquierda y buscala ahí.)
 3. Arriba, en la fila de pestañas (Code, Issues, Pull requests, **Actions**…), tocar **Actions** (acciones: las tareas automáticas).
+
+![Página del repositorio: (A) pestaña Actions, para Instalar, Actualizar y las demás tareas; (S) pestaña Settings, para las claves](img/github-repo-pestanas.png)
+
 4. En la lista de la izquierda, tocar **Instalar**.
 
 **Llegaste bien si ves** arriba el título **Instalar**, a la derecha el botón verde **Run workflow** y abajo «This workflow has no runs yet» (todavía no se usó: es normal). Si en lugar de eso aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo y volver a tocar **Instalar** en la lista de la izquierda.
