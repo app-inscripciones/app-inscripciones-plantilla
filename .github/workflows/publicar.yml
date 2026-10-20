@@ -43,7 +43,7 @@ jobs:
         if: steps.ver.outputs.instalada == 'si'
         run: |
           npm ci
-          npm test
+          npm test -- --reporter=dot   # sin el informe técnico de pruebas en el resumen
           npm run build
 
       - name: Publicar

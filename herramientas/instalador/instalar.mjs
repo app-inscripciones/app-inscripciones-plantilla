@@ -289,7 +289,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
         `- **La app:** ${r.urlApp}`,
         `- **El panel:** ${r.urlApp}/#panel  → entrar con **${env.CORREO_RESPONSABLE.trim().toLowerCase()}** (llega un código al correo)`,
         `- **Bases de Supabase:** ${r.bases.real} (real) y ${r.bases.pruebas} (pruebas)`, '',
-        'Siguiente paso: entrar al panel, pestaña **Institución**, y cargar el nombre, los colores y el logo.', '',
+        '**Siguiente paso:** anotar en la hoja de accesos la fecha (G1), la dirección de la app (G2) y la del panel (G3). Después abrir el panel, entrar con ese correo y seguir la lista **Primeros pasos** (manual de instalación, paso 8).', '',
       ].join('\n'));
     }
     console.log(`\nListo. La app: ${r.urlApp}`);

@@ -291,9 +291,9 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ![Instalación en marcha: (1) Status «Queued» (en espera, después «In progress»). (✗) Cancel workflow no se toca](img/github-instalar-corriendo.png)
 
-4. Cuando termina en verde ✅, tocar la ejecución: arriba aparece el **resumen** con la dirección de la aplicación y la del panel. 📝 **Anotá ya en la hoja: G1 (fecha de hoy), G2 (dirección de la aplicación) y G3 (dirección del panel).**
+4. Cuando termina, el círculo se pone verde ✅ y **Status** dice **Success** (éxito). Bajando un poco aparece el **resumen** «Instalación terminada» con la dirección de la aplicación y la del panel. 📝 **Anotá ya en la hoja: G1 (fecha de hoy), G2 (dirección de la aplicación) y G3 (dirección del panel).**
 
-![Resumen «Instalación terminada» con la dirección de la aplicación y del panel](img/github-instalacion-terminada.png)
+![Terminó: (1) Status «Success» (éxito) y (2) «Instalación terminada» con la dirección de la app y la del panel. (✗) «Re-run all jobs» no se toca](img/github-instalacion-terminada.png)
 
 **Qué hace solo el instalador:** crea las dos bases de datos (real y de pruebas), carga todas las tablas y reglas de seguridad, da de alta al Responsable general, configura los correos con el código de ingreso y publica la aplicación. Desde ese momento, todos los días se hace un **respaldo cifrado** y el sistema **se revisa solo** y avisa por correo si algo necesita atención.
 
