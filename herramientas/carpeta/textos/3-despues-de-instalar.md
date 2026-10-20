@@ -76,9 +76,13 @@ Aparece el QR (con la etiqueta 🧪 PRÁCTICA). **El código se muestra una sola
 
 Para completar el paso falta **marcar un presente**: al cargar otra inscripción tildá **«Ya está presente»**, o creá un **QR de control de presentes** y tocá **Presente** en alguien. El recuadro violeta dice qué falta.
 
-**Práctica del Tesorero:** **Rendiciones** → elegir la práctica (🧪) → **Registrar entrega** en la fila del cargador.
+**Práctica del Tesorero** (el recuadro violeta pasa solo a «Tu práctica de Tesorero»): tocá **Ir a Rendiciones de la práctica** → en la fila del cargador, **Registrar entrega** → anotá el efectivo (el casillero de **tickets** se deja vacío si no se cobró con terminal) → **Registrar**. Si no aparece ningún cargador, cargá antes en el celular una inscripción pagada en **efectivo**.
 
-> ✅ **Salió bien si** el recuadro violeta desaparece y en **Primeros pasos** se tilda **Hacer la práctica**.
+![(1) El efectivo que entregó, (2) tickets: vacío si no hubo cobros con terminal, (3) Registrar](img/pp-rendicion.png)
+
+> ✅ **Salió bien si** aparece el cartel verde **«🎉 Práctica terminada»** y en **Primeros pasos** se tilda **Hacer la práctica**.
+
+![Práctica terminada (arriba); en la tabla, lo que falta rendir queda en $ 0](img/pp-practica-terminada.png)
 
 ## 4. El primer evento real
 
