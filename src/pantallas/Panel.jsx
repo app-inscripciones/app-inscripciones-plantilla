@@ -89,7 +89,7 @@ const AYUDA_ROLES = {
   consulta: 'Solo mira el panel y descarga el Excel.',
 };
 
-function Personas({ yo, alCambiarmeRoles }) {
+function Personas({ yo, alCambiarmeRoles, alVolver }) {
   const [lista, setLista] = useState(null);
   const [error, setError] = useState('');
   const [form, setForm] = useState(null);
@@ -162,6 +162,9 @@ function Personas({ yo, alCambiarmeRoles }) {
       <button className="boton principal" style={{ maxWidth: 320 }} onClick={() => setForm({ nuevo: true, email: '', nombre: '', roles: [], activo: true })}>
         + Agregar persona
       </button>
+      {alVolver && lista && lista.length > 0 && (
+        <button className="boton secundario" style={{ maxWidth: 320, marginLeft: 8 }} onClick={alVolver}>Volver a Primeros pasos →</button>
+      )}
       {error && <div className="error-grande" role="alert">{error}</div>}
       {!lista ? <p>Cargando…</p> : (
         <table className="tabla tabla-panel">
@@ -537,9 +540,9 @@ export default function Panel() {
           </section>
         )}
         {seccion === 'qr' && tiene('organizador') && <AccesosQR key={`qr-${eventoId}-${qrPedido.n}`} api={apiQR} mostrarVolver={false} eventoInicial={eventoId} formInicial={qrPedido.tarea} nombreInicial={qrPedido.tarea ? yo.nombre : ''} />}
-        {seccion === 'personas' && tiene('responsable') && <Personas yo={yo} alCambiarmeRoles={cargarPerfil} />}
+        {seccion === 'personas' && tiene('responsable') && <Personas yo={yo} alCambiarmeRoles={cargarPerfil} alVolver={() => setSeccion('resumen')} />}
         {seccion === 'estado' && tiene('responsable') && <EstadoSistema estado={est} />}
-        {seccion === 'institucion' && tiene('responsable') && <Institucion />}
+        {seccion === 'institucion' && tiene('responsable') && <Institucion alVolver={() => setSeccion('resumen')} />}
       </main>
       </ProveedorPractica>
     </>

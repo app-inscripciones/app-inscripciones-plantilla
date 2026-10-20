@@ -8,7 +8,7 @@ const MENSAJES = {
   datos_invalidos: 'Revisá los datos: el nombre tiene que tener al menos 2 letras y los colores, el formato #RRGGBB.',
 };
 
-export function Institucion({ alGuardar }) {
+export function Institucion({ alGuardar, alVolver }) {
   const actual = useInstitucion();
   const [f, setF] = useState(() => ({
     nombre: actual.configurada ? actual.nombre : '',
@@ -84,6 +84,9 @@ export function Institucion({ alGuardar }) {
       </div>
       {error && <div className="error-grande" role="alert">{error}</div>}
       {estado === 'listo' && <div className="exito">✅ Guardado. Los celulares lo toman la próxima vez que abran la app con internet.</div>}
+      {estado === 'listo' && alVolver && (
+        <button className="boton principal" id="volver-primeros-pasos" onClick={alVolver}>Listo: volver a Primeros pasos →</button>
+      )}
       <button className="boton principal" disabled={estado === 'guardando' || f.nombre.trim().length < 2} onClick={guardar}>
         {estado === 'guardando' ? 'Guardando…' : 'Guardar'}
       </button>
