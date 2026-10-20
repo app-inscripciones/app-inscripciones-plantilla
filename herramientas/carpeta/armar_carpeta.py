@@ -146,6 +146,7 @@ def hoja_html():
 _V = os.path.join(RAIZ, 'herramientas', 'videos')
 VIDEOS_LOCALES = [
     ('0 - Presentación.mp4', os.path.join(_V, 'presentacion', 'video-presentacion.mp4'), 'Presentación de la aplicación (se mira primero)'),
+    ('0b - Instalación paso a paso.mp4', os.path.join(_V, 'instalacion', 'video-instalacion.mp4'), 'Instalación paso a paso (para quien instala, junto con el manual)'),
     ('1 - Responsable general.mp4', os.path.join(_V, 'roles', 'videos', 'video-responsable.mp4'), 'Responsable general'),
     ('2 - Organizador.mp4', os.path.join(_V, 'roles', 'videos', 'video-organizador.mp4'), 'Organizador'),
     ('3 - Tesorero.mp4', os.path.join(_V, 'roles', 'videos', 'video-tesorero.mp4'), 'Tesorero'),
@@ -157,12 +158,12 @@ VIDEOS_LOCALES = [
 VIDEO_PRESENTACION = ''
 PASOS = [
     ('hoja', '1', 'Imprimí la Hoja de accesos', 'Antes de empezar. Vas a ir anotando ahí, a mano, cada cuenta y contraseña que crees.', '1 · Hoja de accesos.pdf', '📋'),
-    ('instalar', '2', 'Instalá el sistema', 'Paso a paso, desde crear el Gmail hasta el botón «Instalar». Entre 1 hora y 1 hora y media, con la computadora y un celular. Se puede hacer en partes.', '2 · Instalación paso a paso.pdf', '🛠️'),
+    ('instalar', '2', 'Instalá el sistema', 'Paso a paso, desde crear el Gmail hasta el botón «Instalar». Entre 1 hora y 1 hora y media, con la computadora y un celular. Se puede hacer en partes. Si querés ver antes todo el recorrido: video «0b - Instalación paso a paso» (carpeta 7).', '2 · Instalación paso a paso.pdf', '🛠️'),
     ('despues', '3', 'Dejá todo listo', 'Datos de la institución, el equipo, la práctica (10 minutos) y el primer evento real.', '3 · Después de instalar.pdf', '✅'),
     ('roles', '4', 'Repartí los manuales por rol', 'Uno para cada rol: Responsable general, Organizador, Tesorero, Consulta, Cargador y Control de presentes.', '4 · Manuales por rol', '📘'),
     ('guias', '5', 'Imprimí las guías rápidas', 'Una hoja por rol, para tener a mano el día del evento.', '5 · Guías rápidas para imprimir', '🗒️'),
     ('ayuda', '6', 'Tené a mano «¿Qué hago si…?»', 'Los problemas frecuentes y qué hacer. También está dentro de la aplicación.', '6 · ¿Qué hago si…?.pdf', '🛟'),
-    ('videos', '7', 'Mirá los videos', 'Uno por rol: cómo se usa cada pantalla, sin voz y con letras grandes. Pasáselos a cada persona según su rol.', '7 · Videos/Ver los videos.html', '🎬'),
+    ('videos', '7', 'Mirá los videos', 'El de la instalación y uno por rol: cómo se usa cada pantalla, sin voz y con letras grandes. Pasáselos a cada persona según su rol.', '7 · Videos/Ver los videos.html', '🎬'),
 ]
 
 def empezar_html():
