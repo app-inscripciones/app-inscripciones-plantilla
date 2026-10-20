@@ -214,11 +214,19 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 > 🔑 **Si saliste de GitHub o cerraste la página:** entrar a **github.com/login** → escribir el usuario (casilla C1) o el Gmail de la institución, y la contraseña (C2) → **Sign in** (entrar) → GitHub pide un número de **6 dígitos**: abrir **Google Authenticator** en el celular (C3) y escribir el número que dice «GitHub». Si Chrome ofrece completar la contraseña, sirve igual.
 
-1. Abrir esta dirección, **cambiando USUARIO por el usuario de GitHub de la institución** (casilla C1):
-   **https://github.com/USUARIO/app-inscripciones/settings/secrets/actions**
-   (por ejemplo, si el usuario es inscripciones-laspalmas: https://github.com/inscripciones-laspalmas/app-inscripciones/settings/secrets/actions). También es la dirección de la casilla C5 con **/settings/secrets/actions** agregado al final.
-   Camino largo, por si la dirección no funciona: entrar a GitHub → arriba a la izquierda, el repositorio **app-inscripciones** (o la dirección de la casilla C5) → pestaña **Settings** (configuración; arriba, a la derecha de la fila de pestañas) → en el menú de la izquierda, **Secrets and variables** (secretos y variables) → **Actions**.
-2. Para cada una de las cuatro claves de la tabla: tocar el botón verde **New repository secret** (nuevo secreto) → en **Name** (nombre) escribir el nombre **exactamente** así, con mayúsculas y guiones bajos → en **Secret** (secreto) pegar el valor → **Add secret** (agregar). **No** usar «Manage environment secrets» (es otra cosa): siempre el botón verde **New repository secret**, de la parte de abajo.
+**Cómo llegar a la página de las claves:**
+
+**Camino A, escribiendo la dirección:** en Chrome, hacé clic en la barra de direcciones de arriba, borrá lo que haya y escribí, **cambiando USUARIO por el usuario de GitHub de la institución** (casilla C1):
+**github.com/USUARIO/app-inscripciones/settings/secrets/actions**
+(por ejemplo: github.com/inscripciones-laspalmas/app-inscripciones/settings/secrets/actions) y apretá **Enter**. Si dice «404 – Page not found», revisá el usuario o usá el camino B.
+
+**Camino B, tocando:** entrar a **github.com** → a la izquierda, en **Top repositories**, tocar **app-inscripciones** → arriba, en la fila de pestañas, tocar **Settings** (configuración; la última, con un engranaje) → en el menú de la izquierda, bajar hasta **Secrets and variables** (secretos y variables) → **Actions**.
+
+**Llegaste bien si ves** el título **Actions secrets and variables** y, abajo, **Repository secrets** con el botón verde **New repository secret**.
+
+**Cargar las claves:**
+
+1. Para cada una de las cuatro claves de la tabla: tocar el botón verde **New repository secret** (nuevo secreto) → en **Name** (nombre) escribir el nombre **exactamente** así, con mayúsculas y guiones bajos → en **Secret** (secreto) pegar el valor → **Add secret** (agregar). **No** usar «Manage environment secrets» (es otra cosa): siempre el botón verde **New repository secret**, de la parte de abajo.
 
 ![(1) Settings, (2) Secrets and variables, (3) Actions, (4) New repository secret](img/github-secretos.png)
 
@@ -243,14 +251,29 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ## Paso 7. El botón «Instalar»
 
-1. Abrir **https://github.com/USUARIO/app-inscripciones/actions/workflows/instalar.yml**, cambiando USUARIO por el de la casilla C1 (si saliste de GitHub, ver «Si saliste de GitHub» en el paso 6). Camino largo: el repositorio → pestaña **Actions** (acciones: las tareas automáticas). Si aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo. Si no aparece ningún cartel, está bien: seguí.
-2. En la lista de la izquierda, tocar **Instalar**. Arriba a la derecha aparece el botón verde **Run workflow** (ejecutar): tocarlo y se abre un panel a la derecha de la pantalla. (Abajo dice «This workflow has no runs yet»: todavía no se usó, es normal.)
+**Cómo llegar a la página de «Instalar»** (hay dos caminos; usá el que te resulte más fácil):
 
-![(1) Instalar, (2) botón Run workflow](img/github-instalar-boton.png)
+**Camino A, escribiendo la dirección:**
+1. En Chrome, hacé clic en la barra de direcciones de arriba (donde se escriben las páginas), borrá lo que haya y escribí, **cambiando USUARIO por el usuario de GitHub de la institución** (casilla C1):
+   **github.com/USUARIO/app-inscripciones/actions/workflows/instalar.yml**
+   Por ejemplo: github.com/inscripciones-laspalmas/app-inscripciones/actions/workflows/instalar.yml. Apretá **Enter**.
+2. Si aparece la página para entrar a GitHub, ver «🔑 Si saliste de GitHub» en el paso 6 y después volvé a escribir la dirección.
+3. Si dice **«404 – Page not found»** (página no encontrada): la dirección quedó mal escrita (revisá el usuario, C1) o no entraste a GitHub. Probá el camino B.
 
-![(1) Pestaña Actions, (2) Instalar en la lista de la izquierda](img/github-actions-instalar.png)
+**Camino B, tocando:**
+1. Entrar a **github.com** (si pide entrar, ver «🔑 Si saliste de GitHub» en el paso 6).
+2. A la izquierda aparece la lista **Top repositories** (tus repositorios): tocar **app-inscripciones**. (Si no la ves, tocá el ícono ☰ de arriba a la izquierda y buscala ahí.)
+3. Arriba, en la fila de pestañas (Code, Issues, Pull requests, **Actions**…), tocar **Actions** (acciones: las tareas automáticas).
+4. En la lista de la izquierda, tocar **Instalar**.
 
-3. Completar los cuatro casilleros del panel (**Use workflow from: main** se deja como está):
+**Llegaste bien si ves** arriba el título **Instalar**, a la derecha el botón verde **Run workflow** y abajo «This workflow has no runs yet» (todavía no se usó: es normal). Si en lugar de eso aparece un cartel con el botón **I understand my workflows, go ahead and enable them** (entiendo, activalas), tocarlo y volver a tocar **Instalar** en la lista de la izquierda.
+
+![Así se ve: (1) Instalar en la lista de la izquierda, (2) botón Run workflow](img/github-instalar-boton.png)
+
+**Ahora sí, instalar:**
+
+1. Tocar el botón verde **Run workflow** (ejecutar), arriba a la derecha. Se abre un panel a la derecha de la pantalla.
+2. Completar los cuatro casilleros del panel (**Use workflow from: main** se deja como está):
    - **Nombre de la institución:** como se va a ver en la aplicación (ej.: «Club Atlético Las Palmas»).
    - **Gmail de la institución:** el del paso 1.
    - **Correo del primer Responsable general:** con el que va a entrar al panel esa persona (puede ser el personal). 📝 **Anotalo ya en la hoja, casilla A2.**
@@ -258,8 +281,8 @@ Cloudflare publica la aplicación en internet (una dirección como `inscripcione
 
 ![Panel de Instalar: (1) nombre de la institución, (2) Gmail de la institución, (3) correo del Responsable general, (4) su nombre y apellido, (5) Run workflow, abajo de todo](img/github-instalar-formulario.png)
 
-4. Tocar el botón verde **Run workflow** de **abajo de todo** del panel. A los pocos segundos aparece una fila nueva con un círculo amarillo 🟡 (está trabajando; si no aparece, recargar la página con F5). Tarda entre **5 y 15 minutos**: no hace falta quedarse mirando.
-5. Cuando termina en verde ✅, tocar la ejecución: arriba aparece el **resumen** con la dirección de la aplicación y la del panel. 📝 **Anotá ya en la hoja: G1 (fecha de hoy), G2 (dirección de la aplicación) y G3 (dirección del panel).**
+3. Tocar el botón verde **Run workflow** de **abajo de todo** del panel. A los pocos segundos aparece una fila nueva con un círculo amarillo 🟡 (está trabajando; si no aparece, recargar la página con F5). Tarda entre **5 y 15 minutos**: no hace falta quedarse mirando.
+4. Cuando termina en verde ✅, tocar la ejecución: arriba aparece el **resumen** con la dirección de la aplicación y la del panel. 📝 **Anotá ya en la hoja: G1 (fecha de hoy), G2 (dirección de la aplicación) y G3 (dirección del panel).**
 
 ![Resumen «Instalación terminada» con la dirección de la aplicación y del panel](img/github-instalacion-terminada.png)
 
