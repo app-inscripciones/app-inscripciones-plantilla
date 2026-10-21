@@ -87,15 +87,14 @@ GUIAS = {
     'Escaneá el QR con la cámara e instalá la app (te dice cómo).',
     f'Abrí la app <b>desde el ícono nuevo</b> y tocá {b("Activar con QR")} (o escribí el código de debajo del QR). Desde ahí funciona sin señal.']) +
   bloque(2, 'Anotar a alguien', [
-    f'{b("+ Nueva inscripción")} → completá los datos. Elegí la categoría si hay. <b>Grupos:</b> el grupo y cada integrante (⭐ responsable).',
-    f'¿Tu QR tiene <b>varios eventos</b>? Primero tocá el evento; en el {b("Resumen para rendir")} el efectivo viene separado por evento: rendí cada uno aparte.',
+    f'{b("+ Nueva inscripción")} → (si hay <b>varios eventos</b>, tocá uno) → completá los datos. Elegí la categoría si hay. <b>Grupos:</b> el grupo y cada integrante (⭐ responsable).',
     'Elegí el <b>medio de pago</b>. Transferencia: banco o billetera y los <b>últimos 6</b> de la operación.',
     f'{b("Revisar y cobrar")} → leé todo con la persona. <b>Cobrá exactamente el total</b> que muestra la app.',
     f'{b("Sí, guardar inscripción")}. El día del evento, si la persona ya llegó, tildá <b>«Ya está presente»</b>.']) +
   bloque(3, 'Mirá el color de cada inscripción', []) + ESTADOS +
   bloque(4, 'Al terminar tu turno', [
     f'Conectate a internet y tocá {b("Enviar ahora")} hasta ver <b>«🟢 Todo enviado»</b>.',
-    f'Abrí {b("Resumen para rendir")} y entregale al Tesorero <b>el efectivo y los tickets de la terminal</b>.']) +
+    f'Abrí {b("Resumen para rendir")} y entregale al Tesorero <b>el efectivo y los tickets</b> de cada evento.']) +
   nunca(['Borrar ni desinstalar la app si queda algo en 🟡: se pierde.',
          'Cambiar el monto. Si no te cierra, no guardes y consultá.',
          'Cargar dos veces a la misma persona (si pasa, avisá).']) +
@@ -140,11 +139,11 @@ GUIAS = {
   '<div class="cols"><div>' + bloque(2, 'Antes del evento', [
     f'{b("Crear eventos")}: el asistente pregunta de a una cosa. Para no empezar de cero, {b("Copiar otro evento")}.',
     '<b>Probá el formulario en la vista previa.</b> Al abrir el evento, formulario y precios quedan fijos.',
-    f'{b("QR de colaboradores")} → {b("+ QR de cargador")}, {b("+ QR de control de presentes")} o {b("+ QR de autopresente")} → {b("Crear QR")}. Un cargador para varios eventos: tildalos en su QR.',
-    f'{b("🖨️ Imprimir")} o {b("📤 Compartir (WhatsApp)")}. <b>El código se ve una sola vez.</b> Un QR = una persona y un celular.',
+    f'{b("QR de colaboradores")} → {b("+ QR de cargador")}, {b("+ QR de control de presentes")} o {b("+ QR de autopresente")} → {b("Crear QR")}.',
+    f'{b("🖨️ Imprimir")} o {b("📤 Compartir (WhatsApp)")}. <b>El código se ve una sola vez.</b> Un QR = una persona, un celular y uno o <b>varios eventos</b>.',
     f'<b>Antes del primer evento real, practicá</b>: {b("Crear evento de práctica")} (10 min; sirve para capacitar).']) +
   '</div><div>' + bloque(3, 'Durante el evento', [
-    f'{b("Resumen")}: inscriptos, dinero y presentes. Mirá la <b>última conexión</b> de cada cargador.',
+    f'{b("Resumen")}: inscriptos, dinero y presentes.',
     'Para frenar las inscripciones: <b>Cerrar las inscripciones</b> (se pueden volver a abrir). La puerta sigue andando.',
     f'¿Perdió el celular? {b("Cerrar este QR")} y dale uno nuevo.',
     f'Otro momento de asistencia: {b("Editar momentos de asistencia")}.']) + '</div></div>' +
