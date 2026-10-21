@@ -36,7 +36,7 @@ export const PASOS_INICIALES = [
   {
     id: 'respaldo',
     titulo: 'Comprobar el respaldo diario',
-    explica: 'Al día siguiente de instalar, entrar a GitHub → pestaña «Actions» → «Respaldo diario»: la última ejecución tiene que estar en verde ✅. Si algún día llega un correo de GitHub avisando que falló, ver la guía «¿Qué hago si…?».',
+    explica: 'No hay que hacer nada: se tilda solo la mañana siguiente a la instalación (entre las 8 y las 9, más o menos), cuando la revisión diaria encuentra el primer respaldo bueno. Si a mediodía sigue sin tilde: entrá a GitHub → pestaña «Actions» → «Respaldo diario» y mirá que la última fila esté en verde ✅; después, en «Revisión diaria», tocá «Run workflow» dos veces y recargá esta página. Si algún día llega un correo de GitHub avisando que falló algo, buscá el mensaje en «¿Qué hago si…?».',
     manual: true,
   },
   {
