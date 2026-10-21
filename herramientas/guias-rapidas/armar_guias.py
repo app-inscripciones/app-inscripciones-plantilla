@@ -88,6 +88,7 @@ GUIAS = {
     f'Abrí la app <b>desde el ícono nuevo</b> y tocá {b("Activar con QR")} (o escribí el código de debajo del QR). Desde ahí funciona sin señal.']) +
   bloque(2, 'Anotar a alguien', [
     f'{b("+ Nueva inscripción")} → completá los datos. Elegí la categoría si hay. <b>Grupos:</b> el grupo y cada integrante (⭐ responsable).',
+    f'¿Tu QR tiene <b>varios eventos</b>? Primero tocá el evento; en el {b("Resumen para rendir")} el efectivo viene separado por evento: rendí cada uno aparte.',
     'Elegí el <b>medio de pago</b>. Transferencia: banco o billetera y los <b>últimos 6</b> de la operación.',
     f'{b("Revisar y cobrar")} → leé todo con la persona. <b>Cobrá exactamente el total</b> que muestra la app.',
     f'{b("Sí, guardar inscripción")}. El día del evento, si la persona ya llegó, tildá <b>«Ya está presente»</b>.']) +
@@ -139,7 +140,7 @@ GUIAS = {
   '<div class="cols"><div>' + bloque(2, 'Antes del evento', [
     f'{b("Crear eventos")}: el asistente pregunta de a una cosa. Para no empezar de cero, {b("Copiar otro evento")}.',
     '<b>Probá el formulario en la vista previa.</b> Al abrir el evento, formulario y precios quedan fijos.',
-    f'{b("QR de colaboradores")} → {b("+ QR de cargador")}, {b("+ QR de control de presentes")} o {b("+ QR de autopresente")} → {b("Crear QR")}.',
+    f'{b("QR de colaboradores")} → {b("+ QR de cargador")}, {b("+ QR de control de presentes")} o {b("+ QR de autopresente")} → {b("Crear QR")}. Un cargador para varios eventos: tildalos en su QR.',
     f'{b("🖨️ Imprimir")} o {b("📤 Compartir (WhatsApp)")}. <b>El código se ve una sola vez.</b> Un QR = una persona y un celular.',
     f'<b>Antes del primer evento real, practicá</b>: {b("Crear evento de práctica")} (10 min; sirve para capacitar).']) +
   '</div><div>' + bloque(3, 'Durante el evento', [
