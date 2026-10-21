@@ -101,6 +101,7 @@ export default function Activar({ codigoInicial = '', alActivar }) {
         {estado === 'activando' ? 'Activando…' : 'Activar con el código'}
       </button>
       <p className="ayuda"><a href="#ayuda">🛟 ¿Problemas? Mirá «¿Qué hago si…?»</a></p>
+      <p className="ayuda">💻 ¿Sos del equipo que organiza (Responsable, Organizador, Tesorero o Consulta)? <a href="#panel" id="ir-al-panel">Entrar al panel</a></p>
     </main>
   );
 }
